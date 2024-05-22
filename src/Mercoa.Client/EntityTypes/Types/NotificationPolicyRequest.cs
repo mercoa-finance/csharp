@@ -1,0 +1,18 @@
+using System.Text.Json.Serialization;
+
+namespace Mercoa.Client;
+
+public class NotificationPolicyRequest
+{
+    /// <summary>
+    /// Set to true if the selected notification type should be disabled for this entity
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    /// <summary>
+    /// List of user roles that should receive notifications in addition to the default users for this notification type
+    /// </summary>
+    [JsonPropertyName("additionalRoles")]
+    public List<string> AdditionalRoles { get; init; }
+}
