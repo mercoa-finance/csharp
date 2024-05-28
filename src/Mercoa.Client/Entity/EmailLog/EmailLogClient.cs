@@ -14,7 +14,7 @@ public class EmailLogClient
     }
 
     /// <summary>
-    /// Get entity users
+    /// Get all incoming invoice emails for an entity.
     /// </summary>
     public async Task<EmailLogResponse> FindAsync(string entityId, EntityEmailLogRequest request)
     {
@@ -56,7 +56,7 @@ public class EmailLogClient
     }
 
     /// <summary>
-    /// Get email log
+    /// Get an email log by ID
     /// </summary>
     public async Task<EmailLog> GetAsync(string entityId, string logId)
     {

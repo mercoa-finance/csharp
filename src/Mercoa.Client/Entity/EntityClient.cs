@@ -191,6 +191,8 @@ public class EntityClient
 
     /// <summary>
     /// Generate a JWT token for an entity with the given options. This token can be used to authenticate the entity in the Mercoa API and iFrame.
+    ///
+    /// <Warning>We recommend using [this endpoint](/api-reference/entity/user/get-token). This will enable features such as approvals and comments.</Warning>
     /// </summary>
     public async Task<string> GetTokenAsync(string entityId, TokenGenerationOptions request)
     {

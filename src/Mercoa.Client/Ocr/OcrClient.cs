@@ -15,23 +15,14 @@ public class OcrClient
     /// <summary>
     /// Run OCR on an Base64 encoded image or PDF. This endpoint will block until the OCR is complete.
     /// </summary>
-    public async Task<OcrResponse> OcrAsync(RunOcrSync request)
+    public async Task<OcrResponse> OcrAsync(OcrRequest request)
     {
-        var _query = new Dictionary<string, object>() { };
-        if (request.VendorNetwork != null)
-        {
-            _query["vendorNetwork"] = request.VendorNetwork;
-        }
-        if (request.EntityId != null)
-        {
-            _query["entityId"] = request.EntityId;
-        }
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest
             {
                 Method = HttpMethod.Post,
                 Path = "/ocr",
-                Query = _query
+                Body = request
             }
         );
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
@@ -45,23 +36,14 @@ public class OcrClient
     /// <summary>
     /// Run OCR on an Base64 encoded image or PDF. This endpoint will return immediately and the OCR will be processed asynchronously.
     /// </summary>
-    public async Task<OcrAsyncResponse> RunAsyncOcrAsync(RunOcrAsync request)
+    public async Task<OcrAsyncResponse> RunAsyncOcrAsync(OcrRequest request)
     {
-        var _query = new Dictionary<string, object>() { };
-        if (request.VendorNetwork != null)
-        {
-            _query["vendorNetwork"] = request.VendorNetwork;
-        }
-        if (request.EntityId != null)
-        {
-            _query["entityId"] = request.EntityId;
-        }
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest
             {
                 Method = HttpMethod.Post,
                 Path = "/ocr-async",
-                Query = _query
+                Body = request
             }
         );
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
