@@ -17,6 +17,7 @@ public class EntityClient
         User = new UserClient(_client);
         ApprovalPolicy = new ApprovalPolicyClient(_client);
         Counterparty = new CounterpartyClient(_client);
+        Customization = new CustomizationClient(_client);
         ExternalAccountingSystem = new ExternalAccountingSystemClient(_client);
         Invoice = new InvoiceClient(_client);
         Metadata = new MetadataClient(_client);
@@ -32,6 +33,8 @@ public class EntityClient
     public ApprovalPolicyClient ApprovalPolicy { get; }
 
     public CounterpartyClient Counterparty { get; }
+
+    public CustomizationClient Customization { get; }
 
     public ExternalAccountingSystemClient ExternalAccountingSystem { get; }
 

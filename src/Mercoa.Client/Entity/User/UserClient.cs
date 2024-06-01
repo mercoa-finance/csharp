@@ -35,6 +35,55 @@ public class UserClient
         throw new Exception();
     }
 
+    /// <summary>
+    /// Get all entity users
+    /// </summary>
+    public async Task<FindEntityUserResponse> FindAsync(
+        string entityId,
+        EntityFindEntityRequest request
+    )
+    {
+        var _query = new Dictionary<string, object>() { };
+        if (request.ForeignId != null)
+        {
+            _query["foreignId"] = request.ForeignId;
+        }
+        if (request.Role != null)
+        {
+            _query["role"] = request.Role;
+        }
+        if (request.Name != null)
+        {
+            _query["name"] = request.Name;
+        }
+        if (request.Email != null)
+        {
+            _query["email"] = request.Email;
+        }
+        if (request.Limit != null)
+        {
+            _query["limit"] = request.Limit;
+        }
+        if (request.StartingAfter != null)
+        {
+            _query["startingAfter"] = request.StartingAfter;
+        }
+        var response = await _client.MakeRequestAsync(
+            new RawClient.ApiRequest
+            {
+                Method = HttpMethod.Put,
+                Path = $"/{entityId}/users",
+                Query = _query
+            }
+        );
+        string responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        {
+            return JsonSerializer.Deserialize<FindEntityUserResponse>(responseBody);
+        }
+        throw new Exception();
+    }
+
     public async Task<EntityUserResponse> CreateAsync(string entityId, EntityUserRequest request)
     {
         var response = await _client.MakeRequestAsync(
