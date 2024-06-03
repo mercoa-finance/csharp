@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class InvoiceClient
@@ -100,13 +102,15 @@ public class InvoiceClient
         {
             return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
     /// Get invoice metrics for an entity with the given filters. Invoices will be grouped by currency. If none of excludePayables, excludeReceivables, payerId, vendorId, or invoiceId status filters are provided, excludeReceivables will be set to true.
     /// </summary>
-    public async Task<List<InvoiceMetricsResponse>> MetricsAsync(InvoiceMetricsRequest request)
+    public async Task<IEnumerable<InvoiceMetricsResponse>> MetricsAsync(
+        InvoiceMetricsRequest request
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.Search != null)
@@ -176,8 +180,8 @@ public class InvoiceClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<InvoiceMetricsResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<InvoiceMetricsResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

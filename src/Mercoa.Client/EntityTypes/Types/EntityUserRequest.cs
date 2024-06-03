@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityUserRequest
@@ -20,5 +22,5 @@ public class EntityUserRequest
     /// List of roles. A role can be any string. For example: "payer", "approver", "viewer"
     /// </summary>
     [JsonPropertyName("roles")]
-    public List<string>? Roles { get; init; }
+    public IEnumerable<string>? Roles { get; init; }
 }

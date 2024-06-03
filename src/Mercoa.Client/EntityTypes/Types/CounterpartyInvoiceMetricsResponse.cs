@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class CounterpartyInvoiceMetricsResponse
@@ -12,5 +14,5 @@ public class CounterpartyInvoiceMetricsResponse
     public double TotalAmount { get; init; }
 
     [JsonPropertyName("statuses")]
-    public List<CounterpartyInvoiceMetricsStatusResponse> Statuses { get; init; }
+    public IEnumerable<CounterpartyInvoiceMetricsStatusResponse> Statuses { get; init; }
 }

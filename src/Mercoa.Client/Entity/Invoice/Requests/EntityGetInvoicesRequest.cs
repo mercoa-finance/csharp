@@ -1,13 +1,20 @@
 using Mercoa.Client;
 
-namespace Mercoa.Client.Invoice;
+#nullable enable
 
-public class GetAllInvoicesRequest
+namespace Mercoa.Client.Entity;
+
+public class EntityGetInvoicesRequest
 {
     /// <summary>
-    /// Filter invoices by the ID of the entity that created the invoice.
+    /// Return only invoices that are receivable by the entity.
     /// </summary>
-    public string? EntityId { get; init; }
+    public bool? ExcludePayables { get; init; }
+
+    /// <summary>
+    /// Return only invoices that are payable by the entity.
+    /// </summary>
+    public bool? ExcludeReceivables { get; init; }
 
     /// <summary>
     /// Start date for invoice created on date filter.
@@ -40,14 +47,14 @@ public class GetAllInvoicesRequest
     public string? StartingAfter { get; init; }
 
     /// <summary>
-    /// Find invoices by vendor name, invoice number, or amount. Partial matches are supported.
-    /// </summary>
-    public string? Search { get; init; }
-
-    /// <summary>
     /// Filter invoices by metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
     public InvoiceMetadataFilter? Metadata { get; init; }
+
+    /// <summary>
+    /// Find invoices by vendor name, invoice number, or amount. Partial matches are supported.
+    /// </summary>
+    public string? Search { get; init; }
 
     /// <summary>
     /// Filter invoices by payer ID.
@@ -75,7 +82,7 @@ public class GetAllInvoicesRequest
     public string? InvoiceId { get; init; }
 
     /// <summary>
-    /// Invoice status to filter on
+    /// Invoice status to filter on.
     /// </summary>
     public InvoiceStatus? Status { get; init; }
 

@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class ApprovalPolicyClient
@@ -15,7 +17,7 @@ public class ApprovalPolicyClient
     /// <summary>
     /// Retrieve all invoice approval policies associated with an entity
     /// </summary>
-    public async Task<List<ApprovalPolicyResponse>> GetAllAsync()
+    public async Task<IEnumerable<ApprovalPolicyResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/approval-policies" }
@@ -23,9 +25,9 @@ public class ApprovalPolicyClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<ApprovalPolicyResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<ApprovalPolicyResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -46,7 +48,7 @@ public class ApprovalPolicyClient
         {
             return JsonSerializer.Deserialize<ApprovalPolicyResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -66,7 +68,7 @@ public class ApprovalPolicyClient
         {
             return JsonSerializer.Deserialize<ApprovalPolicyResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -90,7 +92,7 @@ public class ApprovalPolicyClient
         {
             return JsonSerializer.Deserialize<ApprovalPolicyResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

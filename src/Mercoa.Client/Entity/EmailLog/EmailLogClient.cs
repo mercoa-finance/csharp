@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity.EmailLog;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity.EmailLog;
 
 public class EmailLogClient
@@ -52,7 +54,7 @@ public class EmailLogClient
         {
             return JsonSerializer.Deserialize<EmailLogResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -72,6 +74,6 @@ public class EmailLogClient
         {
             return JsonSerializer.Deserialize<EmailLog>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

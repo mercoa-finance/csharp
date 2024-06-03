@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class ApprovalSlot
@@ -24,10 +26,10 @@ public class ApprovalSlot
     public ApproverAction Action { get; init; }
 
     [JsonPropertyName("eligibleRoles")]
-    public List<string> EligibleRoles { get; init; }
+    public IEnumerable<string> EligibleRoles { get; init; }
 
     [JsonPropertyName("eligibleUserIds")]
-    public List<string> EligibleUserIds { get; init; }
+    public IEnumerable<string> EligibleUserIds { get; init; }
 
     /// <summary>
     /// Either the date the invoice was created, date the approver was assigned, or date of last action by approver, whichever is latest.

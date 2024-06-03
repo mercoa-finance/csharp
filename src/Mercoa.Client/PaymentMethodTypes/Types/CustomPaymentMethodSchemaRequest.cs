@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class CustomPaymentMethodSchemaRequest
@@ -24,8 +26,8 @@ public class CustomPaymentMethodSchemaRequest
     /// List of currencies that this payment method supports. If not provided, the payment method will support only USD.
     /// </summary>
     [JsonPropertyName("supportedCurrencies")]
-    public List<CurrencyCode>? SupportedCurrencies { get; init; }
+    public IEnumerable<CurrencyCode>? SupportedCurrencies { get; init; }
 
     [JsonPropertyName("fields")]
-    public List<CustomPaymentMethodSchemaField> Fields { get; init; }
+    public IEnumerable<CustomPaymentMethodSchemaField> Fields { get; init; }
 }

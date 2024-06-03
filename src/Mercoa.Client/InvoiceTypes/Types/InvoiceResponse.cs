@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class InvoiceResponse
@@ -105,16 +107,16 @@ public class InvoiceResponse
     public bool HasSourceEmail { get; init; }
 
     [JsonPropertyName("comments")]
-    public List<CommentResponse>? Comments { get; init; }
+    public IEnumerable<CommentResponse>? Comments { get; init; }
 
     [JsonPropertyName("lineItems")]
-    public List<InvoiceLineItemResponse>? LineItems { get; init; }
+    public IEnumerable<InvoiceLineItemResponse>? LineItems { get; init; }
 
     [JsonPropertyName("approvers")]
-    public List<ApprovalSlot> Approvers { get; init; }
+    public IEnumerable<ApprovalSlot> Approvers { get; init; }
 
     [JsonPropertyName("approvalPolicy")]
-    public List<ApprovalPolicyResponse> ApprovalPolicy { get; init; }
+    public IEnumerable<ApprovalPolicyResponse> ApprovalPolicy { get; init; }
 
     /// <summary>
     /// Metadata associated with this invoice.

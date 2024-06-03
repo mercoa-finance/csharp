@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class OrganizationResponse
@@ -42,5 +44,5 @@ public class OrganizationResponse
     public OnboardingOptionsResponse? PayorOnboardingOptions { get; init; }
 
     [JsonPropertyName("metadataSchema")]
-    public List<MetadataSchema>? MetadataSchema { get; init; }
+    public IEnumerable<MetadataSchema>? MetadataSchema { get; init; }
 }

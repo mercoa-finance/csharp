@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Invoice;
 
+#nullable enable
+
 namespace Mercoa.Client.Invoice;
 
 public class InvoiceClient
@@ -108,7 +110,7 @@ public class InvoiceClient
         {
             return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<InvoiceResponse> CreateAsync(InvoiceCreationRequest request)
@@ -126,7 +128,7 @@ public class InvoiceClient
         {
             return JsonSerializer.Deserialize<InvoiceResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<InvoiceResponse> GetAsync(string invoiceId, GetInvoice request)
@@ -149,7 +151,7 @@ public class InvoiceClient
         {
             return JsonSerializer.Deserialize<InvoiceResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<InvoiceResponse> UpdateAsync(string invoiceId, InvoiceUpdateRequest request)
@@ -167,7 +169,7 @@ public class InvoiceClient
         {
             return JsonSerializer.Deserialize<InvoiceResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

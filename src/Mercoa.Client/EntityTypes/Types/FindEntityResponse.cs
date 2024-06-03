@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class FindEntityResponse
@@ -18,5 +20,5 @@ public class FindEntityResponse
     public bool HasMore { get; init; }
 
     [JsonPropertyName("data")]
-    public List<EntityWithPaymentMethodResponse> Data { get; init; }
+    public IEnumerable<EntityWithPaymentMethodResponse> Data { get; init; }
 }

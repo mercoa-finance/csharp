@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityHidePayorsRequest
@@ -8,5 +10,5 @@ public class EntityHidePayorsRequest
     /// List of payor entity IDs to hide
     /// </summary>
     [JsonPropertyName("payors")]
-    public List<string> Payors { get; init; }
+    public IEnumerable<string> Payors { get; init; }
 }

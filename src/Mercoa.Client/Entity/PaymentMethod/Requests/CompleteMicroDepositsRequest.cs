@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class CompleteMicroDepositsRequest
@@ -8,5 +10,5 @@ public class CompleteMicroDepositsRequest
     /// The amounts of the micro deposits in cents
     /// </summary>
     [JsonPropertyName("amounts")]
-    public List<int> Amounts { get; init; }
+    public IEnumerable<int> Amounts { get; init; }
 }

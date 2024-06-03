@@ -4,6 +4,8 @@ using Mercoa.Client.Entity;
 using Mercoa.Client.Entity.EmailLog;
 using Mercoa.Client.Entity.User;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class EntityClient
@@ -103,7 +105,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<FindEntityResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<EntityResponse> CreateAsync(EntityRequest request)
@@ -121,7 +123,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<EntityResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<EntityResponse> GetAsync(string entityId)
@@ -134,7 +136,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<EntityResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<EntityResponse> UpdateAsync(string entityId, EntityUpdateRequest request)
@@ -152,7 +154,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<EntityResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async void DeleteAsync(string entityId)
@@ -212,7 +214,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -238,7 +240,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -271,7 +273,7 @@ public class EntityClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

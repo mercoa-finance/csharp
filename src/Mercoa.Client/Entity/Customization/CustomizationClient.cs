@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class CustomizationClient
@@ -25,7 +27,7 @@ public class CustomizationClient
         {
             return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -46,6 +48,6 @@ public class CustomizationClient
         {
             return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

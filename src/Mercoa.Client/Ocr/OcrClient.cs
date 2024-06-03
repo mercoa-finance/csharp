@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class OcrClient
@@ -30,7 +32,7 @@ public class OcrClient
         {
             return JsonSerializer.Deserialize<OcrResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -51,7 +53,7 @@ public class OcrClient
         {
             return JsonSerializer.Deserialize<OcrAsyncResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -67,6 +69,6 @@ public class OcrClient
         {
             return JsonSerializer.Deserialize<OcrJobResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

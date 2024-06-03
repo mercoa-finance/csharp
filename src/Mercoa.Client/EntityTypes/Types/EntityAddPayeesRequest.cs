@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityAddPayeesRequest
@@ -8,5 +10,5 @@ public class EntityAddPayeesRequest
     /// List of payee entity IDs to associate with the entity
     /// </summary>
     [JsonPropertyName("payees")]
-    public List<string> Payees { get; init; }
+    public IEnumerable<string> Payees { get; init; }
 }

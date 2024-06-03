@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity.User;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity.User;
 
 public class UserClient
@@ -20,9 +22,9 @@ public class UserClient
     public NotificationsClient Notifications { get; }
 
     /// <summary>
-    /// Get all entity users
+    /// Get all entity users (DEPRECATED, use Search Entity Users)
     /// </summary>
-    public async Task<List<EntityUserResponse>> GetAllAsync(string entityId)
+    public async Task<IEnumerable<EntityUserResponse>> GetAllAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/{entityId}/users" }
@@ -30,13 +32,13 @@ public class UserClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<EntityUserResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<EntityUserResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
-    /// Get all entity users
+    /// Search entity users
     /// </summary>
     public async Task<FindEntityUserResponse> FindAsync(
         string entityId,
@@ -81,7 +83,7 @@ public class UserClient
         {
             return JsonSerializer.Deserialize<FindEntityUserResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<EntityUserResponse> CreateAsync(string entityId, EntityUserRequest request)
@@ -99,7 +101,7 @@ public class UserClient
         {
             return JsonSerializer.Deserialize<EntityUserResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -119,7 +121,7 @@ public class UserClient
         {
             return JsonSerializer.Deserialize<EntityUserResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -144,7 +146,7 @@ public class UserClient
         {
             return JsonSerializer.Deserialize<EntityUserResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -183,6 +185,6 @@ public class UserClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class ExternalAccountingSystemClient
@@ -35,7 +37,7 @@ public class ExternalAccountingSystemClient
                 responseBody
             );
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -55,7 +57,7 @@ public class ExternalAccountingSystemClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

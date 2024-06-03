@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class InvoiceCreationRequest
@@ -93,10 +95,10 @@ public class InvoiceCreationRequest
     /// Set approvers for this invoice.
     /// </summary>
     [JsonPropertyName("approvers")]
-    public List<ApprovalSlotAssignment>? Approvers { get; init; }
+    public IEnumerable<ApprovalSlotAssignment>? Approvers { get; init; }
 
     [JsonPropertyName("lineItems")]
-    public List<InvoiceLineItemRequest>? LineItems { get; init; }
+    public IEnumerable<InvoiceLineItemRequest>? LineItems { get; init; }
 
     /// <summary>
     /// Metadata associated with this invoice. You can specify up to 10 keys, with key names up to 40 characters long and values up to 200 characters long.

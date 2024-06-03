@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity.User;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity.User;
 
 public class NotificationsClient
@@ -53,7 +55,7 @@ public class NotificationsClient
         {
             return JsonSerializer.Deserialize<FindNotificationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<NotificationResponse> GetAsync(string notificationId)
@@ -70,6 +72,6 @@ public class NotificationsClient
         {
             return JsonSerializer.Deserialize<NotificationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

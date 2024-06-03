@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class CustomPaymentMethodSchemaClient
@@ -15,7 +17,7 @@ public class CustomPaymentMethodSchemaClient
     /// <summary>
     /// Get all custom payment method schemas
     /// </summary>
-    public async Task<List<CustomPaymentMethodSchemaResponse>> GetAllAsync()
+    public async Task<IEnumerable<CustomPaymentMethodSchemaResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/schema" }
@@ -23,11 +25,11 @@ public class CustomPaymentMethodSchemaClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<CustomPaymentMethodSchemaResponse>>(
+            return JsonSerializer.Deserialize<IEnumerable<CustomPaymentMethodSchemaResponse>>(
                 responseBody
             );
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -50,7 +52,7 @@ public class CustomPaymentMethodSchemaClient
         {
             return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -74,7 +76,7 @@ public class CustomPaymentMethodSchemaClient
         {
             return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -90,7 +92,7 @@ public class CustomPaymentMethodSchemaClient
         {
             return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Invoice;
 
+#nullable enable
+
 namespace Mercoa.Client.Invoice;
 
 public class DocumentClient
@@ -16,7 +18,7 @@ public class DocumentClient
     /// <summary>
     /// Get attachments (scanned/uploaded PDFs and images) associated with this invoice
     /// </summary>
-    public async Task<List<DocumentResponse>> GetAllAsync()
+    public async Task<IEnumerable<DocumentResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/documents" }
@@ -24,9 +26,9 @@ public class DocumentClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<DocumentResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<DocumentResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -71,7 +73,7 @@ public class DocumentClient
         {
             return JsonSerializer.Deserialize<DocumentResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -87,7 +89,7 @@ public class DocumentClient
         {
             return JsonSerializer.Deserialize<DocumentResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -103,6 +105,6 @@ public class DocumentClient
         {
             return JsonSerializer.Deserialize<EmailLogResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

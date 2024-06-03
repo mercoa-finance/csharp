@@ -1,7 +1,13 @@
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using Mercoa.Client;
+using Mercoa.Client.Core;
+
+#nullable enable
 
 namespace Mercoa.Client;
 
+[JsonConverter(typeof(StringEnumSerializer<NotificationType>))]
 public enum NotificationType
 {
     [EnumMember(Value = "INVOICE_APPROVAL_NEEDED")]

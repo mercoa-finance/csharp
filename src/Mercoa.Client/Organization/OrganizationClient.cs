@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Organization;
 
+#nullable enable
+
 namespace Mercoa.Client.Organization;
 
 public class OrganizationClient
@@ -63,7 +65,7 @@ public class OrganizationClient
         {
             return JsonSerializer.Deserialize<OrganizationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -84,7 +86,7 @@ public class OrganizationClient
         {
             return JsonSerializer.Deserialize<OrganizationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -122,6 +124,6 @@ public class OrganizationClient
         {
             return JsonSerializer.Deserialize<EmailLogResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

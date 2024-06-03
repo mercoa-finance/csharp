@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class NotificationPolicyResponse
@@ -15,7 +17,7 @@ public class NotificationPolicyResponse
     /// List of user roles that should receive notifications in addition to the default users for this notification type
     /// </summary>
     [JsonPropertyName("additionalRoles")]
-    public List<string> AdditionalRoles { get; init; }
+    public IEnumerable<string> AdditionalRoles { get; init; }
 
     [JsonPropertyName("type")]
     public NotificationType Type { get; init; }

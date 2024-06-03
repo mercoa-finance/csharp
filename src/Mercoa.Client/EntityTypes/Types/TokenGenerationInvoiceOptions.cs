@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class TokenGenerationInvoiceOptions
@@ -18,5 +20,5 @@ public class TokenGenerationInvoiceOptions
     public bool? DisableLineItems { get; init; }
 
     [JsonPropertyName("status")]
-    public List<InvoiceStatus> Status { get; init; }
+    public IEnumerable<InvoiceStatus> Status { get; init; }
 }

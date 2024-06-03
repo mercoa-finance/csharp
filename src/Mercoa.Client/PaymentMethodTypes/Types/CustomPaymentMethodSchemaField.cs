@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class CustomPaymentMethodSchemaField
@@ -36,5 +38,5 @@ public class CustomPaymentMethodSchemaField
     /// When type is 'select', provide options that can be selected
     /// </summary>
     [JsonPropertyName("options")]
-    public List<string>? Options { get; init; }
+    public IEnumerable<string>? Options { get; init; }
 }

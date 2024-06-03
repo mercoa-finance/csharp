@@ -1,5 +1,7 @@
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EmailLogTypesClient

@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityUserResponse
@@ -20,7 +22,7 @@ public class EntityUserResponse
     public string? Name { get; init; }
 
     [JsonPropertyName("roles")]
-    public List<string> Roles { get; init; }
+    public IEnumerable<string> Roles { get; init; }
 
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }

@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class BankLookupClient
@@ -34,6 +36,6 @@ public class BankLookupClient
         {
             return JsonSerializer.Deserialize<BankLookupResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

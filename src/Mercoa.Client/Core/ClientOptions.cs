@@ -1,5 +1,7 @@
 using Mercoa.Client.Core;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public partial class ClientOptions

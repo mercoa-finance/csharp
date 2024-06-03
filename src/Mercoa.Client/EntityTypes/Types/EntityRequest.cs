@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityRequest
@@ -21,7 +23,7 @@ public class EntityRequest
     /// Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias. Include the full email address.
     /// </summary>
     [JsonPropertyName("emailToAlias")]
-    public List<string>? EmailToAlias { get; init; }
+    public IEnumerable<string>? EmailToAlias { get; init; }
 
     /// <summary>
     /// If this entity has a direct relationship with your organization (e.g your direct customer or client), set this to true. Otherwise, set to false (e.g your customer's vendors).

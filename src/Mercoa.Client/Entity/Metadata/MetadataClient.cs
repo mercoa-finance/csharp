@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class MetadataClient
@@ -15,7 +17,7 @@ public class MetadataClient
     /// <summary>
     /// Retrieve all metadata options associated with this entity
     /// </summary>
-    public async Task<List<EntityMetadataResponse>> GetAllAsync()
+    public async Task<IEnumerable<EntityMetadataResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/metadata" }
@@ -23,15 +25,15 @@ public class MetadataClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<EntityMetadataResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<EntityMetadataResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
     /// Retrieve metadata associated with a specific key
     /// </summary>
-    public async Task<List<string>> GetAsync(string key)
+    public async Task<IEnumerable<string>> GetAsync(string key)
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/metadata/{key}" }
@@ -39,15 +41,15 @@ public class MetadataClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<string>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<string>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
     /// Update metadata associated with a specific key
     /// </summary>
-    public async Task<List<string>> UpdateAsync(string key, List<string> request)
+    public async Task<IEnumerable<string>> UpdateAsync(string key, IEnumerable<string> request)
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest
@@ -60,9 +62,9 @@ public class MetadataClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<string>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<string>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

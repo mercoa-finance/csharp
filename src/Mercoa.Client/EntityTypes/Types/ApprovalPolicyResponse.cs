@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class ApprovalPolicyResponse
@@ -9,7 +11,7 @@ public class ApprovalPolicyResponse
     public string Id { get; init; }
 
     [JsonPropertyName("trigger")]
-    public List<Trigger> Trigger { get; init; }
+    public IEnumerable<Trigger> Trigger { get; init; }
 
     [JsonPropertyName("rule")]
     public Rule Rule { get; init; }

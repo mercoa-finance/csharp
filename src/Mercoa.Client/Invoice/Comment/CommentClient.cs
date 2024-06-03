@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client.Invoice;
 
 public class CommentClient
@@ -15,7 +17,7 @@ public class CommentClient
     /// <summary>
     /// Get all comments associated with this invoice
     /// </summary>
-    public async Task<List<CommentResponse>> GetAllAsync()
+    public async Task<IEnumerable<CommentResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/comments" }
@@ -23,9 +25,9 @@ public class CommentClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<CommentResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<CommentResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -46,7 +48,7 @@ public class CommentClient
         {
             return JsonSerializer.Deserialize<CommentResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<CommentResponse> GetAsync(string commentId)
@@ -59,7 +61,7 @@ public class CommentClient
         {
             return JsonSerializer.Deserialize<CommentResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -80,7 +82,7 @@ public class CommentClient
         {
             return JsonSerializer.Deserialize<CommentResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

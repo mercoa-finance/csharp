@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity.User;
 
 public class NotificationPolicyClient
@@ -15,7 +17,7 @@ public class NotificationPolicyClient
     /// <summary>
     /// Retrieve all notification policies associated with this entity user
     /// </summary>
-    public async Task<List<UserNotificationPolicyResponse>> GetAllAsync()
+    public async Task<IEnumerable<UserNotificationPolicyResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/notification-policies" }
@@ -23,9 +25,11 @@ public class NotificationPolicyClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<UserNotificationPolicyResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<UserNotificationPolicyResponse>>(
+                responseBody
+            );
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -45,7 +49,7 @@ public class NotificationPolicyClient
         {
             return JsonSerializer.Deserialize<UserNotificationPolicyResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -69,6 +73,6 @@ public class NotificationPolicyClient
         {
             return JsonSerializer.Deserialize<UserNotificationPolicyResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

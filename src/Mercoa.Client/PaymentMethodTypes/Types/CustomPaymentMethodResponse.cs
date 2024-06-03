@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class CustomPaymentMethodResponse
@@ -48,7 +50,7 @@ public class CustomPaymentMethodResponse
     public bool IsDefaultDestination { get; init; }
 
     [JsonPropertyName("supportedCurrencies")]
-    public List<CurrencyCode> SupportedCurrencies { get; init; }
+    public IEnumerable<CurrencyCode> SupportedCurrencies { get; init; }
 
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }

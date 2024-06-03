@@ -1,12 +1,14 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityWithPaymentMethodResponse
 {
     [JsonPropertyName("paymentMethods")]
-    public List<PaymentMethodResponse>? PaymentMethods { get; init; }
+    public IEnumerable<PaymentMethodResponse>? PaymentMethods { get; init; }
 
     [JsonPropertyName("id")]
     public string Id { get; init; }
@@ -33,7 +35,7 @@ public class EntityWithPaymentMethodResponse
     /// Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
     /// </summary>
     [JsonPropertyName("emailToAlias")]
-    public List<string>? EmailToAlias { get; init; }
+    public IEnumerable<string>? EmailToAlias { get; init; }
 
     /// <summary>
     /// True if this entity has a direct relationship with your organization.

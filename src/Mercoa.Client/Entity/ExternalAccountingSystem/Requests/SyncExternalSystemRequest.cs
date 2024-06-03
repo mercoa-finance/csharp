@@ -1,5 +1,7 @@
 using Mercoa.Client.Entity;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class SyncExternalSystemRequest

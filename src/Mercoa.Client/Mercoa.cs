@@ -3,6 +3,8 @@ using Mercoa.Client.Entity;
 using Mercoa.Client.Invoice;
 using Mercoa.Client.Organization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public partial class Mercoa
@@ -17,7 +19,7 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "v0.3.37" },
+                { "X-Fern-SDK-Version", "v0.3.38" },
             },
             clientOptions ?? new ClientOptions()
         );

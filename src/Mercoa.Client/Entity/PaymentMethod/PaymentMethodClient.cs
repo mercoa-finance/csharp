@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class PaymentMethodClient
@@ -13,7 +15,9 @@ public class PaymentMethodClient
         _client = client;
     }
 
-    public async Task<List<PaymentMethodResponse>> GetAllAsync(GetAllPaymentMethodsRequest request)
+    public async Task<IEnumerable<PaymentMethodResponse>> GetAllAsync(
+        GetAllPaymentMethodsRequest request
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.Type != null)
@@ -31,9 +35,9 @@ public class PaymentMethodClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<PaymentMethodResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<PaymentMethodResponse>>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<PaymentMethodResponse> CreateAsync(PaymentMethodRequest request)
@@ -51,7 +55,7 @@ public class PaymentMethodClient
         {
             return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     public async Task<PaymentMethodResponse> GetAsync(string paymentMethodId)
@@ -68,7 +72,7 @@ public class PaymentMethodClient
         {
             return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -92,7 +96,7 @@ public class PaymentMethodClient
         {
             return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -126,7 +130,7 @@ public class PaymentMethodClient
         {
             return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -150,7 +154,7 @@ public class PaymentMethodClient
         {
             return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -170,6 +174,6 @@ public class PaymentMethodClient
         {
             return JsonSerializer.Deserialize<PaymentMethodBalanceResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 }

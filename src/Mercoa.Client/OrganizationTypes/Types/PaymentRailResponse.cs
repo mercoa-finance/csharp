@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class PaymentRailResponse
@@ -16,4 +18,10 @@ public class PaymentRailResponse
 
     [JsonPropertyName("active")]
     public bool Active { get; init; }
+
+    /// <summary>
+    /// unused
+    /// </summary>
+    [JsonPropertyName("available")]
+    public bool? Available { get; init; }
 }

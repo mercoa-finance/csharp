@@ -1,9 +1,11 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class VendorTrigger
 {
     [JsonPropertyName("vendorIds")]
-    public List<string> VendorIds { get; init; }
+    public IEnumerable<string> VendorIds { get; init; }
 }

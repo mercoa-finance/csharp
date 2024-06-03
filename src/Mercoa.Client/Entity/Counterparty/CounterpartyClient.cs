@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Entity;
 
+#nullable enable
+
 namespace Mercoa.Client.Entity;
 
 public class CounterpartyClient
@@ -62,7 +64,7 @@ public class CounterpartyClient
         {
             return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -114,7 +116,7 @@ public class CounterpartyClient
         {
             return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

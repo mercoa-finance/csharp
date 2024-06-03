@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class CustomPaymentMethodSchemaResponse
@@ -27,10 +29,10 @@ public class CustomPaymentMethodSchemaResponse
     /// List of currencies that this payment method supports.
     /// </summary>
     [JsonPropertyName("supportedCurrencies")]
-    public List<CurrencyCode> SupportedCurrencies { get; init; }
+    public IEnumerable<CurrencyCode> SupportedCurrencies { get; init; }
 
     [JsonPropertyName("fields")]
-    public List<CustomPaymentMethodSchemaField> Fields { get; init; }
+    public IEnumerable<CustomPaymentMethodSchemaField> Fields { get; init; }
 
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }

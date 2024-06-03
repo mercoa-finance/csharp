@@ -2,6 +2,8 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Invoice;
 
+#nullable enable
+
 namespace Mercoa.Client.Invoice;
 
 public class PaymentLinksClient
@@ -26,7 +28,7 @@ public class PaymentLinksClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -62,7 +64,7 @@ public class PaymentLinksClient
         {
             return JsonSerializer.Deserialize<string>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

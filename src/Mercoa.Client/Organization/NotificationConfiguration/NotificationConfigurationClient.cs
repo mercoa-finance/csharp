@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client.Organization;
 
 public class NotificationConfigurationClient
@@ -15,7 +17,7 @@ public class NotificationConfigurationClient
     /// <summary>
     /// Retrieve all notification configurations
     /// </summary>
-    public async Task<List<NotificationConfigurationResponse>> GetAllAsync()
+    public async Task<IEnumerable<NotificationConfigurationResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest
@@ -27,11 +29,11 @@ public class NotificationConfigurationClient
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)
         {
-            return JsonSerializer.Deserialize<List<NotificationConfigurationResponse>>(
+            return JsonSerializer.Deserialize<IEnumerable<NotificationConfigurationResponse>>(
                 responseBody
             );
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -51,7 +53,7 @@ public class NotificationConfigurationClient
         {
             return JsonSerializer.Deserialize<NotificationConfigurationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>
@@ -75,7 +77,7 @@ public class NotificationConfigurationClient
         {
             return JsonSerializer.Deserialize<NotificationConfigurationResponse>(responseBody);
         }
-        throw new Exception();
+        throw new Exception(responseBody);
     }
 
     /// <summary>

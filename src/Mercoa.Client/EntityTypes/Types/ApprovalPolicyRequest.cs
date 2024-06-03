@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using Mercoa.Client;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class ApprovalPolicyRequest
@@ -9,7 +11,7 @@ public class ApprovalPolicyRequest
     /// List of triggers that will cause this policy to be evaluated. If no triggers are provided, the policy will be evaluated for all invoices.
     /// </summary>
     [JsonPropertyName("trigger")]
-    public List<Trigger> Trigger { get; init; }
+    public IEnumerable<Trigger> Trigger { get; init; }
 
     [JsonPropertyName("rule")]
     public Rule Rule { get; init; }

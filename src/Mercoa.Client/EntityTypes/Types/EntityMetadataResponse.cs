@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+#nullable enable
+
 namespace Mercoa.Client;
 
 public class EntityMetadataResponse
@@ -8,5 +10,5 @@ public class EntityMetadataResponse
     public string Key { get; init; }
 
     [JsonPropertyName("value")]
-    public List<string> Value { get; init; }
+    public IEnumerable<string> Value { get; init; }
 }
