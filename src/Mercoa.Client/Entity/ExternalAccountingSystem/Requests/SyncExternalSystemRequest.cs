@@ -12,7 +12,7 @@ public class SyncExternalSystemRequest
     public SyncType? Vendors { get; init; }
 
     /// <summary>
-    /// Sync bills from external accounting system. Default is to not sync bills.
+    /// Sync bills from external accounting system. Default is to not sync bills. Invoices that already exist in both systems will not be updated, only new invoices not present in the other system will be created.
     /// </summary>
     public SyncType? Bills { get; init; }
 

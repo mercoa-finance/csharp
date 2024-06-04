@@ -16,7 +16,29 @@ public class ExternalAccountingSystemClient
     }
 
     /// <summary>
-    /// Create/Link an entity to an external accounting system like Codat or Rutter
+    /// Get the external accounting system connected to an entity
+    /// </summary>
+    public async Task<ExternalAccountingSystemCompanyResponse> GetAsync()
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.ApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = "/external-accounting-system"
+            }
+        );
+        string responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        {
+            return JsonSerializer.Deserialize<ExternalAccountingSystemCompanyResponse>(
+                responseBody
+            );
+        }
+        throw new Exception(responseBody);
+    }
+
+    /// <summary>
+    /// Create/Link an entity to an external accounting system like Codat or Rutter. If the entity is already linked to an external accounting system, this will return the existing connection.
     /// </summary>
     public async Task<ExternalAccountingSystemCompanyResponse> CreateAsync(
         ExternalAccountingSystemCompanyCreationRequest request

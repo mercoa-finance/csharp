@@ -46,6 +46,12 @@ public class CheckResponse
     [JsonPropertyName("supportedCurrencies")]
     public IEnumerable<CurrencyCode> SupportedCurrencies { get; init; }
 
+    /// <summary>
+    /// ID for this payment method in the external accounting system (e.g Rutter or Codat)
+    /// </summary>
+    [JsonPropertyName("externalAccountingSystemId")]
+    public string? ExternalAccountingSystemId { get; init; }
+
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }
 
