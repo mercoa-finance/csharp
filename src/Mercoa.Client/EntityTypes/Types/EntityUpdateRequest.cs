@@ -50,6 +50,18 @@ public class EntityUpdateRequest
     public bool? IsPayee { get; init; }
 
     /// <summary>
+    /// Control if this entity should be available as a payor to any entity on your platform. If set to false, this entity will only be available as a payor to entities that have a direct relationship with this entity. Defaults to false.
+    /// </summary>
+    [JsonPropertyName("isNetworkPayor")]
+    public bool? IsNetworkPayor { get; init; }
+
+    /// <summary>
+    /// Control if this entity should be available as a payee to any entity on your platform. If set to false, this entity will only be available as a payee to entities that have a direct relationship with this entity. Defaults to false.
+    /// </summary>
+    [JsonPropertyName("isNetworkPayee")]
+    public bool? IsNetworkPayee { get; init; }
+
+    /// <summary>
     /// Base64 encoded PNG image data for the entity logo.
     /// </summary>
     [JsonPropertyName("logo")]

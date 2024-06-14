@@ -14,4 +14,7 @@ public class ColorSchemeRequest
 
     [JsonPropertyName("logoBackgroundColor")]
     public string? LogoBackgroundColor { get; init; }
+
+    [JsonPropertyName("roundedCorners")]
+    public int? RoundedCorners { get; init; }
 }

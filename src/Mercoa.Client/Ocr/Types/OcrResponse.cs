@@ -11,7 +11,7 @@ public class OcrResponse
     public InvoiceResponse Invoice { get; init; }
 
     [JsonPropertyName("vendor")]
-    public EntityResponse Vendor { get; init; }
+    public CounterpartyResponse Vendor { get; init; }
 
     [JsonPropertyName("check")]
     public CheckResponse? Check { get; init; }

@@ -7,11 +7,23 @@ namespace Mercoa.Client;
 
 public class CounterpartyResponse
 {
+    /// <summary>
+    /// If the entity searching for counterparties has an Account ID configured in the Payee/Payor relationship, it will be returned
+    /// </summary>
+    [JsonPropertyName("accountId")]
+    public string? AccountId { get; init; }
+
+    /// <summary>
+    /// URL to the entity logo
+    /// </summary>
+    [JsonPropertyName("logo")]
+    public string? Logo { get; init; }
+
     [JsonPropertyName("paymentMethods")]
-    public IEnumerable<PaymentMethodResponse> PaymentMethods { get; init; }
+    public IEnumerable<PaymentMethodResponse>? PaymentMethods { get; init; }
 
     [JsonPropertyName("counterpartyType")]
-    public IEnumerable<CounterpartyNetworkType> CounterpartyType { get; init; }
+    public IEnumerable<CounterpartyNetworkType>? CounterpartyType { get; init; }
 
     [JsonPropertyName("invoiceMetrics")]
     public CounterpartyInvoiceMetricsResponse? InvoiceMetrics { get; init; }
@@ -75,6 +87,18 @@ public class CounterpartyResponse
     /// </summary>
     [JsonPropertyName("isPayee")]
     public bool IsPayee { get; init; }
+
+    /// <summary>
+    /// True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
+    /// </summary>
+    [JsonPropertyName("isNetworkPayor")]
+    public bool IsNetworkPayor { get; init; }
+
+    /// <summary>
+    /// True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
+    /// </summary>
+    [JsonPropertyName("isNetworkPayee")]
+    public bool IsNetworkPayee { get; init; }
 
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }

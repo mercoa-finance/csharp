@@ -157,6 +157,9 @@ public class EntityClient
         throw new Exception(responseBody);
     }
 
+    /// <summary>
+    /// Will archive the entity. This action cannot be undone, and the entity will no longer be available for use.
+    /// </summary>
     public async void DeleteAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(

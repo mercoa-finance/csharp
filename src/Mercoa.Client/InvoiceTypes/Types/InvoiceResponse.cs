@@ -65,7 +65,7 @@ public class InvoiceResponse
     public string? PayerId { get; init; }
 
     [JsonPropertyName("payer")]
-    public EntityResponse? Payer { get; init; }
+    public CounterpartyResponse? Payer { get; init; }
 
     [JsonPropertyName("paymentSource")]
     public PaymentMethodResponse? PaymentSource { get; init; }
@@ -77,7 +77,7 @@ public class InvoiceResponse
     public string? VendorId { get; init; }
 
     [JsonPropertyName("vendor")]
-    public EntityResponse? Vendor { get; init; }
+    public CounterpartyResponse? Vendor { get; init; }
 
     [JsonPropertyName("paymentDestination")]
     public PaymentMethodResponse? PaymentDestination { get; init; }
