@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{758C2339-4466-42A3-B3D9-2821FD9F84AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{BC153F5D-14F0-4509-B2A1-5B9AA242F6CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{F2BBED25-0EE5-4D4C-9807-170C23BB66BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{D7AB86F9-B306-425C-BE18-7937D748FEDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{758C2339-4466-42A3-B3D9-2821FD9F84AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{758C2339-4466-42A3-B3D9-2821FD9F84AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{758C2339-4466-42A3-B3D9-2821FD9F84AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{758C2339-4466-42A3-B3D9-2821FD9F84AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2BBED25-0EE5-4D4C-9807-170C23BB66BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2BBED25-0EE5-4D4C-9807-170C23BB66BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2BBED25-0EE5-4D4C-9807-170C23BB66BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2BBED25-0EE5-4D4C-9807-170C23BB66BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC153F5D-14F0-4509-B2A1-5B9AA242F6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC153F5D-14F0-4509-B2A1-5B9AA242F6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC153F5D-14F0-4509-B2A1-5B9AA242F6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC153F5D-14F0-4509-B2A1-5B9AA242F6CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7AB86F9-B306-425C-BE18-7937D748FEDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7AB86F9-B306-425C-BE18-7937D748FEDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7AB86F9-B306-425C-BE18-7937D748FEDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7AB86F9-B306-425C-BE18-7937D748FEDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

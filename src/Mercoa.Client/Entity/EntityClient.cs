@@ -158,7 +158,7 @@ public class EntityClient
     }
 
     /// <summary>
-    /// Will archive the entity. This action cannot be undone, and the entity will no longer be available for use.
+    /// Will archive the entity. This action cannot be undone, and the entity will no longer be available for use. The foreignId on the entity will be cleared as well.
     /// </summary>
     public async void DeleteAsync(string entityId)
     {
