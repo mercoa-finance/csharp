@@ -18,4 +18,10 @@ public class ApprovalPolicyResponse
 
     [JsonPropertyName("upstreamPolicyId")]
     public string UpstreamPolicyId { get; init; }
+
+    [JsonPropertyName("createdAt")]
+    public DateTime CreatedAt { get; init; }
+
+    [JsonPropertyName("updatedAt")]
+    public DateTime UpdatedAt { get; init; }
 }

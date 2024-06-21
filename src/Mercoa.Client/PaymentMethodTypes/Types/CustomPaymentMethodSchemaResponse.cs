@@ -34,6 +34,12 @@ public class CustomPaymentMethodSchemaResponse
     [JsonPropertyName("fields")]
     public IEnumerable<CustomPaymentMethodSchemaField> Fields { get; init; }
 
+    /// <summary>
+    /// Estimated time in days for this payment method to process a payments. 0 is an same-day payment methods, -1 is unknown processing time.
+    /// </summary>
+    [JsonPropertyName("estimatedProcessingTime")]
+    public int EstimatedProcessingTime { get; init; }
+
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }
 
