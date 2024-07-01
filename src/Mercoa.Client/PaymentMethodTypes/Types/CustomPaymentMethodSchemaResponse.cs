@@ -40,6 +40,9 @@ public class CustomPaymentMethodSchemaResponse
     [JsonPropertyName("estimatedProcessingTime")]
     public int EstimatedProcessingTime { get; init; }
 
+    [JsonPropertyName("fees")]
+    public CustomPaymentMethodSchemaFee? Fees { get; init; }
+
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }
 

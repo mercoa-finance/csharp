@@ -15,4 +15,7 @@ public class PaymentMethodWebhook
 
     [JsonPropertyName("paymentMethod")]
     public PaymentMethodResponse PaymentMethod { get; init; }
+
+    [JsonPropertyName("entity")]
+    public EntityResponse Entity { get; init; }
 }

@@ -32,5 +32,11 @@ public enum CustomPaymentMethodSchemaFieldType
     Url,
 
     [EnumMember(Value = "address")]
-    Address
+    Address,
+
+    [EnumMember(Value = "usBankRoutingNumber")]
+    UsBankRoutingNumber,
+
+    [EnumMember(Value = "usBankAccountNumber")]
+    UsBankAccountNumber
 }

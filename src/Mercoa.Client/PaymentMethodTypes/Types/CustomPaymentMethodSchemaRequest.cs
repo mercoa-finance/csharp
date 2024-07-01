@@ -23,12 +23,6 @@ public class CustomPaymentMethodSchemaRequest
     public bool IsDestination { get; init; }
 
     /// <summary>
-    /// Estimated time in days for this payment method to process a payments. Set as 0 for same-day payment methods, -1 for unknown processing time.
-    /// </summary>
-    [JsonPropertyName("estimatedProcessingTime")]
-    public int? EstimatedProcessingTime { get; init; }
-
-    /// <summary>
     /// List of currencies that this payment method supports. If not provided, the payment method will support only USD.
     /// </summary>
     [JsonPropertyName("supportedCurrencies")]
@@ -36,4 +30,13 @@ public class CustomPaymentMethodSchemaRequest
 
     [JsonPropertyName("fields")]
     public IEnumerable<CustomPaymentMethodSchemaField> Fields { get; init; }
+
+    /// <summary>
+    /// Estimated time in days for this payment method to process a payments. Set as 0 for same-day payment methods, -1 for unknown processing time.
+    /// </summary>
+    [JsonPropertyName("estimatedProcessingTime")]
+    public int? EstimatedProcessingTime { get; init; }
+
+    [JsonPropertyName("fees")]
+    public CustomPaymentMethodSchemaFee? Fees { get; init; }
 }

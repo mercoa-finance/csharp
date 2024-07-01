@@ -35,7 +35,7 @@ public class InvoiceCreationRequest
     public DateTime? InvoiceDate { get; init; }
 
     /// <summary>
-    /// Date when funds will be deducted from payer's account.
+    /// Date when funds are scheduled to be deducted from payer's account.
     /// </summary>
     [JsonPropertyName("deductionDate")]
     public DateTime? DeductionDate { get; init; }
@@ -129,4 +129,10 @@ public class InvoiceCreationRequest
     /// </summary>
     [JsonPropertyName("creatorUserId")]
     public string? CreatorUserId { get; init; }
+
+    /// <summary>
+    /// If the invoice failed to be paid, indicate the failure reason. Only applicable for invoices with custom payment methods.
+    /// </summary>
+    [JsonPropertyName("failureType")]
+    public InvoiceFailureType? FailureType { get; init; }
 }

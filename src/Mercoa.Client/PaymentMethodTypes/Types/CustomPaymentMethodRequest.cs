@@ -19,6 +19,12 @@ public class CustomPaymentMethodRequest
     public string? AccountNumber { get; init; }
 
     /// <summary>
+    /// The available balance for this payment method.
+    /// </summary>
+    [JsonPropertyName("availableBalance")]
+    public double? AvailableBalance { get; init; }
+
+    /// <summary>
     /// Payment method schema used for this payment method. Defines the fields that this payment method contains.
     /// </summary>
     [JsonPropertyName("schemaId")]

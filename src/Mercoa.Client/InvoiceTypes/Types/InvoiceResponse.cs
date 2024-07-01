@@ -32,10 +32,16 @@ public class InvoiceResponse
     public DateTime? InvoiceDate { get; init; }
 
     /// <summary>
-    /// Date when funds will be deducted from payer's account.
+    /// Date when funds are scheduled to be deducted from payer's account. The actual deduction date may differ from this date, and will be reflected in the processedAt field.
     /// </summary>
     [JsonPropertyName("deductionDate")]
     public DateTime? DeductionDate { get; init; }
+
+    /// <summary>
+    /// Date when the invoice payment was processed.
+    /// </summary>
+    [JsonPropertyName("processedAt")]
+    public DateTime? ProcessedAt { get; init; }
 
     /// <summary>
     /// Date of funds settlement.
@@ -141,9 +147,6 @@ public class InvoiceResponse
     /// </summary>
     [JsonPropertyName("failureType")]
     public InvoiceFailureType? FailureType { get; init; }
-
-    [JsonPropertyName("processedAt")]
-    public DateTime? ProcessedAt { get; init; }
 
     [JsonPropertyName("createdAt")]
     public DateTime CreatedAt { get; init; }
