@@ -11,7 +11,7 @@ public class CustomPaymentMethodResponse
     /// ID for this payment method in your system
     /// </summary>
     [JsonPropertyName("foreignId")]
-    public string ForeignId { get; init; }
+    public string? ForeignId { get; init; }
 
     [JsonPropertyName("accountName")]
     public string? AccountName { get; init; }
