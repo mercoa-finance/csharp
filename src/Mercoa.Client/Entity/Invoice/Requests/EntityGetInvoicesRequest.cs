@@ -85,9 +85,4 @@ public class EntityGetInvoicesRequest
     /// Invoice status to filter on.
     /// </summary>
     public InvoiceStatus? Status { get; init; }
-
-    /// <summary>
-    /// DEPRECATED. Fees are now included by default in the response.
-    /// </summary>
-    public bool? IncludeFees { get; init; }
 }

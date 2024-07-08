@@ -14,7 +14,7 @@ public class OcrRequest
     public string MimeType { get; init; }
 
     /// <summary>
-    /// Base64 encoded image or PDF. PNG, JPG, and PDF are supported. 10MB max.
+    /// Base64 encoded image or PDF. PNG, JPG, WEBP, and PDF are supported. 10MB max.
     /// </summary>
     [JsonPropertyName("image")]
     public string Image { get; init; }

@@ -93,10 +93,6 @@ public class InvoiceClient
         {
             _query["status"] = request.Status;
         }
-        if (request.IncludeFees != null)
-        {
-            _query["includeFees"] = request.IncludeFees;
-        }
         var response = await _client.MakeRequestAsync(
             new RawClient.ApiRequest
             {
@@ -131,20 +127,10 @@ public class InvoiceClient
         throw new Exception(responseBody);
     }
 
-    public async Task<InvoiceResponse> GetAsync(string invoiceId, GetInvoice request)
+    public async Task<InvoiceResponse> GetAsync(string invoiceId)
     {
-        var _query = new Dictionary<string, object>() { };
-        if (request.IncludeFees != null)
-        {
-            _query["includeFees"] = request.IncludeFees;
-        }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
-            {
-                Method = HttpMethod.Get,
-                Path = $"/invoice/{invoiceId}",
-                Query = _query
-            }
+            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/invoice/{invoiceId}" }
         );
         string responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode >= 200 && response.StatusCode < 400)

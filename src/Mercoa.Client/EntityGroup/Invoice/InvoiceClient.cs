@@ -1,10 +1,10 @@
 using System.Text.Json;
 using Mercoa.Client;
-using Mercoa.Client.Entity;
+using Mercoa.Client.EntityGroup;
 
 #nullable enable
 
-namespace Mercoa.Client.Entity;
+namespace Mercoa.Client.EntityGroup;
 
 public class InvoiceClient
 {
@@ -16,7 +16,7 @@ public class InvoiceClient
     }
 
     /// <summary>
-    /// Get invoices for an entity with the given filters.
+    /// Get invoices for an entity group with the given filters.
     /// </summary>
     public async Task<FindInvoiceResponse> FindAsync(EntityGetInvoicesRequest request)
     {
@@ -102,10 +102,10 @@ public class InvoiceClient
     }
 
     /// <summary>
-    /// Get invoice metrics for an entity with the given filters. Invoices will be grouped by currency. If none of excludePayables, excludeReceivables, payerId, vendorId, or invoiceId status filters are provided, excludeReceivables will be set to true.
+    /// Get invoice metrics for an entity group with the given filters. Invoices will be grouped by currency. If none of excludePayables, excludeReceivables, payerId, vendorId, or invoiceId status filters are provided, excludeReceivables will be set to true.
     /// </summary>
     public async Task<IEnumerable<InvoiceMetricsResponse>> MetricsAsync(
-        InvoiceMetricsRequest request
+        GroupInvoiceMetricsRequest request
     )
     {
         var _query = new Dictionary<string, object>() { };

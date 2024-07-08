@@ -12,4 +12,10 @@ public class EntityWebhook
 
     [JsonPropertyName("entity")]
     public EntityResponse Entity { get; init; }
+
+    /// <summary>
+    /// User who initiated the change.
+    /// </summary>
+    [JsonPropertyName("user")]
+    public EntityUserResponse? User { get; init; }
 }

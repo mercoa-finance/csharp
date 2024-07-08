@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Mercoa.Client;
 
 #nullable enable
 
@@ -14,4 +15,10 @@ public class CounterpartyWebhook
 
     [JsonPropertyName("payorId")]
     public string PayorId { get; init; }
+
+    /// <summary>
+    /// User who initiated the change.
+    /// </summary>
+    [JsonPropertyName("user")]
+    public EntityUserResponse? User { get; init; }
 }

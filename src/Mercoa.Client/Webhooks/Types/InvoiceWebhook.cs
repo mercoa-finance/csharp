@@ -12,4 +12,10 @@ public class InvoiceWebhook
 
     [JsonPropertyName("invoice")]
     public InvoiceResponse Invoice { get; init; }
+
+    /// <summary>
+    /// User who initiated the change.
+    /// </summary>
+    [JsonPropertyName("user")]
+    public EntityUserResponse? User { get; init; }
 }

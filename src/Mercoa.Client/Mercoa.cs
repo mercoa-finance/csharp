@@ -1,5 +1,6 @@
 using Mercoa.Client;
 using Mercoa.Client.Entity;
+using Mercoa.Client.EntityGroup;
 using Mercoa.Client.Invoice;
 using Mercoa.Client.Organization;
 
@@ -19,10 +20,11 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.4.4" },
+                { "X-Fern-SDK-Version", "0.4.5" },
             },
             clientOptions ?? new ClientOptions()
         );
+        EntityGroup = new EntityGroupClient(_client);
         Entity = new EntityClient(_client);
         Invoice = new InvoiceClient(_client);
         Organization = new OrganizationClient(_client);
@@ -30,6 +32,7 @@ public partial class Mercoa
         Commons = new CommonsClient(_client);
         CustomPaymentMethodSchema = new CustomPaymentMethodSchemaClient(_client);
         EmailLogTypes = new EmailLogTypesClient(_client);
+        EntityGroupTypes = new EntityGroupTypesClient(_client);
         EntityTypes = new EntityTypesClient(_client);
         Fees = new FeesClient(_client);
         InvoiceTypes = new InvoiceTypesClient(_client);
@@ -38,6 +41,8 @@ public partial class Mercoa
         PaymentMethodTypes = new PaymentMethodTypesClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
+
+    public EntityGroupClient EntityGroup { get; }
 
     public EntityClient Entity { get; }
 
@@ -52,6 +57,8 @@ public partial class Mercoa
     public CustomPaymentMethodSchemaClient CustomPaymentMethodSchema { get; }
 
     public EmailLogTypesClient EmailLogTypes { get; }
+
+    public EntityGroupTypesClient EntityGroupTypes { get; }
 
     public EntityTypesClient EntityTypes { get; }
 
