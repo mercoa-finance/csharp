@@ -40,6 +40,18 @@ public class CustomPaymentMethodSchemaResponse
     [JsonPropertyName("estimatedProcessingTime")]
     public int EstimatedProcessingTime { get; init; }
 
+    /// <summary>
+    /// The maximum amount that can be transferred from this payment method in a single transaction.
+    /// </summary>
+    [JsonPropertyName("maxAmount")]
+    public double? MaxAmount { get; init; }
+
+    /// <summary>
+    /// The minimum amount that can be transferred from this payment method in a single transaction. Default is 1.
+    /// </summary>
+    [JsonPropertyName("minAmount")]
+    public double? MinAmount { get; init; }
+
     [JsonPropertyName("fees")]
     public CustomPaymentMethodSchemaFee? Fees { get; init; }
 

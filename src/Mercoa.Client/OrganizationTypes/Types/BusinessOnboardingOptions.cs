@@ -25,6 +25,9 @@ public class BusinessOnboardingOptions
     [JsonPropertyName("ein")]
     public OnboardingOption Ein { get; init; }
 
+    [JsonPropertyName("mcc")]
+    public OnboardingOption Mcc { get; init; }
+
     [JsonPropertyName("address")]
     public OnboardingOption Address { get; init; }
 

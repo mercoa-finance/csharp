@@ -20,7 +20,7 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.4.5" },
+                { "X-Fern-SDK-Version", "0.4.6" },
             },
             clientOptions ?? new ClientOptions()
         );
@@ -29,12 +29,12 @@ public partial class Mercoa
         Invoice = new InvoiceClient(_client);
         Organization = new OrganizationClient(_client);
         BankLookup = new BankLookupClient(_client);
+        Calculate = new CalculateClient(_client);
         Commons = new CommonsClient(_client);
         CustomPaymentMethodSchema = new CustomPaymentMethodSchemaClient(_client);
         EmailLogTypes = new EmailLogTypesClient(_client);
         EntityGroupTypes = new EntityGroupTypesClient(_client);
         EntityTypes = new EntityTypesClient(_client);
-        Fees = new FeesClient(_client);
         InvoiceTypes = new InvoiceTypesClient(_client);
         Ocr = new OcrClient(_client);
         OrganizationTypes = new OrganizationTypesClient(_client);
@@ -52,6 +52,8 @@ public partial class Mercoa
 
     public BankLookupClient BankLookup { get; }
 
+    public CalculateClient Calculate { get; }
+
     public CommonsClient Commons { get; }
 
     public CustomPaymentMethodSchemaClient CustomPaymentMethodSchema { get; }
@@ -61,8 +63,6 @@ public partial class Mercoa
     public EntityGroupTypesClient EntityGroupTypes { get; }
 
     public EntityTypesClient EntityTypes { get; }
-
-    public FeesClient Fees { get; }
 
     public InvoiceTypesClient InvoiceTypes { get; }
 

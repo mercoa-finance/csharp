@@ -57,4 +57,10 @@ public class BusinessProfileRequest
     /// </summary>
     [JsonPropertyName("formationDate")]
     public DateTime? FormationDate { get; init; }
+
+    /// <summary>
+    /// Industry code for the business. Required to collect funds.
+    /// </summary>
+    [JsonPropertyName("industryCodes")]
+    public IndustryCodes? IndustryCodes { get; init; }
 }

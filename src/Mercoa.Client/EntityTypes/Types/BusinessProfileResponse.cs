@@ -39,4 +39,7 @@ public class BusinessProfileResponse
 
     [JsonPropertyName("taxIDProvided")]
     public bool TaxIdProvided { get; init; }
+
+    [JsonPropertyName("industryCodes")]
+    public IndustryCodes? IndustryCodes { get; init; }
 }

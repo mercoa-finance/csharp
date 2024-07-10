@@ -129,4 +129,10 @@ public class InvoiceRequestBase
     /// </summary>
     [JsonPropertyName("failureType")]
     public InvoiceFailureType? FailureType { get; init; }
+
+    /// <summary>
+    /// If using a custom payment method, you can override the default fees for this invoice. If not provided, the default fees for the custom payment method will be used.
+    /// </summary>
+    [JsonPropertyName("fees")]
+    public InvoiceFeesRequest? Fees { get; init; }
 }
