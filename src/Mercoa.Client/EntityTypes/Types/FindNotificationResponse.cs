@@ -5,20 +5,20 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class FindNotificationResponse
+public record FindNotificationResponse
 {
     /// <summary>
     /// Total number of notifications for the given start and end date filters. This value is not limited by the limit parameter. It is provided so that you can determine how many pages of results are available.
     /// </summary>
     [JsonPropertyName("count")]
-    public int Count { get; init; }
+    public required int Count { get; init; }
 
     /// <summary>
     /// True if there are more notifications available for the given start and end date filters.
     /// </summary>
     [JsonPropertyName("hasMore")]
-    public bool HasMore { get; init; }
+    public required bool HasMore { get; init; }
 
     [JsonPropertyName("data")]
-    public IEnumerable<NotificationResponse> Data { get; init; }
+    public IEnumerable<NotificationResponse> Data { get; init; } = new List<NotificationResponse>();
 }

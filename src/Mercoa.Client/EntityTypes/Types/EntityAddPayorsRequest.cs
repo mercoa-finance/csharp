@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityAddPayorsRequest
+public record EntityAddPayorsRequest
 {
     /// <summary>
     /// List of payor entity IDs to associate with the entity
     /// </summary>
     [JsonPropertyName("payors")]
-    public IEnumerable<string> Payors { get; init; }
+    public IEnumerable<string> Payors { get; init; } = new List<string>();
 
     /// <summary>
     /// List of customizations to apply to the payors. If the payor is not currently a counterparty of the entity, the counterparty will be created with the provided customizations.

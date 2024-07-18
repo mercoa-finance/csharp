@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Organization;
 
 #nullable enable
@@ -26,44 +28,45 @@ public class OrganizationClient
         var _query = new Dictionary<string, object>() { };
         if (request.PaymentMethods != null)
         {
-            _query["paymentMethods"] = request.PaymentMethods;
+            _query["paymentMethods"] = request.PaymentMethods.ToString();
         }
         if (request.EmailProvider != null)
         {
-            _query["emailProvider"] = request.EmailProvider;
+            _query["emailProvider"] = request.EmailProvider.ToString();
         }
         if (request.ExternalAccountingSystemProvider != null)
         {
-            _query["externalAccountingSystemProvider"] = request.ExternalAccountingSystemProvider;
+            _query["externalAccountingSystemProvider"] =
+                request.ExternalAccountingSystemProvider.ToString();
         }
         if (request.ColorScheme != null)
         {
-            _query["colorScheme"] = request.ColorScheme;
+            _query["colorScheme"] = request.ColorScheme.ToString();
         }
         if (request.PayeeOnboardingOptions != null)
         {
-            _query["payeeOnboardingOptions"] = request.PayeeOnboardingOptions;
+            _query["payeeOnboardingOptions"] = request.PayeeOnboardingOptions.ToString();
         }
         if (request.PayorOnboardingOptions != null)
         {
-            _query["payorOnboardingOptions"] = request.PayorOnboardingOptions;
+            _query["payorOnboardingOptions"] = request.PayorOnboardingOptions.ToString();
         }
         if (request.MetadataSchema != null)
         {
-            _query["metadataSchema"] = request.MetadataSchema;
+            _query["metadataSchema"] = request.MetadataSchema.ToString();
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/organization",
+                Path = "organization",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<OrganizationResponse>(responseBody);
+            return JsonSerializer.Deserialize<OrganizationResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -74,17 +77,17 @@ public class OrganizationClient
     public async Task<OrganizationResponse> UpdateAsync(OrganizationRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/organization",
+                Path = "organization",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<OrganizationResponse>(responseBody);
+            return JsonSerializer.Deserialize<OrganizationResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -97,32 +100,32 @@ public class OrganizationClient
         var _query = new Dictionary<string, object>() { };
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate;
+            _query["startDate"] = request.StartDate.Value.ToString("o0");
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate;
+            _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
             _query["startingAfter"] = request.StartingAfter;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/organization/emailLog",
+                Path = "organization/emailLog",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody);
+            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

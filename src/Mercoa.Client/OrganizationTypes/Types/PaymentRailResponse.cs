@@ -5,19 +5,19 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class PaymentRailResponse
+public record PaymentRailResponse
 {
     [JsonPropertyName("type")]
-    public PaymentMethodType Type { get; init; }
+    public required PaymentMethodType Type { get; init; }
 
     /// <summary>
     /// For custom payment methods, this is the ID of the schema.
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     [JsonPropertyName("active")]
-    public bool Active { get; init; }
+    public required bool Active { get; init; }
 
     /// <summary>
     /// unused

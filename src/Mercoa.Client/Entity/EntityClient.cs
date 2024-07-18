@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 using Mercoa.Client.Entity.EmailLog;
 using Mercoa.Client.Entity.User;
@@ -20,6 +22,7 @@ public class EntityClient
         ApprovalPolicy = new ApprovalPolicyClient(_client);
         Counterparty = new CounterpartyClient(_client);
         Customization = new CustomizationClient(_client);
+        Document = new DocumentClient(_client);
         ExternalAccountingSystem = new ExternalAccountingSystemClient(_client);
         Invoice = new InvoiceClient(_client);
         Metadata = new MetadataClient(_client);
@@ -37,6 +40,8 @@ public class EntityClient
     public CounterpartyClient Counterparty { get; }
 
     public CustomizationClient Customization { get; }
+
+    public DocumentClient Document { get; }
 
     public ExternalAccountingSystemClient ExternalAccountingSystem { get; }
 
@@ -58,11 +63,11 @@ public class EntityClient
         var _query = new Dictionary<string, object>() { };
         if (request.PaymentMethods != null)
         {
-            _query["paymentMethods"] = request.PaymentMethods;
+            _query["paymentMethods"] = request.PaymentMethods.ToString();
         }
         if (request.IsCustomer != null)
         {
-            _query["isCustomer"] = request.IsCustomer;
+            _query["isCustomer"] = request.IsCustomer.ToString();
         }
         if (request.ForeignId != null)
         {
@@ -70,15 +75,15 @@ public class EntityClient
         }
         if (request.Status != null)
         {
-            _query["status"] = request.Status;
+            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         if (request.IsPayee != null)
         {
-            _query["isPayee"] = request.IsPayee;
+            _query["isPayee"] = request.IsPayee.ToString();
         }
         if (request.IsPayor != null)
         {
-            _query["isPayor"] = request.IsPayor;
+            _query["isPayor"] = request.IsPayor.ToString();
         }
         if (request.Name != null)
         {
@@ -86,24 +91,24 @@ public class EntityClient
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
             _query["startingAfter"] = request.StartingAfter;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/entity",
+                Path = "entity",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindEntityResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindEntityResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -111,17 +116,17 @@ public class EntityClient
     public async Task<EntityResponse> CreateAsync(EntityRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/entity",
+                Path = "entity",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -129,12 +134,12 @@ public class EntityClient
     public async Task<EntityResponse> GetAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/entity/{entityId}" }
+            new RawClient.JsonApiRequest { Method = HttpMethod.Get, Path = $"entity/{entityId}" }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -142,17 +147,17 @@ public class EntityClient
     public async Task<EntityResponse> UpdateAsync(string entityId, EntityUpdateRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/entity/{entityId}",
+                Path = $"entity/{entityId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -160,23 +165,23 @@ public class EntityClient
     /// <summary>
     /// Will archive the entity. This action cannot be undone, and the entity will no longer be available for use. The foreignId on the entity will be cleared as well.
     /// </summary>
-    public async void DeleteAsync(string entityId)
+    public async Task DeleteAsync(string entityId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Delete, Path = $"/entity/{entityId}" }
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest { Method = HttpMethod.Delete, Path = $"entity/{entityId}" }
         );
     }
 
     /// <summary>
     /// This endpoint is used to indicate acceptance of Mercoa's terms of service for an entity. Send a request to this endpoint only after the entity has accepted the Mercoa ToS. Entities must accept Mercoa ToS before they can be send or pay invoices using Mercoa's payment rails.
     /// </summary>
-    public async void AcceptTermsOfServiceAsync(string entityId)
+    public async Task AcceptTermsOfServiceAsync(string entityId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/entity/{entityId}/accept-tos"
+                Path = $"entity/{entityId}/accept-tos"
             }
         );
     }
@@ -186,13 +191,13 @@ public class EntityClient
     /// Send a request to this endpoint only after the entity has accepted the Mercoa ToS,
     /// all representatives have been added, and all required fields have been filled out.
     /// </summary>
-    public async void InitiateKybAsync(string entityId)
+    public async Task InitiateKybAsync(string entityId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/entity/{entityId}/request-kyb"
+                Path = $"entity/{entityId}/request-kyb"
             }
         );
     }
@@ -205,17 +210,17 @@ public class EntityClient
     public async Task<string> GetTokenAsync(string entityId, TokenGenerationOptions request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/entity/{entityId}/token",
+                Path = $"entity/{entityId}/token",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -231,17 +236,17 @@ public class EntityClient
             _query["paymentMethodId"] = request.PaymentMethodId;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/plaidLinkToken",
+                Path = $"entity/{entityId}/plaidLinkToken",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -254,7 +259,10 @@ public class EntityClient
         GenerateOnboardingLink request
     )
     {
-        var _query = new Dictionary<string, object>() { { "type", request.Type.ToString() }, };
+        var _query = new Dictionary<string, object>()
+        {
+            { "type", JsonSerializer.Serialize(request.Type) },
+        };
         if (request.ExpiresIn != null)
         {
             _query["expiresIn"] = request.ExpiresIn;
@@ -264,17 +272,17 @@ public class EntityClient
             _query["connectedEntityId"] = request.ConnectedEntityId;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/onboarding",
+                Path = $"entity/{entityId}/onboarding",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -282,9 +290,12 @@ public class EntityClient
     /// <summary>
     /// Send an email with a onboarding link to the entity. The email will be sent to the email address associated with the entity.
     /// </summary>
-    public async void SendOnboardingLinkAsync(string entityId, SendOnboardingLink request)
+    public async Task SendOnboardingLinkAsync(string entityId, SendOnboardingLink request)
     {
-        var _query = new Dictionary<string, object>() { { "type", request.Type.ToString() }, };
+        var _query = new Dictionary<string, object>()
+        {
+            { "type", JsonSerializer.Serialize(request.Type) },
+        };
         if (request.ExpiresIn != null)
         {
             _query["expiresIn"] = request.ExpiresIn;
@@ -293,11 +304,11 @@ public class EntityClient
         {
             _query["connectedEntityId"] = request.ConnectedEntityId;
         }
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/entity/{entityId}/onboarding",
+                Path = $"entity/{entityId}/onboarding",
                 Query = _query
             }
         );

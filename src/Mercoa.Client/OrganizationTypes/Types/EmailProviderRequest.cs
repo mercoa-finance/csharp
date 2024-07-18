@@ -5,11 +5,11 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EmailProviderRequest
+public record EmailProviderRequest
 {
     [JsonPropertyName("sender")]
-    public EmailSenderRequest Sender { get; init; }
+    public required EmailSenderRequest Sender { get; init; }
 
     [JsonPropertyName("inboxDomain")]
-    public string InboxDomain { get; init; }
+    public required string InboxDomain { get; init; }
 }

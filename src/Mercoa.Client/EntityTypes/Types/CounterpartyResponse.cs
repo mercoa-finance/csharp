@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CounterpartyResponse
+public record CounterpartyResponse
 {
     /// <summary>
-    /// If the entity searching for counterparties has an Account ID configured in the Payee/Payor relationship, it will be returned
+    /// If the entity searching for counterparties has any accounts configured in the Payee/Payor relationship, they will be returned
     /// </summary>
-    [JsonPropertyName("accountId")]
-    public string? AccountId { get; init; }
+    [JsonPropertyName("accounts")]
+    public IEnumerable<CounterpartyCustomizationAccount>? Accounts { get; init; }
 
     /// <summary>
     /// URL to the entity logo
@@ -20,7 +20,7 @@ public class CounterpartyResponse
     public string? Logo { get; init; }
 
     [JsonPropertyName("paymentMethods")]
-    public IEnumerable<PaymentMethodResponse>? PaymentMethods { get; init; }
+    public IEnumerable<object>? PaymentMethods { get; init; }
 
     [JsonPropertyName("counterpartyType")]
     public IEnumerable<CounterpartyNetworkType>? CounterpartyType { get; init; }
@@ -29,13 +29,13 @@ public class CounterpartyResponse
     public CounterpartyInvoiceMetricsResponse? InvoiceMetrics { get; init; }
 
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     [JsonPropertyName("email")]
-    public string Email { get; init; }
+    public required string Email { get; init; }
 
     /// <summary>
     /// The ID used to identify this entity in your system
@@ -59,50 +59,50 @@ public class CounterpartyResponse
     /// True if this entity has a direct relationship with your organization.
     /// </summary>
     [JsonPropertyName("isCustomer")]
-    public bool IsCustomer { get; init; }
+    public required bool IsCustomer { get; init; }
 
     [JsonPropertyName("accountType")]
-    public AccountType AccountType { get; init; }
+    public required AccountType AccountType { get; init; }
 
     [JsonPropertyName("profile")]
-    public ProfileResponse Profile { get; init; }
+    public required ProfileResponse Profile { get; init; }
 
     [JsonPropertyName("status")]
-    public EntityStatus Status { get; init; }
+    public required EntityStatus Status { get; init; }
 
     /// <summary>
     /// True if this entity has accepted the terms of service.
     /// </summary>
     [JsonPropertyName("acceptedTos")]
-    public bool AcceptedTos { get; init; }
+    public required bool AcceptedTos { get; init; }
 
     /// <summary>
     /// True if this entity can pay invoices.
     /// </summary>
     [JsonPropertyName("isPayor")]
-    public bool IsPayor { get; init; }
+    public required bool IsPayor { get; init; }
 
     /// <summary>
     /// True if this entity can receive payments.
     /// </summary>
     [JsonPropertyName("isPayee")]
-    public bool IsPayee { get; init; }
+    public required bool IsPayee { get; init; }
 
     /// <summary>
     /// True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
     /// </summary>
     [JsonPropertyName("isNetworkPayor")]
-    public bool IsNetworkPayor { get; init; }
+    public required bool IsNetworkPayor { get; init; }
 
     /// <summary>
     /// True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
     /// </summary>
     [JsonPropertyName("isNetworkPayee")]
-    public bool IsNetworkPayee { get; init; }
+    public required bool IsNetworkPayee { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

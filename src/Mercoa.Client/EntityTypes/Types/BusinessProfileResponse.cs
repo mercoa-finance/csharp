@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class BusinessProfileResponse
+public record BusinessProfileResponse
 {
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     [JsonPropertyName("legalBusinessName")]
-    public string LegalBusinessName { get; init; }
+    public required string LegalBusinessName { get; init; }
 
     [JsonPropertyName("businessType")]
     public BusinessType? BusinessType { get; init; }
@@ -38,7 +38,7 @@ public class BusinessProfileResponse
     public bool? OwnersProvided { get; init; }
 
     [JsonPropertyName("taxIDProvided")]
-    public bool TaxIdProvided { get; init; }
+    public required bool TaxIdProvided { get; init; }
 
     [JsonPropertyName("industryCodes")]
     public IndustryCodes? IndustryCodes { get; init; }

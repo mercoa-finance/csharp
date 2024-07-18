@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -17,15 +19,19 @@ public class CommentClient
     /// <summary>
     /// Get all comments associated with this invoice
     /// </summary>
-    public async Task<IEnumerable<CommentResponse>> GetAllAsync()
+    public async Task<IEnumerable<CommentResponse>> GetAllAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/comments" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/comments"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<CommentResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<CommentResponse>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -33,33 +39,37 @@ public class CommentClient
     /// <summary>
     /// Add a comment to this invoice
     /// </summary>
-    public async Task<CommentResponse> CreateAsync(CommentRequest request)
+    public async Task<CommentResponse> CreateAsync(string invoiceId, CommentRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/comment",
+                Path = $"/invoice/{invoiceId}/comment",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CommentResponse>(responseBody);
+            return JsonSerializer.Deserialize<CommentResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async Task<CommentResponse> GetAsync(string commentId)
+    public async Task<CommentResponse> GetAsync(string invoiceId, string commentId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/comment/{commentId}" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/comment/{commentId}"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CommentResponse>(responseBody);
+            return JsonSerializer.Deserialize<CommentResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -67,20 +77,24 @@ public class CommentClient
     /// <summary>
     /// Edit a comment on this invoice
     /// </summary>
-    public async Task<CommentResponse> UpdateAsync(string commentId, CommentRequest request)
+    public async Task<CommentResponse> UpdateAsync(
+        string invoiceId,
+        string commentId,
+        CommentRequest request
+    )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/comment/{commentId}",
+                Path = $"/invoice/{invoiceId}/comment/{commentId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CommentResponse>(responseBody);
+            return JsonSerializer.Deserialize<CommentResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -88,10 +102,14 @@ public class CommentClient
     /// <summary>
     /// Delete a comment on this invoice
     /// </summary>
-    public async void DeleteAsync(string commentId)
+    public async Task DeleteAsync(string invoiceId, string commentId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Delete, Path = $"/comment/{commentId}" }
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Delete,
+                Path = $"/invoice/{invoiceId}/comment/{commentId}"
+            }
         );
     }
 }

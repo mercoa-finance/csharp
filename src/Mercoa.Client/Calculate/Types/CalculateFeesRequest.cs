@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CalculateFeesRequest
+public record CalculateFeesRequest
 {
     /// <summary>
     /// Total amount in major units. If the entered amount has more decimal places than the currency supports, trailing decimals will be truncated.
     /// </summary>
     [JsonPropertyName("amount")]
-    public double Amount { get; init; }
+    public required double Amount { get; init; }
 
     /// <summary>
     /// Currency code for the amount. Defaults to USD.
@@ -23,17 +23,17 @@ public class CalculateFeesRequest
     /// ID of payment source.
     /// </summary>
     [JsonPropertyName("paymentSourceId")]
-    public string PaymentSourceId { get; init; }
+    public required string PaymentSourceId { get; init; }
 
     /// <summary>
     /// ID of payment destination.
     /// </summary>
     [JsonPropertyName("paymentDestinationId")]
-    public string PaymentDestinationId { get; init; }
+    public required string PaymentDestinationId { get; init; }
 
     /// <summary>
     /// Options for the payment destination. Depending on the payment destination, this may include things such as check delivery method.
     /// </summary>
     [JsonPropertyName("paymentDestinationOptions")]
-    public PaymentDestinationOptions? PaymentDestinationOptions { get; init; }
+    public object? PaymentDestinationOptions { get; init; }
 }

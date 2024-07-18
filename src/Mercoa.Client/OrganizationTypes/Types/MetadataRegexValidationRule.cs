@@ -4,17 +4,17 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class MetadataRegexValidationRule
+public record MetadataRegexValidationRule
 {
     /// <summary>
     /// A regular expression that the value must match.
     /// </summary>
     [JsonPropertyName("regex")]
-    public string Regex { get; init; }
+    public required string Regex { get; init; }
 
     /// <summary>
     /// The error message to display if the value does not match the regular expression.
     /// </summary>
     [JsonPropertyName("errorMessage")]
-    public string ErrorMessage { get; init; }
+    public required string ErrorMessage { get; init; }
 }

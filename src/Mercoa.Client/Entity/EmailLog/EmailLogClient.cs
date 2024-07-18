@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity.EmailLog;
 
 #nullable enable
@@ -23,15 +25,15 @@ public class EmailLogClient
         var _query = new Dictionary<string, object>() { };
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate;
+            _query["startDate"] = request.StartDate.Value.ToString("o0");
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate;
+            _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
@@ -42,17 +44,17 @@ public class EmailLogClient
             _query["search"] = request.Search;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/{entityId}/emailLogs",
+                Path = $"/entity/{entityId}/emailLogs",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody);
+            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -63,16 +65,16 @@ public class EmailLogClient
     public async Task<EmailLog> GetAsync(string entityId, string logId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/{entityId}/emailLog/{logId}"
+                Path = $"/entity/{entityId}/emailLog/{logId}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EmailLog>(responseBody);
+            return JsonSerializer.Deserialize<EmailLog>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

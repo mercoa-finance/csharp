@@ -1,6 +1,6 @@
 namespace Mercoa.Client.Invoice;
 
-public class SendPayerEmail
+public record SendPayerEmail
 {
     /// <summary>
     /// Whether to attach the invoice to the email

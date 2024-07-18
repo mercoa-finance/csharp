@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class ProfileResponse
+public record ProfileResponse
 {
     /// <summary>
     /// Will be set if the entity is a business

@@ -5,11 +5,11 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class AmountTrigger
+public record AmountTrigger
 {
     [JsonPropertyName("amount")]
-    public double Amount { get; init; }
+    public required double Amount { get; init; }
 
     [JsonPropertyName("currency")]
-    public CurrencyCode Currency { get; init; }
+    public required CurrencyCode Currency { get; init; }
 }

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class EntityUserRequest
+public record EntityUserRequest
 {
     /// <summary>
     /// The ID used to identify this user in your system.

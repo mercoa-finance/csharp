@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityUpdateRequest
+public record EntityUpdateRequest
 {
     /// <summary>
     /// The ID used to identify this entity in your system. This ID must be unique across all entities in your system.

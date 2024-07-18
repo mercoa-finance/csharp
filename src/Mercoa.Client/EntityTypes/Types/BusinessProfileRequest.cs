@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class BusinessProfileRequest
+public record BusinessProfileRequest
 {
     /// <summary>
     /// Email address for the business. Required for KYB.
@@ -14,7 +14,7 @@ public class BusinessProfileRequest
     public string? Email { get; init; }
 
     [JsonPropertyName("legalBusinessName")]
-    public string LegalBusinessName { get; init; }
+    public required string LegalBusinessName { get; init; }
 
     [JsonPropertyName("businessType")]
     public BusinessType? BusinessType { get; init; }

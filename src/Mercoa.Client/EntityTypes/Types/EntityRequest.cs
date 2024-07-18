@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityRequest
+public record EntityRequest
 {
     /// <summary>
     /// The ID used to identify this entity in your system. This ID must be unique across all entities in your system.
@@ -29,25 +29,25 @@ public class EntityRequest
     /// If this entity has a direct relationship with your organization (e.g your direct customer or client), set this to true. Otherwise, set to false (e.g your customer's vendors).
     /// </summary>
     [JsonPropertyName("isCustomer")]
-    public bool IsCustomer { get; init; }
+    public required bool IsCustomer { get; init; }
 
     [JsonPropertyName("accountType")]
-    public AccountType AccountType { get; init; }
+    public required AccountType AccountType { get; init; }
 
     [JsonPropertyName("profile")]
-    public ProfileRequest Profile { get; init; }
+    public required ProfileRequest Profile { get; init; }
 
     /// <summary>
     /// If this entity will be paying invoices, set this to true.
     /// </summary>
     [JsonPropertyName("isPayor")]
-    public bool IsPayor { get; init; }
+    public required bool IsPayor { get; init; }
 
     /// <summary>
     /// If this entity will be receiving payments, set this to true.
     /// </summary>
     [JsonPropertyName("isPayee")]
-    public bool IsPayee { get; init; }
+    public required bool IsPayee { get; init; }
 
     /// <summary>
     /// Control if this entity should be available as a payor to any entity on your platform. If set to false, this entity will only be available as a payor to entities that have a direct relationship with this entity. Defaults to false.

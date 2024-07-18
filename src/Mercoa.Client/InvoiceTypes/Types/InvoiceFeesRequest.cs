@@ -4,17 +4,17 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class InvoiceFeesRequest
+public record InvoiceFeesRequest
 {
     /// <summary>
     /// Fee charged to the payer (C2).
     /// </summary>
     [JsonPropertyName("sourcePlatformMarkupFee")]
-    public double SourcePlatformMarkupFee { get; init; }
+    public required double SourcePlatformMarkupFee { get; init; }
 
     /// <summary>
     /// Fee charged to the payee (C3).
     /// </summary>
     [JsonPropertyName("destinationPlatformMarkupFee")]
-    public double DestinationPlatformMarkupFee { get; init; }
+    public required double DestinationPlatformMarkupFee { get; init; }
 }

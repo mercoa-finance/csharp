@@ -5,46 +5,46 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CheckResponse
+public record CheckResponse
 {
     [JsonPropertyName("payToTheOrderOf")]
-    public string PayToTheOrderOf { get; init; }
+    public required string PayToTheOrderOf { get; init; }
 
     [JsonPropertyName("addressLine1")]
-    public string AddressLine1 { get; init; }
+    public required string AddressLine1 { get; init; }
 
     [JsonPropertyName("addressLine2")]
     public string? AddressLine2 { get; init; }
 
     [JsonPropertyName("city")]
-    public string City { get; init; }
+    public required string City { get; init; }
 
     [JsonPropertyName("stateOrProvince")]
-    public string StateOrProvince { get; init; }
+    public required string StateOrProvince { get; init; }
 
     [JsonPropertyName("postalCode")]
-    public string PostalCode { get; init; }
+    public required string PostalCode { get; init; }
 
     [JsonPropertyName("country")]
-    public string Country { get; init; }
+    public required string Country { get; init; }
 
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     /// <summary>
     /// Indicates whether this payment method is the default source for the entity
     /// </summary>
     [JsonPropertyName("isDefaultSource")]
-    public bool IsDefaultSource { get; init; }
+    public required bool IsDefaultSource { get; init; }
 
     /// <summary>
     /// Indicates whether this payment method is the default destination for the entity
     /// </summary>
     [JsonPropertyName("isDefaultDestination")]
-    public bool IsDefaultDestination { get; init; }
+    public required bool IsDefaultDestination { get; init; }
 
     [JsonPropertyName("supportedCurrencies")]
-    public IEnumerable<CurrencyCode> SupportedCurrencies { get; init; }
+    public IEnumerable<CurrencyCode> SupportedCurrencies { get; init; } = new List<CurrencyCode>();
 
     /// <summary>
     /// ID for this payment method in the external accounting system (e.g Rutter or Codat)
@@ -53,8 +53,8 @@ public class CheckResponse
     public string? ExternalAccountingSystemId { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

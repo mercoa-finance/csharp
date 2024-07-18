@@ -4,20 +4,20 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class BankAddress
+public record BankAddress
 {
     [JsonPropertyName("address")]
-    public string Address { get; init; }
+    public required string Address { get; init; }
 
     [JsonPropertyName("city")]
-    public string City { get; init; }
+    public required string City { get; init; }
 
     [JsonPropertyName("state")]
-    public string State { get; init; }
+    public required string State { get; init; }
 
     [JsonPropertyName("postalCode")]
-    public string PostalCode { get; init; }
+    public required string PostalCode { get; init; }
 
     [JsonPropertyName("postalCodeExtension")]
-    public string PostalCodeExtension { get; init; }
+    public required string PostalCodeExtension { get; init; }
 }

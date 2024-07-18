@@ -4,10 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class CommentRequest
+public record CommentRequest
 {
     [JsonPropertyName("text")]
-    public string Text { get; init; }
+    public required string Text { get; init; }
 
     [JsonPropertyName("userId")]
     public string? UserId { get; init; }

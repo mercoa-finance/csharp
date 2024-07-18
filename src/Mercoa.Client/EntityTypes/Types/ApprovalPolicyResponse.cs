@@ -1,27 +1,26 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
 namespace Mercoa.Client;
 
-public class ApprovalPolicyResponse
+public record ApprovalPolicyResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("trigger")]
-    public IEnumerable<Trigger> Trigger { get; init; }
+    public IEnumerable<object> Trigger { get; init; } = new List<object>();
 
     [JsonPropertyName("rule")]
-    public Rule Rule { get; init; }
+    public required object Rule { get; init; }
 
     [JsonPropertyName("upstreamPolicyId")]
-    public string UpstreamPolicyId { get; init; }
+    public required string UpstreamPolicyId { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

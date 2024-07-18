@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CommentResponse
+public record CommentResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("text")]
-    public string Text { get; init; }
+    public required string Text { get; init; }
 
     [JsonPropertyName("user")]
     public EntityUserResponse? User { get; init; }
@@ -23,8 +23,8 @@ public class CommentResponse
     public AssociatedApprovalAction? AssociatedApprovalAction { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

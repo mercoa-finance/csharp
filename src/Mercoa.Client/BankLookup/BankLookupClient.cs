@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -24,17 +26,17 @@ public class BankLookupClient
             { "routingNumber", request.RoutingNumber },
         };
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/bankLookup",
+                Path = "bankLookup",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<BankLookupResponse>(responseBody);
+            return JsonSerializer.Deserialize<BankLookupResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

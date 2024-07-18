@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Entity;
 
-public class FindPayeeCounterpartiesRequest
+public record FindPayeeCounterpartiesRequest
 {
     /// <summary>
     /// Filter by counterparty name

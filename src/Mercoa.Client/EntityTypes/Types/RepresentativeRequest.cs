@@ -5,26 +5,26 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class RepresentativeRequest
+public record RepresentativeRequest
 {
     [JsonPropertyName("name")]
-    public FullName Name { get; init; }
+    public required FullName Name { get; init; }
 
     [JsonPropertyName("phone")]
-    public PhoneNumber Phone { get; init; }
+    public required PhoneNumber Phone { get; init; }
 
     [JsonPropertyName("email")]
-    public string Email { get; init; }
+    public required string Email { get; init; }
 
     [JsonPropertyName("address")]
-    public Address Address { get; init; }
+    public required Address Address { get; init; }
 
     [JsonPropertyName("birthDate")]
-    public BirthDate BirthDate { get; init; }
+    public required BirthDate BirthDate { get; init; }
 
     [JsonPropertyName("governmentID")]
-    public IndividualGovernmentId GovernmentId { get; init; }
+    public required IndividualGovernmentId GovernmentId { get; init; }
 
     [JsonPropertyName("responsibilities")]
-    public Responsibilities Responsibilities { get; init; }
+    public required Responsibilities Responsibilities { get; init; }
 }

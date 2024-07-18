@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class UserNotificationPolicyRequest
+public record UserNotificationPolicyRequest
 {
     /// <summary>
     /// Set to true if the selected notification type should be disabled for this user

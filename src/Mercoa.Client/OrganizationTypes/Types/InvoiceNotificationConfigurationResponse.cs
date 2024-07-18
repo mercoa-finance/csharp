@@ -5,11 +5,11 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceNotificationConfigurationResponse
+public record InvoiceNotificationConfigurationResponse
 {
     [JsonPropertyName("type")]
-    public NotificationType Type { get; init; }
+    public required NotificationType Type { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; }
+    public required string Url { get; init; }
 }

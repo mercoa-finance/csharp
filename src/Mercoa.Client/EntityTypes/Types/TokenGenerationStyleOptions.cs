@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class TokenGenerationStyleOptions
+public record TokenGenerationStyleOptions
 {
     [JsonPropertyName("primaryColor")]
-    public string PrimaryColor { get; init; }
+    public required string PrimaryColor { get; init; }
 }

@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Entity;
 
-public class FindEntities
+public record FindEntities
 {
     /// <summary>
     /// If true, will include entity payment methods as part of the response

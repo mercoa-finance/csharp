@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class BankAccountPaymentDestinationOptions
+public record BankAccountPaymentDestinationOptions
 {
     /// <summary>
     /// Delivery method for ACH payments. Defaults to ACH_SAME_DAY.

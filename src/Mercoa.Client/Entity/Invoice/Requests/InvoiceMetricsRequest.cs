@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Entity;
 
-public class InvoiceMetricsRequest
+public record InvoiceMetricsRequest
 {
     /// <summary>
     /// Find invoices by vendor name, invoice number, or amount. Partial matches are supported.

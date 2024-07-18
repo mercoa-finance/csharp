@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class EntityHidePayeesRequest
+public record EntityHidePayeesRequest
 {
     /// <summary>
     /// List of payee entity IDs to hide
     /// </summary>
     [JsonPropertyName("payees")]
-    public IEnumerable<string> Payees { get; init; }
+    public IEnumerable<string> Payees { get; init; } = new List<string>();
 }

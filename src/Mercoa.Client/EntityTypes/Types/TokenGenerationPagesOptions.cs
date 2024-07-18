@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class TokenGenerationPagesOptions
+public record TokenGenerationPagesOptions
 {
     [JsonPropertyName("paymentMethods")]
     public bool? PaymentMethods { get; init; }

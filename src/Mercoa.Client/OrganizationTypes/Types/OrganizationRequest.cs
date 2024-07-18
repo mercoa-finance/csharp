@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class OrganizationRequest
+public record OrganizationRequest
 {
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -26,7 +26,7 @@ public class OrganizationRequest
     public EmailProviderRequest? EmailProvider { get; init; }
 
     [JsonPropertyName("externalAccountingSystemProvider")]
-    public ExternalAccountingSystemProviderRequest? ExternalAccountingSystemProvider { get; init; }
+    public object? ExternalAccountingSystemProvider { get; init; }
 
     [JsonPropertyName("colorScheme")]
     public ColorSchemeRequest? ColorScheme { get; init; }

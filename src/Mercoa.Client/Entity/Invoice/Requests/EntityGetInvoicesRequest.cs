@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Entity;
 
-public class EntityGetInvoicesRequest
+public record EntityGetInvoicesRequest
 {
     /// <summary>
     /// Return only invoices that are receivable by the entity.
@@ -50,6 +50,16 @@ public class EntityGetInvoicesRequest
     /// Filter invoices by metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
     public InvoiceMetadataFilter? Metadata { get; init; }
+
+    /// <summary>
+    /// Filter invoices by line item metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
+    /// </summary>
+    public InvoiceMetadataFilter? LineItemMetadata { get; init; }
+
+    /// <summary>
+    /// Filter invoices by line item GL account ID. Each filter will be applied as an OR condition. Duplicate keys will be ignored.
+    /// </summary>
+    public string? LineItemGlAccountId { get; init; }
 
     /// <summary>
     /// Find invoices by vendor name, invoice number, or amount. Partial matches are supported.

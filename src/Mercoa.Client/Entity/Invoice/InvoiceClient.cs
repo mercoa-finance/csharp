@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 
 #nullable enable
@@ -18,36 +20,39 @@ public class InvoiceClient
     /// <summary>
     /// Get invoices for an entity with the given filters.
     /// </summary>
-    public async Task<FindInvoiceResponse> FindAsync(EntityGetInvoicesRequest request)
+    public async Task<FindInvoiceResponse> FindAsync(
+        string entityId,
+        EntityGetInvoicesRequest request
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.ExcludePayables != null)
         {
-            _query["excludePayables"] = request.ExcludePayables;
+            _query["excludePayables"] = request.ExcludePayables.ToString();
         }
         if (request.ExcludeReceivables != null)
         {
-            _query["excludeReceivables"] = request.ExcludeReceivables;
+            _query["excludeReceivables"] = request.ExcludeReceivables.ToString();
         }
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate;
+            _query["startDate"] = request.StartDate.Value.ToString("o0");
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate;
+            _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
         if (request.OrderBy != null)
         {
-            _query["orderBy"] = request.OrderBy;
+            _query["orderBy"] = JsonSerializer.Serialize(request.OrderBy.Value);
         }
         if (request.OrderDirection != null)
         {
-            _query["orderDirection"] = request.OrderDirection;
+            _query["orderDirection"] = JsonSerializer.Serialize(request.OrderDirection.Value);
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
@@ -55,7 +60,15 @@ public class InvoiceClient
         }
         if (request.Metadata != null)
         {
-            _query["metadata"] = request.Metadata;
+            _query["metadata"] = request.Metadata.ToString();
+        }
+        if (request.LineItemMetadata != null)
+        {
+            _query["lineItemMetadata"] = request.LineItemMetadata.ToString();
+        }
+        if (request.LineItemGlAccountId != null)
+        {
+            _query["lineItemGlAccountId"] = request.LineItemGlAccountId;
         }
         if (request.Search != null)
         {
@@ -75,7 +88,7 @@ public class InvoiceClient
         }
         if (request.ApproverAction != null)
         {
-            _query["approverAction"] = request.ApproverAction;
+            _query["approverAction"] = JsonSerializer.Serialize(request.ApproverAction.Value);
         }
         if (request.InvoiceId != null)
         {
@@ -83,20 +96,20 @@ public class InvoiceClient
         }
         if (request.Status != null)
         {
-            _query["status"] = request.Status;
+            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/invoices",
+                Path = $"/entity/{entityId}/invoices",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -105,6 +118,7 @@ public class InvoiceClient
     /// Get invoice metrics for an entity with the given filters. Invoices will be grouped by currency. If none of excludePayables, excludeReceivables, payerId, vendorId, or invoiceId status filters are provided, excludeReceivables will be set to true.
     /// </summary>
     public async Task<IEnumerable<InvoiceMetricsResponse>> MetricsAsync(
+        string entityId,
         InvoiceMetricsRequest request
     )
     {
@@ -115,15 +129,15 @@ public class InvoiceClient
         }
         if (request.ExcludePayables != null)
         {
-            _query["excludePayables"] = request.ExcludePayables;
+            _query["excludePayables"] = request.ExcludePayables.ToString();
         }
         if (request.ExcludeReceivables != null)
         {
-            _query["excludeReceivables"] = request.ExcludeReceivables;
+            _query["excludeReceivables"] = request.ExcludeReceivables.ToString();
         }
         if (request.ReturnByDate != null)
         {
-            _query["returnByDate"] = request.ReturnByDate;
+            _query["returnByDate"] = JsonSerializer.Serialize(request.ReturnByDate.Value);
         }
         if (request.PayerId != null)
         {
@@ -143,40 +157,40 @@ public class InvoiceClient
         }
         if (request.Status != null)
         {
-            _query["status"] = request.Status;
+            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         if (request.DueDateStart != null)
         {
-            _query["dueDateStart"] = request.DueDateStart;
+            _query["dueDateStart"] = request.DueDateStart.Value.ToString("o0");
         }
         if (request.DueDateEnd != null)
         {
-            _query["dueDateEnd"] = request.DueDateEnd;
+            _query["dueDateEnd"] = request.DueDateEnd.Value.ToString("o0");
         }
         if (request.CreatedDateStart != null)
         {
-            _query["createdDateStart"] = request.CreatedDateStart;
+            _query["createdDateStart"] = request.CreatedDateStart.Value.ToString("o0");
         }
         if (request.CreatedDateEnd != null)
         {
-            _query["createdDateEnd"] = request.CreatedDateEnd;
+            _query["createdDateEnd"] = request.CreatedDateEnd.Value.ToString("o0");
         }
         if (request.Currency != null)
         {
-            _query["currency"] = request.Currency;
+            _query["currency"] = JsonSerializer.Serialize(request.Currency.Value);
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/invoice-metrics",
+                Path = $"/entity/{entityId}/invoice-metrics",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<InvoiceMetricsResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<InvoiceMetricsResponse>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

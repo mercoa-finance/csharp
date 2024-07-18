@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 
 #nullable enable
@@ -19,6 +21,7 @@ public class CounterpartyClient
     /// Find payee counterparties. This endpoint lets you find vendors linked to the entity.
     /// </summary>
     public async Task<FindCounterpartiesResponse> FindPayeesAsync(
+        string entityId,
         FindPayeeCounterpartiesRequest request
     )
     {
@@ -29,19 +32,19 @@ public class CounterpartyClient
         }
         if (request.NetworkType != null)
         {
-            _query["networkType"] = request.NetworkType;
+            _query["networkType"] = JsonSerializer.Serialize(request.NetworkType.Value);
         }
         if (request.PaymentMethods != null)
         {
-            _query["paymentMethods"] = request.PaymentMethods;
+            _query["paymentMethods"] = request.PaymentMethods.ToString();
         }
         if (request.InvoiceMetrics != null)
         {
-            _query["invoiceMetrics"] = request.InvoiceMetrics;
+            _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
         }
         if (request.Logo != null)
         {
-            _query["logo"] = request.Logo;
+            _query["logo"] = request.Logo.ToString();
         }
         if (request.CounterpartyId != null)
         {
@@ -49,24 +52,24 @@ public class CounterpartyClient
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
             _query["startingAfter"] = request.StartingAfter;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/counterparties/payees",
+                Path = $"/entity/{entityId}/counterparties/payees",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -75,6 +78,7 @@ public class CounterpartyClient
     /// Find payor counterparties. This endpoint lets you find customers linked to the entity.
     /// </summary>
     public async Task<FindCounterpartiesResponse> FindPayorsAsync(
+        string entityId,
         FindPayorCounterpartiesRequest request
     )
     {
@@ -85,19 +89,19 @@ public class CounterpartyClient
         }
         if (request.NetworkType != null)
         {
-            _query["networkType"] = request.NetworkType;
+            _query["networkType"] = JsonSerializer.Serialize(request.NetworkType.Value);
         }
         if (request.PaymentMethods != null)
         {
-            _query["paymentMethods"] = request.PaymentMethods;
+            _query["paymentMethods"] = request.PaymentMethods.ToString();
         }
         if (request.InvoiceMetrics != null)
         {
-            _query["invoiceMetrics"] = request.InvoiceMetrics;
+            _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
         }
         if (request.Logo != null)
         {
-            _query["logo"] = request.Logo;
+            _query["logo"] = request.Logo.ToString();
         }
         if (request.CounterpartyId != null)
         {
@@ -105,24 +109,24 @@ public class CounterpartyClient
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
             _query["startingAfter"] = request.StartingAfter;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/counterparties/payors",
+                Path = $"/entity/{entityId}/counterparties/payors",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -130,13 +134,13 @@ public class CounterpartyClient
     /// <summary>
     /// Create association between Entity and a given list of Payees. If a Payee has previously been archived, unarchive the Payee.
     /// </summary>
-    public async void AddPayeesAsync(EntityAddPayeesRequest request)
+    public async Task AddPayeesAsync(string entityId, EntityAddPayeesRequest request)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/addPayees",
+                Path = $"/entity/{entityId}/addPayees",
                 Body = request
             }
         );
@@ -145,13 +149,13 @@ public class CounterpartyClient
     /// <summary>
     /// Marks Payees as unsearchable by Entity via Counterparty search. Invoices associated with these Payees will still be searchable via Invoice search.
     /// </summary>
-    public async void HidePayeesAsync(EntityHidePayeesRequest request)
+    public async Task HidePayeesAsync(string entityId, EntityHidePayeesRequest request)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/hidePayees",
+                Path = $"/entity/{entityId}/hidePayees",
                 Body = request
             }
         );
@@ -160,13 +164,13 @@ public class CounterpartyClient
     /// <summary>
     /// Create association between Entity and a given list of Payors. If a Payor has previously been archived, unarchive the Payor.
     /// </summary>
-    public async void AddPayorsAsync(EntityAddPayorsRequest request)
+    public async Task AddPayorsAsync(string entityId, EntityAddPayorsRequest request)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/addPayors",
+                Path = $"/entity/{entityId}/addPayors",
                 Body = request
             }
         );
@@ -175,13 +179,13 @@ public class CounterpartyClient
     /// <summary>
     /// Marks Payors as unsearchable by Entity via Counterparty search. Invoices associated with these Payors will still be searchable via Invoice search.
     /// </summary>
-    public async void HidePayorsAsync(EntityHidePayorsRequest request)
+    public async Task HidePayorsAsync(string entityId, EntityHidePayorsRequest request)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/hidePayors",
+                Path = $"/entity/{entityId}/hidePayors",
                 Body = request
             }
         );

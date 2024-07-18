@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class Responsibilities
+public record Responsibilities
 {
     [JsonPropertyName("jobTitle")]
     public string? JobTitle { get; init; }

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class AddApproverRequest
+public record AddApproverRequest
 {
     /// <summary>
     /// The identifier for the approval slot this user is assigned to.
@@ -13,5 +13,5 @@ public class AddApproverRequest
     public string? ApprovalSlotId { get; init; }
 
     [JsonPropertyName("userId")]
-    public string UserId { get; init; }
+    public required string UserId { get; init; }
 }

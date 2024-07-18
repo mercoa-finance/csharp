@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class ApprovalRequest
+public record ApprovalRequest
 {
     /// <summary>
     /// Comment associated with this approval action.
@@ -13,5 +13,5 @@ public class ApprovalRequest
     public string? Text { get; init; }
 
     [JsonPropertyName("userId")]
-    public string UserId { get; init; }
+    public required string UserId { get; init; }
 }

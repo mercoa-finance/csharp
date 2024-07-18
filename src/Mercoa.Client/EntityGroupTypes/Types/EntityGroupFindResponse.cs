@@ -5,14 +5,14 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityGroupFindResponse
+public record EntityGroupFindResponse
 {
     [JsonPropertyName("count")]
-    public int Count { get; init; }
+    public required int Count { get; init; }
 
     [JsonPropertyName("hasMore")]
-    public bool HasMore { get; init; }
+    public required bool HasMore { get; init; }
 
     [JsonPropertyName("data")]
-    public IEnumerable<EntityGroupResponse> Data { get; init; }
+    public IEnumerable<EntityGroupResponse> Data { get; init; } = new List<EntityGroupResponse>();
 }

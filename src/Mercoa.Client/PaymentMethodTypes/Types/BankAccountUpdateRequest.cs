@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class BankAccountUpdateRequest
+public record BankAccountUpdateRequest
 {
     [JsonPropertyName("accountName")]
     public string? AccountName { get; init; }

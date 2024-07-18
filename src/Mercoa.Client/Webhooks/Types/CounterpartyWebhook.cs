@@ -5,16 +5,16 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CounterpartyWebhook
+public record CounterpartyWebhook
 {
     [JsonPropertyName("eventType")]
-    public string EventType { get; init; }
+    public required string EventType { get; init; }
 
     [JsonPropertyName("payeeId")]
-    public string PayeeId { get; init; }
+    public IEnumerable<string> PayeeId { get; init; } = new List<string>();
 
     [JsonPropertyName("payorId")]
-    public string PayorId { get; init; }
+    public IEnumerable<string> PayorId { get; init; } = new List<string>();
 
     /// <summary>
     /// User who initiated the change.

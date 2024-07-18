@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -20,14 +22,14 @@ public class CustomPaymentMethodSchemaClient
     public async Task<IEnumerable<CustomPaymentMethodSchemaResponse>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/schema" }
+            new RawClient.JsonApiRequest { Method = HttpMethod.Get, Path = "/paymentMethod/schema" }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
             return JsonSerializer.Deserialize<IEnumerable<CustomPaymentMethodSchemaResponse>>(
                 responseBody
-            );
+            )!;
         }
         throw new Exception(responseBody);
     }
@@ -40,17 +42,17 @@ public class CustomPaymentMethodSchemaClient
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/schema",
+                Path = "/paymentMethod/schema",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody);
+            return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -64,17 +66,17 @@ public class CustomPaymentMethodSchemaClient
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/schema/{schemaId}",
+                Path = $"/paymentMethod/schema/{schemaId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody);
+            return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -85,12 +87,16 @@ public class CustomPaymentMethodSchemaClient
     public async Task<CustomPaymentMethodSchemaResponse> GetAsync(string schemaId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/schema/{schemaId}" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/paymentMethod/schema/{schemaId}"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody);
+            return JsonSerializer.Deserialize<CustomPaymentMethodSchemaResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -98,10 +104,14 @@ public class CustomPaymentMethodSchemaClient
     /// <summary>
     /// Delete custom payment method schema. Schema that have been used in an invoice cannot be deleted.
     /// </summary>
-    public async void DeleteAsync(string schemaId)
+    public async Task DeleteAsync(string schemaId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Delete, Path = $"/schema/{schemaId}" }
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Delete,
+                Path = $"/paymentMethod/schema/{schemaId}"
+            }
         );
     }
 }

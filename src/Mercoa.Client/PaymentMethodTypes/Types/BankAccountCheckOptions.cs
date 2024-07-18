@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class BankAccountCheckOptions
+public record BankAccountCheckOptions
 {
     /// <summary>
     /// If true, will allow the user to print checks from this bank account
@@ -34,7 +34,7 @@ public class BankAccountCheckOptions
     /// Name of the person who's signature will be printed on the check.
     /// </summary>
     [JsonPropertyName("signatoryName")]
-    public string SignatoryName { get; init; }
+    public required string SignatoryName { get; init; }
 
     /// <summary>
     /// Base64 encoded image of the signature. If not provided, will use the signatoryName to generate a signature. Mercoa will automatically grayscale, resize, and convert the image to a PNG the image to fit on the check.

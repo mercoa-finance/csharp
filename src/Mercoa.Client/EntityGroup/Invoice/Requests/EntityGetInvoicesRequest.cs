@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.EntityGroup;
 
-public class EntityGetInvoicesRequest
+public record EntityGetInvoicesRequest
 {
     /// <summary>
     /// Return only invoices that are receivable by the entity.

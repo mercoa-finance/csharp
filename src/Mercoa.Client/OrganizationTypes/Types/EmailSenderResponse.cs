@@ -5,17 +5,17 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EmailSenderResponse
+public record EmailSenderResponse
 {
     [JsonPropertyName("provider")]
-    public EmailSenderProvider Provider { get; init; }
+    public required EmailSenderProvider Provider { get; init; }
 
     [JsonPropertyName("fromEmail")]
-    public string FromEmail { get; init; }
+    public required string FromEmail { get; init; }
 
     [JsonPropertyName("fromName")]
-    public string FromName { get; init; }
+    public required string FromName { get; init; }
 
     [JsonPropertyName("hasApiKey")]
-    public bool HasApiKey { get; init; }
+    public required bool HasApiKey { get; init; }
 }

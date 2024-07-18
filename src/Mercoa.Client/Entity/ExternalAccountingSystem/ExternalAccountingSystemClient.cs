@@ -1,5 +1,6 @@
+using System.Net.Http;
 using System.Text.Json;
-using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 
 #nullable enable
@@ -18,21 +19,19 @@ public class ExternalAccountingSystemClient
     /// <summary>
     /// Get the external accounting system connected to an entity
     /// </summary>
-    public async Task<ExternalAccountingSystemCompanyResponse> GetAsync()
+    public async Task<object> GetAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/external-accounting-system"
+                Path = $"/entity/{entityId}/external-accounting-system"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<ExternalAccountingSystemCompanyResponse>(
-                responseBody
-            );
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -40,24 +39,20 @@ public class ExternalAccountingSystemClient
     /// <summary>
     /// Create/Link an entity to an external accounting system like Codat or Rutter. If the entity is already linked to an external accounting system, this will return the existing connection.
     /// </summary>
-    public async Task<ExternalAccountingSystemCompanyResponse> CreateAsync(
-        ExternalAccountingSystemCompanyCreationRequest request
-    )
+    public async Task<object> CreateAsync(string entityId, object request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/external-accounting-system/create",
+                Path = $"/entity/{entityId}/external-accounting-system/create",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<ExternalAccountingSystemCompanyResponse>(
-                responseBody
-            );
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -65,19 +60,19 @@ public class ExternalAccountingSystemClient
     /// <summary>
     /// Get a link to connect an entity to an external accounting system like Quickbooks or Xero
     /// </summary>
-    public async Task<string> ConnectAsync()
+    public async Task<string> ConnectAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/external-accounting-system/connect"
+                Path = $"/entity/{entityId}/external-accounting-system/connect"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -85,26 +80,26 @@ public class ExternalAccountingSystemClient
     /// <summary>
     /// Sync an entity with an external accounting system. Will sync customers/vendors and invoices.
     /// </summary>
-    public async void SyncAsync(SyncExternalSystemRequest request)
+    public async Task SyncAsync(string entityId, SyncExternalSystemRequest request)
     {
         var _query = new Dictionary<string, object>() { };
         if (request.Vendors != null)
         {
-            _query["vendors"] = request.Vendors;
+            _query["vendors"] = JsonSerializer.Serialize(request.Vendors.Value);
         }
         if (request.Bills != null)
         {
-            _query["bills"] = request.Bills;
+            _query["bills"] = JsonSerializer.Serialize(request.Bills.Value);
         }
         if (request.GlAccounts != null)
         {
-            _query["glAccounts"] = request.GlAccounts;
+            _query["glAccounts"] = JsonSerializer.Serialize(request.GlAccounts.Value);
         }
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/external-accounting-system/sync",
+                Path = $"/entity/{entityId}/external-accounting-system/sync",
                 Query = _query
             }
         );

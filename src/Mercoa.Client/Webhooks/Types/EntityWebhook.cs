@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityWebhook
+public record EntityWebhook
 {
     [JsonPropertyName("eventType")]
-    public string EventType { get; init; }
+    public required string EventType { get; init; }
 
     [JsonPropertyName("entity")]
-    public EntityResponse Entity { get; init; }
+    public required EntityResponse Entity { get; init; }
 
     /// <summary>
     /// User who initiated the change.

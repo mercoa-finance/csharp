@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class PhoneNumber
+public record PhoneNumber
 {
     [JsonPropertyName("countryCode")]
-    public string CountryCode { get; init; }
+    public required string CountryCode { get; init; }
 
     [JsonPropertyName("number")]
-    public string Number { get; init; }
+    public required string Number { get; init; }
 }

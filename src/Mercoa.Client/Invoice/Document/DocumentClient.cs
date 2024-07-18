@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Invoice;
 
 #nullable enable
@@ -18,15 +20,19 @@ public class DocumentClient
     /// <summary>
     /// Get attachments (scanned/uploaded PDFs and images) associated with this invoice
     /// </summary>
-    public async Task<IEnumerable<DocumentResponse>> GetAllAsync()
+    public async Task<IEnumerable<DocumentResponse>> GetAllAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/documents" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/documents"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<DocumentResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<DocumentResponse>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -34,13 +40,13 @@ public class DocumentClient
     /// <summary>
     /// Upload documents (scanned/uploaded PDFs and images) associated with this Invoice
     /// </summary>
-    public async void UploadAsync(UploadDocumentRequest request)
+    public async Task UploadAsync(string invoiceId, UploadDocumentRequest request)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/document",
+                Path = $"/invoice/{invoiceId}/document",
                 Body = request
             }
         );
@@ -49,13 +55,13 @@ public class DocumentClient
     /// <summary>
     /// Delete an attachment (scanned/uploaded PDFs and images) associated with this invoice
     /// </summary>
-    public async void DeleteAsync(string documentId)
+    public async Task DeleteAsync(string invoiceId, string documentId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Delete,
-                Path = $"/document/{documentId}"
+                Path = $"/invoice/{invoiceId}/document/{documentId}"
             }
         );
     }
@@ -63,15 +69,19 @@ public class DocumentClient
     /// <summary>
     /// Generate a PDF of the invoice. This PDF is generated from the data in the invoice, not from the uploaded documents.
     /// </summary>
-    public async Task<DocumentResponse> GenerateInvoicePdfAsync()
+    public async Task<DocumentResponse> GenerateInvoicePdfAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/pdf/generate" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/pdf/generate"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<DocumentResponse>(responseBody);
+            return JsonSerializer.Deserialize<DocumentResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -79,15 +89,19 @@ public class DocumentClient
     /// <summary>
     /// Get a PDF of the check for the invoice. If the invoice does not have check as the disbursement method, an error will be returned. If the disbursement option for the check is set to 'MAIL', a void copy of the check will be returned. If the disbursement option for the check is set to 'PRINT', a printable check will be returned. If the invoice is NOT marked as PAID, the check will be a void copy.
     /// </summary>
-    public async Task<DocumentResponse> GenerateCheckPdfAsync()
+    public async Task<DocumentResponse> GenerateCheckPdfAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/check/generate" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/check/generate"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<DocumentResponse>(responseBody);
+            return JsonSerializer.Deserialize<DocumentResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -95,15 +109,19 @@ public class DocumentClient
     /// <summary>
     /// Get the email subject and body that was used to create this invoice.
     /// </summary>
-    public async Task<EmailLogResponse> GetSourceEmailAsync()
+    public async Task<EmailLogResponse> GetSourceEmailAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/source-email" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/source-email"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody);
+            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

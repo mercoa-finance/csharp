@@ -5,26 +5,26 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class IndividualOnboardingOptions
+public record IndividualOnboardingOptions
 {
     [JsonPropertyName("termsOfService")]
-    public OnboardingOption TermsOfService { get; init; }
+    public required OnboardingOption TermsOfService { get; init; }
 
     [JsonPropertyName("email")]
-    public OnboardingOption Email { get; init; }
+    public required OnboardingOption Email { get; init; }
 
     [JsonPropertyName("name")]
-    public OnboardingOption Name { get; init; }
+    public required OnboardingOption Name { get; init; }
 
     [JsonPropertyName("dateOfBirth")]
-    public OnboardingOption DateOfBirth { get; init; }
+    public required OnboardingOption DateOfBirth { get; init; }
 
     [JsonPropertyName("ssn")]
-    public OnboardingOption Ssn { get; init; }
+    public required OnboardingOption Ssn { get; init; }
 
     [JsonPropertyName("address")]
-    public OnboardingOption Address { get; init; }
+    public required OnboardingOption Address { get; init; }
 
     [JsonPropertyName("phone")]
-    public OnboardingOption Phone { get; init; }
+    public required OnboardingOption Phone { get; init; }
 }

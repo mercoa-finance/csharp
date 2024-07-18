@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class Ein
+public record Ein
 {
     /// <summary>
     /// Must be in the format XX-XXXXXXX.
     /// </summary>
     [JsonPropertyName("number")]
-    public string Number { get; init; }
+    public required string Number { get; init; }
 }

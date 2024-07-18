@@ -5,26 +5,26 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class UserNotificationPolicyResponse
+public record UserNotificationPolicyResponse
 {
     /// <summary>
     /// True if the selected notification type is disabled for this user
     /// </summary>
     [JsonPropertyName("disabled")]
-    public bool Disabled { get; init; }
+    public required bool Disabled { get; init; }
 
     /// <summary>
     /// True if the selected notification type is sent as a digest.
     /// </summary>
     [JsonPropertyName("digest")]
-    public bool Digest { get; init; }
+    public required bool Digest { get; init; }
 
     /// <summary>
     /// True if the selected notification type is sent immediately.
     /// </summary>
     [JsonPropertyName("immediate")]
-    public bool Immediate { get; init; }
+    public required bool Immediate { get; init; }
 
     [JsonPropertyName("type")]
-    public NotificationType Type { get; init; }
+    public required NotificationType Type { get; init; }
 }

@@ -4,14 +4,14 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class OnboardingOption
+public record OnboardingOption
 {
     [JsonPropertyName("show")]
-    public bool Show { get; init; }
+    public required bool Show { get; init; }
 
     [JsonPropertyName("edit")]
-    public bool Edit { get; init; }
+    public required bool Edit { get; init; }
 
     [JsonPropertyName("required")]
-    public bool Required { get; init; }
+    public required bool Required { get; init; }
 }

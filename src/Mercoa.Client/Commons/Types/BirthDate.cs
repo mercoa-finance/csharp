@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class BirthDate
+public record BirthDate
 {
     [JsonPropertyName("day")]
     public string? Day { get; init; }

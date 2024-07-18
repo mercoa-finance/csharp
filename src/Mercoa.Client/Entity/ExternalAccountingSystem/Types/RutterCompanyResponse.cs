@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client.Entity;
 
-public class RutterCompanyResponse
+public record RutterCompanyResponse
 {
     [JsonPropertyName("accessToken")]
-    public string AccessToken { get; init; }
+    public required string AccessToken { get; init; }
 }

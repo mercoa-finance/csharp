@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -17,21 +19,19 @@ public class NotificationConfigurationClient
     /// <summary>
     /// Retrieve all notification configurations
     /// </summary>
-    public async Task<IEnumerable<NotificationConfigurationResponse>> GetAllAsync()
+    public async Task<IEnumerable<object>> GetAllAsync()
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/notification-configurations"
+                Path = "/organization/notification-configurations"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<NotificationConfigurationResponse>>(
-                responseBody
-            );
+            return JsonSerializer.Deserialize<IEnumerable<object>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -39,19 +39,19 @@ public class NotificationConfigurationClient
     /// <summary>
     /// Retrieve notification configuration for this notification type
     /// </summary>
-    public async Task<NotificationConfigurationResponse> GetAsync(NotificationType notificationType)
+    public async Task<object> GetAsync(NotificationType notificationType)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/notification-configuration/{notificationType}"
+                Path = $"/organization/notification-configuration/{notificationType}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationConfigurationResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -59,23 +59,20 @@ public class NotificationConfigurationClient
     /// <summary>
     /// Update notification configuration for this notification type
     /// </summary>
-    public async Task<NotificationConfigurationResponse> UpdateAsync(
-        NotificationType notificationType,
-        NotificationConfigurationRequest request
-    )
+    public async Task<object> UpdateAsync(NotificationType notificationType, object request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/notification-configuration/{notificationType}",
+                Path = $"/organization/notification-configuration/{notificationType}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationConfigurationResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -83,13 +80,13 @@ public class NotificationConfigurationClient
     /// <summary>
     /// Reset notification configuration for this notification type
     /// </summary>
-    public async void ResetAsync(NotificationType notificationType)
+    public async Task ResetAsync(NotificationType notificationType)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Delete,
-                Path = $"/notification-configuration/{notificationType}"
+                Path = $"/organization/notification-configuration/{notificationType}"
             }
         );
     }

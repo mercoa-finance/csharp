@@ -4,7 +4,7 @@ using Mercoa.Client.Entity;
 
 namespace Mercoa.Client.Entity;
 
-public class SyncExternalSystemRequest
+public record SyncExternalSystemRequest
 {
     /// <summary>
     /// Sync vendors from external accounting system. Default is to pull vendors from external system.

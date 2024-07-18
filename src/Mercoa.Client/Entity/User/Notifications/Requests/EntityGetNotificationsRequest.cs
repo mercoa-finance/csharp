@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Entity.User;
 
-public class EntityGetNotificationsRequest
+public record EntityGetNotificationsRequest
 {
     /// <summary>
     /// Start date for notification created on date filter.
@@ -35,4 +35,9 @@ public class EntityGetNotificationsRequest
     /// The type of notification to filter by.
     /// </summary>
     public NotificationType? NotificationType { get; init; }
+
+    /// <summary>
+    /// The status of the notification to filter by.
+    /// </summary>
+    public NotificationStatus? Status { get; init; }
 }

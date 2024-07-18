@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class CustomPaymentMethodUpdateRequest
+public record CustomPaymentMethodUpdateRequest
 {
     /// <summary>
     /// ID for this payment method in your system

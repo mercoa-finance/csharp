@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class EntityMetadataResponse
+public record EntityMetadataResponse
 {
     [JsonPropertyName("key")]
-    public string Key { get; init; }
+    public required string Key { get; init; }
 
     [JsonPropertyName("value")]
-    public IEnumerable<string> Value { get; init; }
+    public IEnumerable<string> Value { get; init; } = new List<string>();
 }

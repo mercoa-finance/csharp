@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class InvoiceMetadataFilter
+public record InvoiceMetadataFilter
 {
     [JsonPropertyName("key")]
-    public string Key { get; init; }
+    public required string Key { get; init; }
 
     [JsonPropertyName("value")]
-    public string Value { get; init; }
+    public required string Value { get; init; }
 }

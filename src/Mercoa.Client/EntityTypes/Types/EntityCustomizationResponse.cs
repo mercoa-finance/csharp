@@ -5,17 +5,21 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityCustomizationResponse
+public record EntityCustomizationResponse
 {
     [JsonPropertyName("metadata")]
-    public IEnumerable<MetadataCustomizationRequest> Metadata { get; init; }
+    public IEnumerable<MetadataCustomizationRequest> Metadata { get; init; } =
+        new List<MetadataCustomizationRequest>();
 
     [JsonPropertyName("paymentSource")]
-    public IEnumerable<PaymentMethodCustomizationRequest> PaymentSource { get; init; }
+    public IEnumerable<PaymentMethodCustomizationRequest> PaymentSource { get; init; } =
+        new List<PaymentMethodCustomizationRequest>();
 
     [JsonPropertyName("backupDisbursement")]
-    public IEnumerable<PaymentMethodCustomizationRequest> BackupDisbursement { get; init; }
+    public IEnumerable<PaymentMethodCustomizationRequest> BackupDisbursement { get; init; } =
+        new List<PaymentMethodCustomizationRequest>();
 
     [JsonPropertyName("paymentDestination")]
-    public IEnumerable<PaymentMethodCustomizationRequest> PaymentDestination { get; init; }
+    public IEnumerable<PaymentMethodCustomizationRequest> PaymentDestination { get; init; } =
+        new List<PaymentMethodCustomizationRequest>();
 }

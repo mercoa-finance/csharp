@@ -5,19 +5,19 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class OcrRequest
+public record OcrRequest
 {
     /// <summary>
     /// MIME type of the image. Supported types are image/png, image/jpeg, and application/pdf.
     /// </summary>
     [JsonPropertyName("mimeType")]
-    public string MimeType { get; init; }
+    public required string MimeType { get; init; }
 
     /// <summary>
     /// Base64 encoded image or PDF. PNG, JPG, WEBP, and PDF are supported. 10MB max.
     /// </summary>
     [JsonPropertyName("image")]
-    public string Image { get; init; }
+    public required string Image { get; init; }
 
     /// <summary>
     /// Limit OCR vendor search to a specific network

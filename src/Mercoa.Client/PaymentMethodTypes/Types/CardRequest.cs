@@ -5,25 +5,25 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CardRequest
+public record CardRequest
 {
     [JsonPropertyName("cardType")]
-    public CardType CardType { get; init; }
+    public required CardType CardType { get; init; }
 
     [JsonPropertyName("cardBrand")]
-    public CardBrand CardBrand { get; init; }
+    public required CardBrand CardBrand { get; init; }
 
     [JsonPropertyName("lastFour")]
-    public string LastFour { get; init; }
+    public required string LastFour { get; init; }
 
     [JsonPropertyName("expMonth")]
-    public string ExpMonth { get; init; }
+    public required string ExpMonth { get; init; }
 
     [JsonPropertyName("expYear")]
-    public string ExpYear { get; init; }
+    public required string ExpYear { get; init; }
 
     [JsonPropertyName("token")]
-    public string Token { get; init; }
+    public required string Token { get; init; }
 
     /// <summary>
     /// If true, this payment method will be set as the default source. Only one payment method can be set as the default source. If another payment method is already set as the default source, it will be unset.

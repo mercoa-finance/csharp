@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceRequestBase
+public record InvoiceRequestBase
 {
     [JsonPropertyName("status")]
     public InvoiceStatus? Status { get; init; }
@@ -83,7 +83,7 @@ public class InvoiceRequestBase
     /// Options for the payment destination. Depending on the payment destination, this may include things such as check delivery method.
     /// </summary>
     [JsonPropertyName("paymentDestinationOptions")]
-    public PaymentDestinationOptions? PaymentDestinationOptions { get; init; }
+    public object? PaymentDestinationOptions { get; init; }
 
     /// <summary>
     /// Set approvers for this invoice.

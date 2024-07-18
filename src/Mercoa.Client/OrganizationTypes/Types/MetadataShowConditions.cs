@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class MetadataShowConditions
+public record MetadataShowConditions
 {
     /// <summary>
     /// Show this field only if the entity has values set for the metadata key.

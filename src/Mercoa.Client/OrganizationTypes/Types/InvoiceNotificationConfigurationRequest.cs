@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class InvoiceNotificationConfigurationRequest
+public record InvoiceNotificationConfigurationRequest
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; }
+    public required string Url { get; init; }
 }

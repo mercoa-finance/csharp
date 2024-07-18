@@ -4,14 +4,14 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class ApprovalSlotAssignment
+public record ApprovalSlotAssignment
 {
     /// <summary>
     /// The identifier for the approval slot this user is assigned to.
     /// </summary>
     [JsonPropertyName("approvalSlotId")]
-    public string ApprovalSlotId { get; init; }
+    public required string ApprovalSlotId { get; init; }
 
     [JsonPropertyName("assignedUserId")]
-    public string AssignedUserId { get; init; }
+    public required string AssignedUserId { get; init; }
 }

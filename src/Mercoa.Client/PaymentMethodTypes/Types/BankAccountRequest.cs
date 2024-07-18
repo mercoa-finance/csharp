@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class BankAccountRequest
+public record BankAccountRequest
 {
     /// <summary>
     /// The name of the account. For example "My Checking Account" or "Property XYZ Checking"
@@ -20,13 +20,13 @@ public class BankAccountRequest
     public string? BankName { get; init; }
 
     [JsonPropertyName("routingNumber")]
-    public string RoutingNumber { get; init; }
+    public required string RoutingNumber { get; init; }
 
     [JsonPropertyName("accountNumber")]
-    public string AccountNumber { get; init; }
+    public required string AccountNumber { get; init; }
 
     [JsonPropertyName("accountType")]
-    public BankType AccountType { get; init; }
+    public required BankType AccountType { get; init; }
 
     /// <summary>
     /// If provided, will link a bank account using Plaid Link

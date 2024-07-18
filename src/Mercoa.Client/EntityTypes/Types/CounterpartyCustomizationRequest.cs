@@ -1,17 +1,18 @@
 using System.Text.Json.Serialization;
+using Mercoa.Client;
 
 #nullable enable
 
 namespace Mercoa.Client;
 
-public class CounterpartyCustomizationRequest
+public record CounterpartyCustomizationRequest
 {
     [JsonPropertyName("counterpartyId")]
-    public string CounterpartyId { get; init; }
+    public required string CounterpartyId { get; init; }
 
     /// <summary>
-    /// The ID the counterparty has assigned to this account.
+    /// The list of accounts the entity has with the counterparty.
     /// </summary>
-    [JsonPropertyName("accountId")]
-    public string? AccountId { get; init; }
+    [JsonPropertyName("accounts")]
+    public IEnumerable<CounterpartyCustomizationAccount>? Accounts { get; init; }
 }

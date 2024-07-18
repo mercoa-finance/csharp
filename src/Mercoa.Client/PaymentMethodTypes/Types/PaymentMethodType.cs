@@ -32,5 +32,8 @@ public enum PaymentMethodType
     VirtualCard,
 
     [EnumMember(Value = "offPlatform")]
-    OffPlatform
+    OffPlatform,
+
+    [EnumMember(Value = "utility")]
+    Utility
 }

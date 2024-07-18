@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class TokenGenerationInvoiceOptions
+public record TokenGenerationInvoiceOptions
 {
     /// <summary>
     /// Defaults to OPTIONAL. If set to REQUIRED, the user will be required to provide at least one line item when creating an invoice. If set to DISABLED, the user will not be able to provide line items when creating an invoice.
@@ -20,5 +20,5 @@ public class TokenGenerationInvoiceOptions
     public bool? DisableLineItems { get; init; }
 
     [JsonPropertyName("status")]
-    public IEnumerable<InvoiceStatus> Status { get; init; }
+    public IEnumerable<InvoiceStatus> Status { get; init; } = new List<InvoiceStatus>();
 }

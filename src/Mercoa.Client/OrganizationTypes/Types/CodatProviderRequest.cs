@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class CodatProviderRequest
+public record CodatProviderRequest
 {
     [JsonPropertyName("apiKey")]
-    public string ApiKey { get; init; }
+    public required string ApiKey { get; init; }
 }

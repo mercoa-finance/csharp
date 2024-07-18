@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity.User;
 
 #nullable enable
@@ -15,24 +17,28 @@ public class NotificationsClient
         _client = client;
     }
 
-    public async Task<FindNotificationResponse> FindAsync(EntityGetNotificationsRequest request)
+    public async Task<FindNotificationResponse> FindAsync(
+        string entityId,
+        string userId,
+        EntityGetNotificationsRequest request
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate;
+            _query["startDate"] = request.StartDate.Value.ToString("o0");
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate;
+            _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
         if (request.OrderDirection != null)
         {
-            _query["orderDirection"] = request.OrderDirection;
+            _query["orderDirection"] = JsonSerializer.Serialize(request.OrderDirection.Value);
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
@@ -40,37 +46,71 @@ public class NotificationsClient
         }
         if (request.NotificationType != null)
         {
-            _query["notificationType"] = request.NotificationType;
+            _query["notificationType"] = JsonSerializer.Serialize(request.NotificationType.Value);
+        }
+        if (request.Status != null)
+        {
+            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/notifications",
+                Path = $"/entity/{entityId}/user/{userId}/notifications",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindNotificationResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindNotificationResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async Task<NotificationResponse> GetAsync(string notificationId)
+    public async Task<NotificationResponse> GetAsync(
+        string entityId,
+        string userId,
+        string notificationId
+    )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/notification/{notificationId}"
+                Path = $"/entity/{entityId}/user/{userId}/notification/{notificationId}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationResponse>(responseBody);
+            return JsonSerializer.Deserialize<NotificationResponse>(responseBody)!;
+        }
+        throw new Exception(responseBody);
+    }
+
+    /// <summary>
+    /// Update the status of a notification.
+    /// </summary>
+    public async Task<NotificationResponse> UpdateAsync(
+        string entityId,
+        string userId,
+        string notificationId,
+        NotificationUpdateRequest request
+    )
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Put,
+                Path = $"/entity/{entityId}/user/{userId}/notification/{notificationId}",
+                Body = request
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return JsonSerializer.Deserialize<NotificationResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

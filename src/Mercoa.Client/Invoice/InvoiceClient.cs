@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Invoice;
 
 #nullable enable
@@ -39,23 +41,23 @@ public class InvoiceClient
         }
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate;
+            _query["startDate"] = request.StartDate.Value.ToString("o0");
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate;
+            _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
         if (request.OrderBy != null)
         {
-            _query["orderBy"] = request.OrderBy;
+            _query["orderBy"] = JsonSerializer.Serialize(request.OrderBy.Value);
         }
         if (request.OrderDirection != null)
         {
-            _query["orderDirection"] = request.OrderDirection;
+            _query["orderDirection"] = JsonSerializer.Serialize(request.OrderDirection.Value);
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
@@ -67,7 +69,15 @@ public class InvoiceClient
         }
         if (request.Metadata != null)
         {
-            _query["metadata"] = request.Metadata;
+            _query["metadata"] = request.Metadata.ToString();
+        }
+        if (request.LineItemMetadata != null)
+        {
+            _query["lineItemMetadata"] = request.LineItemMetadata.ToString();
+        }
+        if (request.LineItemGlAccountId != null)
+        {
+            _query["lineItemGlAccountId"] = request.LineItemGlAccountId;
         }
         if (request.PayerId != null)
         {
@@ -83,7 +93,7 @@ public class InvoiceClient
         }
         if (request.ApproverAction != null)
         {
-            _query["approverAction"] = request.ApproverAction;
+            _query["approverAction"] = JsonSerializer.Serialize(request.ApproverAction.Value);
         }
         if (request.InvoiceId != null)
         {
@@ -91,20 +101,20 @@ public class InvoiceClient
         }
         if (request.Status != null)
         {
-            _query["status"] = request.Status;
+            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/invoices",
+                Path = "invoices",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -112,17 +122,17 @@ public class InvoiceClient
     public async Task<InvoiceResponse> CreateAsync(InvoiceCreationRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/invoice",
+                Path = "invoice",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody);
+            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -130,12 +140,12 @@ public class InvoiceClient
     public async Task<InvoiceResponse> GetAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/invoice/{invoiceId}" }
+            new RawClient.JsonApiRequest { Method = HttpMethod.Get, Path = $"invoice/{invoiceId}" }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody);
+            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -143,17 +153,17 @@ public class InvoiceClient
     public async Task<InvoiceResponse> UpdateAsync(string invoiceId, InvoiceUpdateRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/invoice/{invoiceId}",
+                Path = $"invoice/{invoiceId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody);
+            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -161,10 +171,14 @@ public class InvoiceClient
     /// <summary>
     /// Only invoices in the DRAFT and NEW status can be deleted.
     /// </summary>
-    public async void DeleteAsync(string invoiceId)
+    public async Task DeleteAsync(string invoiceId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Delete, Path = $"/invoice/{invoiceId}" }
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Delete,
+                Path = $"invoice/{invoiceId}"
+            }
         );
     }
 }

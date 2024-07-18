@@ -5,10 +5,10 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class NotificationResponse
+public record NotificationResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     /// <summary>
     /// The invoice ID that this notification is related to. This field is only present for notifications related to invoices.
@@ -17,8 +17,11 @@ public class NotificationResponse
     public string? InvoiceId { get; init; }
 
     [JsonPropertyName("type")]
-    public NotificationType Type { get; init; }
+    public required NotificationType Type { get; init; }
+
+    [JsonPropertyName("status")]
+    public required NotificationStatus Status { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 }

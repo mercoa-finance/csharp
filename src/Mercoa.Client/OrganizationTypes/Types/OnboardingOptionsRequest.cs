@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class OnboardingOptionsRequest
+public record OnboardingOptionsRequest
 {
     [JsonPropertyName("enableBusiness")]
     public bool? EnableBusiness { get; init; }

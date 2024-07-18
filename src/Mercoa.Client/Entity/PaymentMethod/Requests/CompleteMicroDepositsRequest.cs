@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client.Entity;
 
-public class CompleteMicroDepositsRequest
+public record CompleteMicroDepositsRequest
 {
     /// <summary>
     /// The amounts of the micro deposits in cents
     /// </summary>
     [JsonPropertyName("amounts")]
-    public IEnumerable<int> Amounts { get; init; }
+    public IEnumerable<int> Amounts { get; init; } = new List<int>();
 }

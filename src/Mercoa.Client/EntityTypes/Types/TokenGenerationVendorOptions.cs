@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class TokenGenerationVendorOptions
+public record TokenGenerationVendorOptions
 {
     /// <summary>
     /// If true, the user will not be able to create new vendors.
@@ -14,5 +14,5 @@ public class TokenGenerationVendorOptions
     public bool? DisableCreation { get; init; }
 
     [JsonPropertyName("network")]
-    public VendorNetwork Network { get; init; }
+    public required VendorNetwork Network { get; init; }
 }

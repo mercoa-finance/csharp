@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CheckPaymentDestinationOptions
+public record CheckPaymentDestinationOptions
 {
     /// <summary>
     /// Delivery method for check disbursements. Defaults to MAIL.

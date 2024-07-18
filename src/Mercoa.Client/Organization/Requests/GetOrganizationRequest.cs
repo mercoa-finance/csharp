@@ -1,6 +1,6 @@
 namespace Mercoa.Client.Organization;
 
-public class GetOrganizationRequest
+public record GetOrganizationRequest
 {
     /// <summary>
     /// include supported payment methods in response

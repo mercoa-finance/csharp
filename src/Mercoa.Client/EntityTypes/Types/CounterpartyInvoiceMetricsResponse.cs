@@ -5,14 +5,15 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CounterpartyInvoiceMetricsResponse
+public record CounterpartyInvoiceMetricsResponse
 {
     [JsonPropertyName("totalCount")]
-    public int TotalCount { get; init; }
+    public required int TotalCount { get; init; }
 
     [JsonPropertyName("totalAmount")]
-    public double TotalAmount { get; init; }
+    public required double TotalAmount { get; init; }
 
     [JsonPropertyName("statuses")]
-    public IEnumerable<CounterpartyInvoiceMetricsStatusResponse> Statuses { get; init; }
+    public IEnumerable<CounterpartyInvoiceMetricsStatusResponse> Statuses { get; init; } =
+        new List<CounterpartyInvoiceMetricsStatusResponse>();
 }

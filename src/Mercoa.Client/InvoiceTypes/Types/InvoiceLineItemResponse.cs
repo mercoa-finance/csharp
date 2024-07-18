@@ -5,10 +5,10 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceLineItemResponse
+public record InvoiceLineItemResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     /// <summary>
     /// Total amount of line item in major units.
@@ -17,7 +17,7 @@ public class InvoiceLineItemResponse
     public double? Amount { get; init; }
 
     [JsonPropertyName("currency")]
-    public CurrencyCode Currency { get; init; }
+    public required CurrencyCode Currency { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
@@ -50,8 +50,8 @@ public class InvoiceLineItemResponse
     public string? GlAccountId { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

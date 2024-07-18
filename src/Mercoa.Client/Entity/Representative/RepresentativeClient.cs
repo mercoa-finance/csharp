@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -17,61 +19,68 @@ public class RepresentativeClient
     /// <summary>
     /// Get representatives for an entity
     /// </summary>
-    public async Task<IEnumerable<RepresentativeResponse>> GetAllAsync()
+    public async Task<IEnumerable<RepresentativeResponse>> GetAllAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/representatives" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/entity/{entityId}/representatives"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<RepresentativeResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<RepresentativeResponse>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async Task<RepresentativeResponse> CreateAsync(RepresentativeRequest request)
+    public async Task<RepresentativeResponse> CreateAsync(
+        string entityId,
+        RepresentativeRequest request
+    )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/representative",
+                Path = $"/entity/{entityId}/representative",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<RepresentativeResponse>(responseBody);
+            return JsonSerializer.Deserialize<RepresentativeResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async Task<RepresentativeResponse> GetAsync(string representativeId)
+    public async Task<RepresentativeResponse> GetAsync(string entityId, string representativeId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/representative/{representativeId}"
+                Path = $"/entity/{entityId}/representative/{representativeId}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<RepresentativeResponse>(responseBody);
+            return JsonSerializer.Deserialize<RepresentativeResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async void DeleteAsync(string representativeId)
+    public async Task DeleteAsync(string entityId, string representativeId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Delete,
-                Path = $"/representative/{representativeId}"
+                Path = $"/entity/{entityId}/representative/{representativeId}"
             }
         );
     }

@@ -5,20 +5,20 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceMetricsPerDateResponse
+public record InvoiceMetricsPerDateResponse
 {
     [JsonPropertyName("date")]
-    public DateTime Date { get; init; }
+    public required DateTime Date { get; init; }
 
     [JsonPropertyName("totalAmount")]
-    public double TotalAmount { get; init; }
+    public required double TotalAmount { get; init; }
 
     [JsonPropertyName("totalCount")]
-    public int TotalCount { get; init; }
+    public required int TotalCount { get; init; }
 
     [JsonPropertyName("averageAmount")]
-    public double AverageAmount { get; init; }
+    public required double AverageAmount { get; init; }
 
     [JsonPropertyName("currency")]
-    public CurrencyCode Currency { get; init; }
+    public required CurrencyCode Currency { get; init; }
 }

@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class OcrResponse
+public record OcrResponse
 {
     [JsonPropertyName("invoice")]
-    public InvoiceResponse Invoice { get; init; }
+    public required InvoiceResponse Invoice { get; init; }
 
     [JsonPropertyName("vendor")]
-    public CounterpartyResponse Vendor { get; init; }
+    public required CounterpartyResponse Vendor { get; init; }
 
     [JsonPropertyName("check")]
     public CheckResponse? Check { get; init; }

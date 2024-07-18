@@ -5,10 +5,10 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceEmailWebhook
+public record InvoiceEmailWebhook
 {
     [JsonPropertyName("eventType")]
-    public string EventType { get; init; }
+    public required string EventType { get; init; }
 
     /// <summary>
     /// If an invoice was created from the email, this will be present.

@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -17,15 +19,19 @@ public class CustomizationClient
     /// <summary>
     /// Get entity customization.
     /// </summary>
-    public async Task<EntityCustomizationResponse> GetAsync()
+    public async Task<EntityCustomizationResponse> GetAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/customization" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/entity/{entityId}/customization"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -33,20 +39,23 @@ public class CustomizationClient
     /// <summary>
     /// Update entity customization. This lets you turn off metadata and payment methods for an entity.
     /// </summary>
-    public async Task<EntityCustomizationResponse> UpdateAsync(EntityCustomizationRequest request)
+    public async Task<EntityCustomizationResponse> UpdateAsync(
+        string entityId,
+        EntityCustomizationRequest request
+    )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/customization",
+                Path = $"/entity/{entityId}/customization",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

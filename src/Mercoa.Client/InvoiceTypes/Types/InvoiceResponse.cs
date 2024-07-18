@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceResponse
+public record InvoiceResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("status")]
-    public InvoiceStatus Status { get; init; }
+    public required InvoiceStatus Status { get; init; }
 
     /// <summary>
     /// Total amount of invoice in major units
@@ -74,7 +74,7 @@ public class InvoiceResponse
     public CounterpartyResponse? Payer { get; init; }
 
     [JsonPropertyName("paymentSource")]
-    public PaymentMethodResponse? PaymentSource { get; init; }
+    public object? PaymentSource { get; init; }
 
     [JsonPropertyName("paymentSourceId")]
     public string? PaymentSourceId { get; init; }
@@ -86,31 +86,31 @@ public class InvoiceResponse
     public CounterpartyResponse? Vendor { get; init; }
 
     [JsonPropertyName("paymentDestination")]
-    public PaymentMethodResponse? PaymentDestination { get; init; }
+    public object? PaymentDestination { get; init; }
 
     [JsonPropertyName("paymentDestinationId")]
     public string? PaymentDestinationId { get; init; }
 
     [JsonPropertyName("paymentDestinationOptions")]
-    public PaymentDestinationOptions? PaymentDestinationOptions { get; init; }
+    public object? PaymentDestinationOptions { get; init; }
 
     /// <summary>
     /// True if the payment destination has been confirmed by the vendor. False if the payment destination has been set (for example, a check to an address) but has not been confirmed by the vendor.
     /// </summary>
     [JsonPropertyName("paymentDestinationConfirmed")]
-    public bool PaymentDestinationConfirmed { get; init; }
+    public required bool PaymentDestinationConfirmed { get; init; }
 
     /// <summary>
     /// True if the invoice has documents attached.
     /// </summary>
     [JsonPropertyName("hasDocuments")]
-    public bool HasDocuments { get; init; }
+    public required bool HasDocuments { get; init; }
 
     /// <summary>
     /// True if the invoice was created by an incoming email.
     /// </summary>
     [JsonPropertyName("hasSourceEmail")]
-    public bool HasSourceEmail { get; init; }
+    public required bool HasSourceEmail { get; init; }
 
     [JsonPropertyName("comments")]
     public IEnumerable<CommentResponse>? Comments { get; init; }
@@ -119,16 +119,17 @@ public class InvoiceResponse
     public IEnumerable<InvoiceLineItemResponse>? LineItems { get; init; }
 
     [JsonPropertyName("approvers")]
-    public IEnumerable<ApprovalSlot> Approvers { get; init; }
+    public IEnumerable<ApprovalSlot> Approvers { get; init; } = new List<ApprovalSlot>();
 
     [JsonPropertyName("approvalPolicy")]
-    public IEnumerable<ApprovalPolicyResponse> ApprovalPolicy { get; init; }
+    public IEnumerable<ApprovalPolicyResponse> ApprovalPolicy { get; init; } =
+        new List<ApprovalPolicyResponse>();
 
     /// <summary>
     /// Metadata associated with this invoice.
     /// </summary>
     [JsonPropertyName("metadata")]
-    public Dictionary<string, string> Metadata { get; init; }
+    public Dictionary<string, string> Metadata { get; init; } = new Dictionary<string, string>();
 
     /// <summary>
     /// The ID used to identify this invoice in your system. This ID must be unique within each creatorEntity in your system, e.g. two invoices with the same creatorEntity may not have the same foreign ID.
@@ -149,10 +150,10 @@ public class InvoiceResponse
     public InvoiceFailureType? FailureType { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 
     /// <summary>
     /// Fees associated with this invoice.

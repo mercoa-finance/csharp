@@ -1,6 +1,6 @@
 namespace Mercoa.Client.EntityGroup;
 
-public class EntityGroupFindRequest
+public record EntityGroupFindRequest
 {
     /// <summary>
     /// The maximum number of results to return. Defaults to 1. Max is 10.

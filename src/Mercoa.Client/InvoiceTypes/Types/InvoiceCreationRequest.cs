@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceCreationRequest
+public record InvoiceCreationRequest
 {
     /// <summary>
     /// ID of entity who created this invoice.
     /// </summary>
     [JsonPropertyName("creatorEntityId")]
-    public string CreatorEntityId { get; init; }
+    public required string CreatorEntityId { get; init; }
 
     [JsonPropertyName("status")]
     public InvoiceStatus? Status { get; init; }
@@ -89,7 +89,7 @@ public class InvoiceCreationRequest
     /// Options for the payment destination. Depending on the payment destination, this may include things such as check delivery method.
     /// </summary>
     [JsonPropertyName("paymentDestinationOptions")]
-    public PaymentDestinationOptions? PaymentDestinationOptions { get; init; }
+    public object? PaymentDestinationOptions { get; init; }
 
     /// <summary>
     /// Set approvers for this invoice.

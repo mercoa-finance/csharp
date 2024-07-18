@@ -5,20 +5,20 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class OnboardingOptionsResponse
+public record OnboardingOptionsResponse
 {
     [JsonPropertyName("enableBusiness")]
-    public bool EnableBusiness { get; init; }
+    public required bool EnableBusiness { get; init; }
 
     [JsonPropertyName("enableIndividual")]
-    public bool EnableIndividual { get; init; }
+    public required bool EnableIndividual { get; init; }
 
     [JsonPropertyName("paymentMethod")]
-    public bool PaymentMethod { get; init; }
+    public required bool PaymentMethod { get; init; }
 
     [JsonPropertyName("business")]
-    public BusinessOnboardingOptions Business { get; init; }
+    public required BusinessOnboardingOptions Business { get; init; }
 
     [JsonPropertyName("individual")]
-    public IndividualOnboardingOptions Individual { get; init; }
+    public required IndividualOnboardingOptions Individual { get; init; }
 }

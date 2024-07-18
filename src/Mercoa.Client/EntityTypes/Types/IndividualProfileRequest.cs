@@ -5,13 +5,13 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class IndividualProfileRequest
+public record IndividualProfileRequest
 {
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     [JsonPropertyName("name")]
-    public FullName Name { get; init; }
+    public required FullName Name { get; init; }
 
     [JsonPropertyName("phone")]
     public PhoneNumber? Phone { get; init; }

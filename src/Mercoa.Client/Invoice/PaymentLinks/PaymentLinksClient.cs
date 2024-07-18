@@ -1,5 +1,6 @@
+using System.Net.Http;
 using System.Text.Json;
-using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Invoice;
 
 #nullable enable
@@ -18,15 +19,19 @@ public class PaymentLinksClient
     /// <summary>
     /// Get temporary link for payer to send payment
     /// </summary>
-    public async Task<string> GetPayerLinkAsync()
+    public async Task<string> GetPayerLinkAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/payerLink" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/payerLink"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -34,18 +39,18 @@ public class PaymentLinksClient
     /// <summary>
     /// Trigger email to payer inviting them to make payment
     /// </summary>
-    public async void SendPayerEmailAsync(SendPayerEmail request)
+    public async Task SendPayerEmailAsync(string invoiceId, SendPayerEmail request)
     {
         var _query = new Dictionary<string, object>() { };
         if (request.AttachInvoice != null)
         {
-            _query["attachInvoice"] = request.AttachInvoice;
+            _query["attachInvoice"] = request.AttachInvoice.ToString();
         }
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/sendPayerEmail",
+                Path = $"/invoice/{invoiceId}/sendPayerEmail",
                 Query = _query
             }
         );
@@ -54,15 +59,19 @@ public class PaymentLinksClient
     /// <summary>
     /// Get temporary link for vendor to accept payment
     /// </summary>
-    public async Task<string> GetVendorLinkAsync()
+    public async Task<string> GetVendorLinkAsync(string invoiceId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/vendorLink" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/invoice/{invoiceId}/vendorLink"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -70,10 +79,14 @@ public class PaymentLinksClient
     /// <summary>
     /// Trigger email to vendor inviting them into the vendor portal
     /// </summary>
-    public async void SendVendorEmailAsync()
+    public async Task SendVendorEmailAsync(string invoiceId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Post, Path = "/sendVendorEmail" }
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Post,
+                Path = $"/invoice/{invoiceId}/sendVendorEmail"
+            }
         );
     }
 }

@@ -5,22 +5,22 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CustomPaymentMethodSchemaRequest
+public record CustomPaymentMethodSchemaRequest
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// This payment method can be used as a payment source for an invoice
     /// </summary>
     [JsonPropertyName("isSource")]
-    public bool IsSource { get; init; }
+    public required bool IsSource { get; init; }
 
     /// <summary>
     /// This payment method can be used as a payment destination for an invoice
     /// </summary>
     [JsonPropertyName("isDestination")]
-    public bool IsDestination { get; init; }
+    public required bool IsDestination { get; init; }
 
     /// <summary>
     /// List of currencies that this payment method supports. If not provided, the payment method will support only USD.
@@ -29,7 +29,8 @@ public class CustomPaymentMethodSchemaRequest
     public IEnumerable<CurrencyCode>? SupportedCurrencies { get; init; }
 
     [JsonPropertyName("fields")]
-    public IEnumerable<CustomPaymentMethodSchemaField> Fields { get; init; }
+    public IEnumerable<CustomPaymentMethodSchemaField> Fields { get; init; } =
+        new List<CustomPaymentMethodSchemaField>();
 
     /// <summary>
     /// Estimated time in days for this payment method to process a payments. Set as 0 for same-day payment methods, -1 for unknown processing time.

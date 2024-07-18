@@ -5,10 +5,10 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class PaymentRailRequest
+public record PaymentRailRequest
 {
     [JsonPropertyName("type")]
-    public PaymentMethodType Type { get; init; }
+    public required PaymentMethodType Type { get; init; }
 
     /// <summary>
     /// For custom payment methods, this is the ID of the schema.
@@ -17,5 +17,5 @@ public class PaymentRailRequest
     public string? Name { get; init; }
 
     [JsonPropertyName("active")]
-    public bool Active { get; init; }
+    public required bool Active { get; init; }
 }

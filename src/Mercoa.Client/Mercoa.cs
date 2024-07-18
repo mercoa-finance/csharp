@@ -1,4 +1,5 @@
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 using Mercoa.Client.EntityGroup;
 using Mercoa.Client.Invoice;
@@ -12,7 +13,7 @@ public partial class Mercoa
 {
     private RawClient _client;
 
-    public Mercoa(string token = null, ClientOptions clientOptions = null)
+    public Mercoa(string? token = null, ClientOptions? clientOptions = null)
     {
         _client = new RawClient(
             new Dictionary<string, string>()
@@ -20,7 +21,7 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.4.6" },
+                { "X-Fern-SDK-Version", "0.4.7" },
             },
             clientOptions ?? new ClientOptions()
         );
@@ -42,45 +43,35 @@ public partial class Mercoa
         Webhooks = new WebhooksClient(_client);
     }
 
-    public EntityGroupClient EntityGroup { get; }
+    public EntityGroupClient EntityGroup { get; init; }
 
-    public EntityClient Entity { get; }
+    public EntityClient Entity { get; init; }
 
-    public InvoiceClient Invoice { get; }
+    public InvoiceClient Invoice { get; init; }
 
-    public OrganizationClient Organization { get; }
+    public OrganizationClient Organization { get; init; }
 
-    public BankLookupClient BankLookup { get; }
+    public BankLookupClient BankLookup { get; init; }
 
-    public CalculateClient Calculate { get; }
+    public CalculateClient Calculate { get; init; }
 
-    public CommonsClient Commons { get; }
+    public CommonsClient Commons { get; init; }
 
-    public CustomPaymentMethodSchemaClient CustomPaymentMethodSchema { get; }
+    public CustomPaymentMethodSchemaClient CustomPaymentMethodSchema { get; init; }
 
-    public EmailLogTypesClient EmailLogTypes { get; }
+    public EmailLogTypesClient EmailLogTypes { get; init; }
 
-    public EntityGroupTypesClient EntityGroupTypes { get; }
+    public EntityGroupTypesClient EntityGroupTypes { get; init; }
 
-    public EntityTypesClient EntityTypes { get; }
+    public EntityTypesClient EntityTypes { get; init; }
 
-    public InvoiceTypesClient InvoiceTypes { get; }
+    public InvoiceTypesClient InvoiceTypes { get; init; }
 
-    public OcrClient Ocr { get; }
+    public OcrClient Ocr { get; init; }
 
-    public OrganizationTypesClient OrganizationTypes { get; }
+    public OrganizationTypesClient OrganizationTypes { get; init; }
 
-    public PaymentMethodTypesClient PaymentMethodTypes { get; }
+    public PaymentMethodTypesClient PaymentMethodTypes { get; init; }
 
-    public WebhooksClient Webhooks { get; }
-
-    private string GetFromEnvironmentOrThrow(string env, string message)
-    {
-        var value = Environment.GetEnvironmentVariable(env);
-        if (value == null)
-        {
-            throw new Exception(message);
-        }
-        return value;
-    }
+    public WebhooksClient Webhooks { get; init; }
 }

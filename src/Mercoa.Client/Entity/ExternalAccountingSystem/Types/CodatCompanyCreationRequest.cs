@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client.Entity;
 
-public class CodatCompanyCreationRequest
+public record CodatCompanyCreationRequest
 {
     /// <summary>
     /// If the company already exists in Codat, provide the company ID to link the company to the entity. If the company does not exist, leave this field blank and Codat will create a new company.

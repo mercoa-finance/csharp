@@ -1,4 +1,4 @@
-using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 

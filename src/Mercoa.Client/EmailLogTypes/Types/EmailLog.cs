@@ -4,28 +4,28 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class EmailLog
+public record EmailLog
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("subject")]
-    public string Subject { get; init; }
+    public required string Subject { get; init; }
 
     [JsonPropertyName("from")]
-    public string From { get; init; }
+    public required string From { get; init; }
 
     [JsonPropertyName("to")]
-    public string To { get; init; }
+    public required string To { get; init; }
 
     [JsonPropertyName("htmlBody")]
-    public string HtmlBody { get; init; }
+    public required string HtmlBody { get; init; }
 
     [JsonPropertyName("textBody")]
-    public string TextBody { get; init; }
+    public required string TextBody { get; init; }
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("invoiceId")]
     public string? InvoiceId { get; init; }

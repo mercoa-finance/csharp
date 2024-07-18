@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 
 #nullable enable
@@ -15,62 +17,63 @@ public class PaymentMethodClient
         _client = client;
     }
 
-    public async Task<IEnumerable<PaymentMethodResponse>> GetAllAsync(
+    public async Task<IEnumerable<object>> GetAllAsync(
+        string entityId,
         GetAllPaymentMethodsRequest request
     )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.Type != null)
         {
-            _query["type"] = request.Type;
+            _query["type"] = JsonSerializer.Serialize(request.Type.Value);
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/paymentMethods",
+                Path = $"/entity/{entityId}/paymentMethods",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<PaymentMethodResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<object>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async Task<PaymentMethodResponse> CreateAsync(PaymentMethodRequest request)
+    public async Task<object> CreateAsync(string entityId, object request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/paymentMethod",
+                Path = $"/entity/{entityId}/paymentMethod",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
 
-    public async Task<PaymentMethodResponse> GetAsync(string paymentMethodId)
+    public async Task<object> GetAsync(string entityId, string paymentMethodId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/paymentMethod/{paymentMethodId}"
+                Path = $"/entity/{entityId}/paymentMethod/{paymentMethodId}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -78,23 +81,20 @@ public class PaymentMethodClient
     /// <summary>
     /// Only custom payment methods can be updated.
     /// </summary>
-    public async Task<PaymentMethodResponse> UpdateAsync(
-        string paymentMethodId,
-        PaymentMethodUpdateRequest request
-    )
+    public async Task<object> UpdateAsync(string entityId, string paymentMethodId, object request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Put,
-                Path = $"/paymentMethod/{paymentMethodId}",
+                Path = $"/entity/{entityId}/paymentMethod/{paymentMethodId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -102,13 +102,13 @@ public class PaymentMethodClient
     /// <summary>
     /// Mark a payment method as inactive. This will not remove the payment method from the system, but will prevent it from being used in the future.
     /// </summary>
-    public async void DeleteAsync(string paymentMethodId)
+    public async Task DeleteAsync(string entityId, string paymentMethodId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Delete,
-                Path = $"/paymentMethod/{paymentMethodId}"
+                Path = $"/entity/{entityId}/paymentMethod/{paymentMethodId}"
             }
         );
     }
@@ -116,19 +116,19 @@ public class PaymentMethodClient
     /// <summary>
     /// Initiate micro deposits for a bank account
     /// </summary>
-    public async Task<PaymentMethodResponse> InitiateMicroDepositsAsync(string paymentMethodId)
+    public async Task<object> InitiateMicroDepositsAsync(string entityId, string paymentMethodId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/paymentMethod/{paymentMethodId}/micro-deposits"
+                Path = $"/entity/{entityId}/paymentMethod/{paymentMethodId}/micro-deposits"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -136,23 +136,24 @@ public class PaymentMethodClient
     /// <summary>
     /// Complete micro deposit verification
     /// </summary>
-    public async Task<PaymentMethodResponse> CompleteMicroDepositsAsync(
+    public async Task<object> CompleteMicroDepositsAsync(
+        string entityId,
         string paymentMethodId,
         CompleteMicroDepositsRequest request
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Put,
-                Path = $"/paymentMethod/{paymentMethodId}/micro-deposits",
+                Path = $"/entity/{entityId}/paymentMethod/{paymentMethodId}/micro-deposits",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodResponse>(responseBody);
+            return JsonSerializer.Deserialize<object>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -160,19 +161,22 @@ public class PaymentMethodClient
     /// <summary>
     /// Deprecated. Get the available balance of a payment method. Only bank accounts added with Plaid are supported. This endpoint will return a cached value and will refresh the balance when called.
     /// </summary>
-    public async Task<PaymentMethodBalanceResponse> GetBalanceAsync(string paymentMethodId)
+    public async Task<PaymentMethodBalanceResponse> GetBalanceAsync(
+        string entityId,
+        string paymentMethodId
+    )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/paymentMethod/{paymentMethodId}/balance"
+                Path = $"/entity/{entityId}/paymentMethod/{paymentMethodId}/balance"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodBalanceResponse>(responseBody);
+            return JsonSerializer.Deserialize<PaymentMethodBalanceResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

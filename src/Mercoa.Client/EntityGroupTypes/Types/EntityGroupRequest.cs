@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class EntityGroupRequest
+public record EntityGroupRequest
 {
     [JsonPropertyName("entityIds")]
-    public IEnumerable<string> EntityIds { get; init; }
+    public IEnumerable<string> EntityIds { get; init; } = new List<string>();
 }

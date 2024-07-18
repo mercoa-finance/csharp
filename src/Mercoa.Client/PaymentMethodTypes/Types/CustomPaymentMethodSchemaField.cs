@@ -5,22 +5,22 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class CustomPaymentMethodSchemaField
+public record CustomPaymentMethodSchemaField
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     [JsonPropertyName("displayName")]
     public string? DisplayName { get; init; }
 
     [JsonPropertyName("type")]
-    public CustomPaymentMethodSchemaFieldType Type { get; init; }
+    public required CustomPaymentMethodSchemaFieldType Type { get; init; }
 
     /// <summary>
     /// Indicates whether this field is optional
     /// </summary>
     [JsonPropertyName("optional")]
-    public bool Optional { get; init; }
+    public required bool Optional { get; init; }
 
     /// <summary>
     /// Indicates whether this field should be used as the name of the payment method. Only one field can be used as the name. Will set the accountName field of the payment method to the value of this field.

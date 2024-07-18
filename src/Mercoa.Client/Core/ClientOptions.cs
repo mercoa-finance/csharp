@@ -1,8 +1,9 @@
+using System.Net.Http;
 using Mercoa.Client.Core;
 
 #nullable enable
 
-namespace Mercoa.Client;
+namespace Mercoa.Client.Core;
 
 public partial class ClientOptions
 {

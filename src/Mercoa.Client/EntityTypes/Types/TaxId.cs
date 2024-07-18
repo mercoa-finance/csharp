@@ -5,8 +5,8 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class TaxId
+public record TaxId
 {
     [JsonPropertyName("ein")]
-    public Ein Ein { get; init; }
+    public required Ein Ein { get; init; }
 }

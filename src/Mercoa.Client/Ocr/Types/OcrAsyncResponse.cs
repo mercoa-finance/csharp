@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class OcrAsyncResponse
+public record OcrAsyncResponse
 {
     [JsonPropertyName("jobId")]
-    public string JobId { get; init; }
+    public required string JobId { get; init; }
 }

@@ -4,10 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class EntityUserResponse
+public record EntityUserResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     /// <summary>
     /// The ID used to identify this user in your system.
@@ -22,11 +22,11 @@ public class EntityUserResponse
     public string? Name { get; init; }
 
     [JsonPropertyName("roles")]
-    public IEnumerable<string> Roles { get; init; }
+    public IEnumerable<string> Roles { get; init; } = new List<string>();
 
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; init; }
 
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; init; }
 }

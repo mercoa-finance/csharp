@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class TokenGenerationOptions
+public record TokenGenerationOptions
 {
     /// <summary>
     /// Expressed in seconds or a string describing a time span. The default is 1h.

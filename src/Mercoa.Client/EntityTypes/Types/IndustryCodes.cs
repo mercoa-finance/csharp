@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class IndustryCodes
+public record IndustryCodes
 {
     [JsonPropertyName("mcc")]
     public string? Mcc { get; init; }

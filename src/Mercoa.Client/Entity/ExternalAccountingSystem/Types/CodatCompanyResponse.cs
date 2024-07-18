@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client.Entity;
 
-public class CodatCompanyResponse
+public record CodatCompanyResponse
 {
     [JsonPropertyName("companyId")]
-    public string CompanyId { get; init; }
+    public required string CompanyId { get; init; }
 }

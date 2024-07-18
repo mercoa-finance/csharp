@@ -5,11 +5,11 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class BankLookupResponse
+public record BankLookupResponse
 {
     [JsonPropertyName("bankName")]
-    public string BankName { get; init; }
+    public required string BankName { get; init; }
 
     [JsonPropertyName("bankAddress")]
-    public BankAddress BankAddress { get; init; }
+    public required BankAddress BankAddress { get; init; }
 }

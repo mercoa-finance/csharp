@@ -5,7 +5,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class InvoiceUpdateRequest
+public record InvoiceUpdateRequest
 {
     /// <summary>
     /// ID of entity who created this invoice. If creating a payable invoice (AP), this must be the same as the payerId. If creating a receivable invoice (AR), this must be the same as the vendorId.
@@ -89,7 +89,7 @@ public class InvoiceUpdateRequest
     /// Options for the payment destination. Depending on the payment destination, this may include things such as check delivery method.
     /// </summary>
     [JsonPropertyName("paymentDestinationOptions")]
-    public PaymentDestinationOptions? PaymentDestinationOptions { get; init; }
+    public object? PaymentDestinationOptions { get; init; }
 
     /// <summary>
     /// Set approvers for this invoice.

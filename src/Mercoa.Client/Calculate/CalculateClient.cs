@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -20,17 +22,17 @@ public class CalculateClient
     public async Task<InvoiceFeesResponse> FeeAsync(CalculateFeesRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/fees",
+                Path = "fees",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<InvoiceFeesResponse>(responseBody);
+            return JsonSerializer.Deserialize<InvoiceFeesResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -43,17 +45,17 @@ public class CalculateClient
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/paymentTiming",
+                Path = "paymentTiming",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<CalculatePaymentTimingResponse>(responseBody);
+            return JsonSerializer.Deserialize<CalculatePaymentTimingResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

@@ -5,16 +5,16 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class OrganizationResponse
+public record OrganizationResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("sandbox")]
-    public bool Sandbox { get; init; }
+    public required bool Sandbox { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; }
+    public required string Name { get; init; }
 
     [JsonPropertyName("logoUrl")]
     public string? LogoUrl { get; init; }
@@ -32,7 +32,7 @@ public class OrganizationResponse
     public EmailProviderResponse? EmailProvider { get; init; }
 
     [JsonPropertyName("externalAccountingSystemProvider")]
-    public ExternalAccountingSystemProviderResponse? ExternalAccountingSystemProvider { get; init; }
+    public object? ExternalAccountingSystemProvider { get; init; }
 
     [JsonPropertyName("colorScheme")]
     public ColorSchemeResponse? ColorScheme { get; init; }

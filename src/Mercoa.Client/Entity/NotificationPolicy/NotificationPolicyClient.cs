@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 
 #nullable enable
 
@@ -17,17 +19,21 @@ public class NotificationPolicyClient
     /// <summary>
     /// Retrieve all notification policies associated with this entity
     /// </summary>
-    public async Task<IEnumerable<NotificationPolicyResponse>> GetAllAsync()
+    public async Task<IEnumerable<NotificationPolicyResponse>> GetAllAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = "/notification-policies" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/entity/{entityId}/notification-policies"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
             return JsonSerializer.Deserialize<IEnumerable<NotificationPolicyResponse>>(
                 responseBody
-            );
+            )!;
         }
         throw new Exception(responseBody);
     }
@@ -35,19 +41,22 @@ public class NotificationPolicyClient
     /// <summary>
     /// Retrieve notification policy associated with this entity
     /// </summary>
-    public async Task<NotificationPolicyResponse> GetAsync(NotificationType notificationType)
+    public async Task<NotificationPolicyResponse> GetAsync(
+        string entityId,
+        NotificationType notificationType
+    )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/notification-policy/{notificationType}"
+                Path = $"/entity/{entityId}/notification-policy/{notificationType}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationPolicyResponse>(responseBody);
+            return JsonSerializer.Deserialize<NotificationPolicyResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -56,22 +65,23 @@ public class NotificationPolicyClient
     /// Update notification policy associated with this entity
     /// </summary>
     public async Task<NotificationPolicyResponse> UpdateAsync(
+        string entityId,
         NotificationType notificationType,
         NotificationPolicyRequest request
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/notification-policy/{notificationType}",
+                Path = $"/entity/{entityId}/notification-policy/{notificationType}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationPolicyResponse>(responseBody);
+            return JsonSerializer.Deserialize<NotificationPolicyResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

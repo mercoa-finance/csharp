@@ -5,11 +5,11 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class AssociatedApprovalAction
+public record AssociatedApprovalAction
 {
     [JsonPropertyName("userId")]
-    public string UserId { get; init; }
+    public required string UserId { get; init; }
 
     [JsonPropertyName("action")]
-    public ApproverAction Action { get; init; }
+    public required ApproverAction Action { get; init; }
 }

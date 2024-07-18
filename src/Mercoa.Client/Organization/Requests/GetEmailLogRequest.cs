@@ -1,6 +1,6 @@
 namespace Mercoa.Client.Organization;
 
-public class GetEmailLogRequest
+public record GetEmailLogRequest
 {
     public DateTime? StartDate { get; init; }
 

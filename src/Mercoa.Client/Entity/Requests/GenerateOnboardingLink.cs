@@ -4,12 +4,12 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Entity;
 
-public class GenerateOnboardingLink
+public record GenerateOnboardingLink
 {
     /// <summary>
     /// The type of onboarding link to generate. If not provided, the default is payee. The onboarding options are determined by your organization's onboarding configuration.
     /// </summary>
-    public EntityOnboardingLinkType Type { get; init; }
+    public required EntityOnboardingLinkType Type { get; init; }
 
     /// <summary>
     /// Expressed in seconds or a string describing a time span. The default is 24h.

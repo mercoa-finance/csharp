@@ -5,19 +5,19 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class PaymentMethodWebhook
+public record PaymentMethodWebhook
 {
     [JsonPropertyName("eventType")]
-    public string EventType { get; init; }
+    public required string EventType { get; init; }
 
     [JsonPropertyName("entityId")]
-    public string EntityId { get; init; }
+    public required string EntityId { get; init; }
 
     [JsonPropertyName("paymentMethod")]
-    public PaymentMethodResponse PaymentMethod { get; init; }
+    public required object PaymentMethod { get; init; }
 
     [JsonPropertyName("entity")]
-    public EntityResponse Entity { get; init; }
+    public required EntityResponse Entity { get; init; }
 
     /// <summary>
     /// User who initiated the change.

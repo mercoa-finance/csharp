@@ -1,6 +1,6 @@
 namespace Mercoa.Client.Entity.User;
 
-public class EntityFindEntityRequest
+public record EntityFindEntityRequest
 {
     /// <summary>
     /// ID used to identify user in your system

@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class RutterProviderRequest
+public record RutterProviderRequest
 {
     [JsonPropertyName("clientId")]
-    public string ClientId { get; init; }
+    public required string ClientId { get; init; }
 
     [JsonPropertyName("clientSecret")]
-    public string ClientSecret { get; init; }
+    public required string ClientSecret { get; init; }
 }

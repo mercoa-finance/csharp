@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class VendorTrigger
+public record VendorTrigger
 {
     [JsonPropertyName("vendorIds")]
-    public IEnumerable<string> VendorIds { get; init; }
+    public IEnumerable<string> VendorIds { get; init; } = new List<string>();
 }

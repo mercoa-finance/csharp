@@ -4,16 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class FullName
+public record FullName
 {
     [JsonPropertyName("firstName")]
-    public string FirstName { get; init; }
+    public required string FirstName { get; init; }
 
     [JsonPropertyName("middleName")]
     public string? MiddleName { get; init; }
 
     [JsonPropertyName("lastName")]
-    public string LastName { get; init; }
+    public required string LastName { get; init; }
 
     [JsonPropertyName("suffix")]
     public string? Suffix { get; init; }

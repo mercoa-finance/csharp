@@ -1,6 +1,6 @@
 namespace Mercoa.Client.Entity;
 
-public class PlaidLinkTokenRequest
+public record PlaidLinkTokenRequest
 {
     /// <summary>
     /// ID of Bank Account to update

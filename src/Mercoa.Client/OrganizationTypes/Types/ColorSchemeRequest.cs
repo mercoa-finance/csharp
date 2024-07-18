@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class ColorSchemeRequest
+public record ColorSchemeRequest
 {
     [JsonPropertyName("primaryColor")]
     public string? PrimaryColor { get; init; }

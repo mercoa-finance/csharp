@@ -5,11 +5,11 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public class EntityGroupResponse
+public record EntityGroupResponse
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; }
+    public required string Id { get; init; }
 
     [JsonPropertyName("entities")]
-    public IEnumerable<EntityResponse> Entities { get; init; }
+    public IEnumerable<EntityResponse> Entities { get; init; } = new List<EntityResponse>();
 }

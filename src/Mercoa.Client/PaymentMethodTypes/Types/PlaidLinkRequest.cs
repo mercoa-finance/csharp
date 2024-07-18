@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public class PlaidLinkRequest
+public record PlaidLinkRequest
 {
     /// <summary>
     /// Plaid account ID
     /// </summary>
     [JsonPropertyName("accountId")]
-    public string AccountId { get; init; }
+    public required string AccountId { get; init; }
 
     /// <summary>
     /// Public token received from Plaid Link. Use this if linking the account using the Plaid Link frontend component.

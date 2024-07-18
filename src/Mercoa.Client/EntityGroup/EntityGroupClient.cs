@@ -1,6 +1,9 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.EntityGroup;
+using Mercoa.Client.EntityGroup.User;
 
 #nullable enable
 
@@ -13,8 +16,11 @@ public class EntityGroupClient
     public EntityGroupClient(RawClient client)
     {
         _client = client;
+        User = new UserClient(_client);
         Invoice = new InvoiceClient(_client);
     }
+
+    public UserClient User { get; }
 
     public InvoiceClient Invoice { get; }
 
@@ -26,24 +32,24 @@ public class EntityGroupClient
         var _query = new Dictionary<string, object>() { };
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
             _query["startingAfter"] = request.StartingAfter;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = "/entityGroups",
+                Path = "entityGroups",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityGroupFindResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityGroupFindResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -54,17 +60,17 @@ public class EntityGroupClient
     public async Task<EntityGroupResponse> CreateAsync(EntityGroupRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = "/entityGroup",
+                Path = "entityGroup",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityGroupResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityGroupResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -75,16 +81,16 @@ public class EntityGroupClient
     public async Task<EntityGroupResponse> GetAsync(string entityGroupId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/entityGroup/{entityGroupId}"
+                Path = $"entityGroup/{entityGroupId}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityGroupResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityGroupResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -98,17 +104,17 @@ public class EntityGroupClient
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/entityGroup/{entityGroupId}",
+                Path = $"entityGroup/{entityGroupId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityGroupResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityGroupResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -116,13 +122,13 @@ public class EntityGroupClient
     /// <summary>
     /// Delete an entity group
     /// </summary>
-    public async void DeleteAsync(string entityGroupId)
+    public async Task DeleteAsync(string entityGroupId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Delete,
-                Path = $"/entityGroup/{entityGroupId}"
+                Path = $"entityGroup/{entityGroupId}"
             }
         );
     }

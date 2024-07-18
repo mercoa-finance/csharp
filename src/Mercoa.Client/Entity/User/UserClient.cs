@@ -1,5 +1,7 @@
+using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
+using Mercoa.Client.Core;
 using Mercoa.Client.Entity.User;
 
 #nullable enable
@@ -27,12 +29,16 @@ public class UserClient
     public async Task<IEnumerable<EntityUserResponse>> GetAllAsync(string entityId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest { Method = HttpMethod.Get, Path = $"/{entityId}/users" }
+            new RawClient.JsonApiRequest
+            {
+                Method = HttpMethod.Get,
+                Path = $"/entity/{entityId}/users"
+            }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<EntityUserResponse>>(responseBody);
+            return JsonSerializer.Deserialize<IEnumerable<EntityUserResponse>>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -64,24 +70,24 @@ public class UserClient
         }
         if (request.Limit != null)
         {
-            _query["limit"] = request.Limit;
+            _query["limit"] = request.Limit.ToString();
         }
         if (request.StartingAfter != null)
         {
             _query["startingAfter"] = request.StartingAfter;
         }
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Put,
-                Path = $"/{entityId}/users",
+                Path = $"/entity/{entityId}/users",
                 Query = _query
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindEntityUserResponse>(responseBody);
+            return JsonSerializer.Deserialize<FindEntityUserResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -89,17 +95,17 @@ public class UserClient
     public async Task<EntityUserResponse> CreateAsync(string entityId, EntityUserRequest request)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/{entityId}/user",
+                Path = $"/entity/{entityId}/user",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityUserResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityUserResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -110,16 +116,16 @@ public class UserClient
     public async Task<EntityUserResponse> GetAsync(string entityId, string userId)
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Get,
-                Path = $"/{entityId}/user/{userId}"
+                Path = $"/entity/{entityId}/user/{userId}"
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityUserResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityUserResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -134,17 +140,17 @@ public class UserClient
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/{entityId}/user/{userId}",
+                Path = $"/entity/{entityId}/user/{userId}",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityUserResponse>(responseBody);
+            return JsonSerializer.Deserialize<EntityUserResponse>(responseBody)!;
         }
         throw new Exception(responseBody);
     }
@@ -152,13 +158,13 @@ public class UserClient
     /// <summary>
     /// Delete entity user. This will also remove the user from all approval policies. If an approval policy will break as a result of this operation, this request will fail.
     /// </summary>
-    public async void DeleteAsync(string entityId, string userId)
+    public async Task DeleteAsync(string entityId, string userId)
     {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+        await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Delete,
-                Path = $"/{entityId}/user/{userId}"
+                Path = $"/entity/{entityId}/user/{userId}"
             }
         );
     }
@@ -173,17 +179,17 @@ public class UserClient
     )
     {
         var response = await _client.MakeRequestAsync(
-            new RawClient.ApiRequest
+            new RawClient.JsonApiRequest
             {
                 Method = HttpMethod.Post,
-                Path = $"/{entityId}/user/{userId}/token",
+                Path = $"/entity/{entityId}/user/{userId}/token",
                 Body = request
             }
         );
-        string responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode >= 200 && response.StatusCode < 400)
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody);
+            return JsonSerializer.Deserialize<string>(responseBody)!;
         }
         throw new Exception(responseBody);
     }

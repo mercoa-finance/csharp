@@ -1,15 +1,14 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
 namespace Mercoa.Client;
 
-public class ApproverRule
+public record ApproverRule
 {
     [JsonPropertyName("numApprovers")]
-    public int NumApprovers { get; init; }
+    public required int NumApprovers { get; init; }
 
     [JsonPropertyName("identifierList")]
-    public IdentifierList IdentifierList { get; init; }
+    public required object IdentifierList { get; init; }
 }

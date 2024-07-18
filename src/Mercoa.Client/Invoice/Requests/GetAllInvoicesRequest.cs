@@ -4,7 +4,7 @@ using Mercoa.Client;
 
 namespace Mercoa.Client.Invoice;
 
-public class GetAllInvoicesRequest
+public record GetAllInvoicesRequest
 {
     /// <summary>
     /// Filter invoices by the ID of the entity that created the invoice.
@@ -50,6 +50,16 @@ public class GetAllInvoicesRequest
     /// Filter invoices by metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
     public InvoiceMetadataFilter? Metadata { get; init; }
+
+    /// <summary>
+    /// Filter invoices by line item metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
+    /// </summary>
+    public InvoiceMetadataFilter? LineItemMetadata { get; init; }
+
+    /// <summary>
+    /// Filter invoices by line item GL account ID. Each filter will be applied as an OR condition. Duplicate keys will be ignored.
+    /// </summary>
+    public string? LineItemGlAccountId { get; init; }
 
     /// <summary>
     /// Filter invoices by payer ID.
