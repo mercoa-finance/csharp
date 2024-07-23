@@ -52,6 +52,18 @@ public record CheckResponse
     [JsonPropertyName("externalAccountingSystemId")]
     public string? ExternalAccountingSystemId { get; init; }
 
+    /// <summary>
+    /// Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+    /// </summary>
+    [JsonPropertyName("frozen")]
+    public required bool Frozen { get; init; }
+
+    /// <summary>
+    /// Metadata associated with this payment method.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, string> Metadata { get; init; } = new Dictionary<string, string>();
+
     [JsonPropertyName("createdAt")]
     public required DateTime CreatedAt { get; init; }
 

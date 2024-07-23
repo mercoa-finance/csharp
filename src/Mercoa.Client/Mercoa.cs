@@ -21,7 +21,7 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.4.7" },
+                { "X-Fern-SDK-Version", "0.4.8" },
             },
             clientOptions ?? new ClientOptions()
         );
@@ -40,6 +40,7 @@ public partial class Mercoa
         Ocr = new OcrClient(_client);
         OrganizationTypes = new OrganizationTypesClient(_client);
         PaymentMethodTypes = new PaymentMethodTypesClient(_client);
+        PaymentMethods = new PaymentMethodsClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
 
@@ -72,6 +73,8 @@ public partial class Mercoa
     public OrganizationTypesClient OrganizationTypes { get; init; }
 
     public PaymentMethodTypesClient PaymentMethodTypes { get; init; }
+
+    public PaymentMethodsClient PaymentMethods { get; init; }
 
     public WebhooksClient Webhooks { get; init; }
 }

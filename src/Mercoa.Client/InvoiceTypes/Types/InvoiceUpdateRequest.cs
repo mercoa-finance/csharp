@@ -7,6 +7,9 @@ namespace Mercoa.Client;
 
 public record InvoiceUpdateRequest
 {
+    [JsonPropertyName("lineItems")]
+    public IEnumerable<InvoiceLineItemUpdateRequest>? LineItems { get; init; }
+
     /// <summary>
     /// ID of entity who created this invoice. If creating a payable invoice (AP), this must be the same as the payerId. If creating a receivable invoice (AR), this must be the same as the vendorId.
     /// </summary>
@@ -97,11 +100,8 @@ public record InvoiceUpdateRequest
     [JsonPropertyName("approvers")]
     public IEnumerable<ApprovalSlotAssignment>? Approvers { get; init; }
 
-    [JsonPropertyName("lineItems")]
-    public IEnumerable<InvoiceLineItemRequest>? LineItems { get; init; }
-
     /// <summary>
-    /// Metadata associated with this invoice. You can specify up to 10 keys, with key names up to 40 characters long and values up to 200 characters long.
+    /// Metadata associated with this invoice.
     /// </summary>
     [JsonPropertyName("metadata")]
     public Dictionary<string, string>? Metadata { get; init; }

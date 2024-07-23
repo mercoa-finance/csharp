@@ -3,6 +3,7 @@ using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Core;
 using Mercoa.Client.Invoice;
+using Mercoa.Client.Invoice.LineItem;
 
 #nullable enable
 
@@ -15,11 +16,14 @@ public class InvoiceClient
     public InvoiceClient(RawClient client)
     {
         _client = client;
+        LineItem = new LineItemClient(_client);
         Approval = new ApprovalClient(_client);
         Comment = new CommentClient(_client);
         Document = new DocumentClient(_client);
         PaymentLinks = new PaymentLinksClient(_client);
     }
+
+    public LineItemClient LineItem { get; }
 
     public ApprovalClient Approval { get; }
 

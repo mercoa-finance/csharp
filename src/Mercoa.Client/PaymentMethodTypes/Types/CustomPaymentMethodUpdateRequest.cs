@@ -53,4 +53,16 @@ public record CustomPaymentMethodUpdateRequest
     /// </summary>
     [JsonPropertyName("externalAccountingSystemId")]
     public string? ExternalAccountingSystemId { get; init; }
+
+    /// <summary>
+    /// If true, this payment method will be frozen. Frozen payment methods cannot be used for payments, but will still be returned in API responses.
+    /// </summary>
+    [JsonPropertyName("frozen")]
+    public bool? Frozen { get; init; }
+
+    /// <summary>
+    /// Metadata associated with this payment method.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, string>? Metadata { get; init; }
 }
