@@ -42,10 +42,6 @@ public class CounterpartyClient
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
         }
-        if (request.Logo != null)
-        {
-            _query["logo"] = request.Logo.ToString();
-        }
         if (request.CounterpartyId != null)
         {
             _query["counterpartyId"] = request.CounterpartyId;
@@ -98,10 +94,6 @@ public class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.Logo != null)
-        {
-            _query["logo"] = request.Logo.ToString();
         }
         if (request.CounterpartyId != null)
         {

@@ -27,11 +27,6 @@ public record FindPayeeCounterpartiesRequest
     public bool? InvoiceMetrics { get; init; }
 
     /// <summary>
-    /// If true, will include counterparty logo as part of the response
-    /// </summary>
-    public bool? Logo { get; init; }
-
-    /// <summary>
     /// Filter by counterparty ids
     /// </summary>
     public string? CounterpartyId { get; init; }

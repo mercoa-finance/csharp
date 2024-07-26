@@ -13,12 +13,6 @@ public record CounterpartyResponse
     [JsonPropertyName("accounts")]
     public IEnumerable<CounterpartyCustomizationAccount>? Accounts { get; init; }
 
-    /// <summary>
-    /// URL to the entity logo
-    /// </summary>
-    [JsonPropertyName("logo")]
-    public string? Logo { get; init; }
-
     [JsonPropertyName("paymentMethods")]
     public IEnumerable<object>? PaymentMethods { get; init; }
 
@@ -66,6 +60,12 @@ public record CounterpartyResponse
 
     [JsonPropertyName("profile")]
     public required ProfileResponse Profile { get; init; }
+
+    /// <summary>
+    /// URL for the entity logo
+    /// </summary>
+    [JsonPropertyName("logo")]
+    public string? Logo { get; init; }
 
     [JsonPropertyName("status")]
     public required EntityStatus Status { get; init; }

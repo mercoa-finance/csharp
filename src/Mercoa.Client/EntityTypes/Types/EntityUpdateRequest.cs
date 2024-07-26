@@ -62,7 +62,7 @@ public record EntityUpdateRequest
     public bool? IsNetworkPayee { get; init; }
 
     /// <summary>
-    /// Base64 encoded PNG image data for the entity logo.
+    /// Base64 encoded PNG image data for the entity logo. Max size 100KB.
     /// </summary>
     [JsonPropertyName("logo")]
     public string? Logo { get; init; }

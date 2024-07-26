@@ -49,6 +49,12 @@ public record EntityWithPaymentMethodResponse
     [JsonPropertyName("profile")]
     public required ProfileResponse Profile { get; init; }
 
+    /// <summary>
+    /// URL for the entity logo
+    /// </summary>
+    [JsonPropertyName("logo")]
+    public string? Logo { get; init; }
+
     [JsonPropertyName("status")]
     public required EntityStatus Status { get; init; }
 

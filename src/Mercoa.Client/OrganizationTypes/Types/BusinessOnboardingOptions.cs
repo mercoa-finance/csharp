@@ -45,4 +45,7 @@ public record BusinessOnboardingOptions
 
     [JsonPropertyName("representatives")]
     public required OnboardingOption Representatives { get; init; }
+
+    [JsonPropertyName("logo")]
+    public required OnboardingOption Logo { get; init; }
 }
