@@ -42,6 +42,10 @@ public class InvoiceClient
         {
             _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
+        if (request.DateType != null)
+        {
+            _query["dateType"] = JsonSerializer.Serialize(request.DateType.Value);
+        }
         if (request.OrderBy != null)
         {
             _query["orderBy"] = JsonSerializer.Serialize(request.OrderBy.Value);
@@ -150,6 +154,18 @@ public class InvoiceClient
         if (request.Status != null)
         {
             _query["status"] = JsonSerializer.Serialize(request.Status.Value);
+        }
+        if (request.StartDate != null)
+        {
+            _query["startDate"] = request.StartDate.Value.ToString("o0");
+        }
+        if (request.EndDate != null)
+        {
+            _query["endDate"] = request.EndDate.Value.ToString("o0");
+        }
+        if (request.DateType != null)
+        {
+            _query["dateType"] = JsonSerializer.Serialize(request.DateType.Value);
         }
         if (request.DueDateStart != null)
         {

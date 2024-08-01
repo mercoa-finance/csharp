@@ -12,14 +12,19 @@ public record GetAllInvoicesRequest
     public string? EntityId { get; init; }
 
     /// <summary>
-    /// Start date for invoice created on date filter.
+    /// Start date filter. Defaults to CREATED_AT unless specified the dateType is specified
     /// </summary>
     public DateTime? StartDate { get; init; }
 
     /// <summary>
-    /// End date for invoice created date filter.
+    /// End date filter. Defaults to CREATED_AT unless specified the dateType is specified
     /// </summary>
     public DateTime? EndDate { get; init; }
+
+    /// <summary>
+    /// Type of date to filter by if startDate and endDate filters are provided. Defaults to CREATED_AT.
+    /// </summary>
+    public InvoiceDateFilter? DateType { get; init; }
 
     /// <summary>
     /// Field to order invoices by. Defaults to CREATED_AT.

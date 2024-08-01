@@ -51,6 +51,10 @@ public class InvoiceClient
         {
             _query["endDate"] = request.EndDate.Value.ToString("o0");
         }
+        if (request.DateType != null)
+        {
+            _query["dateType"] = JsonSerializer.Serialize(request.DateType.Value);
+        }
         if (request.OrderBy != null)
         {
             _query["orderBy"] = JsonSerializer.Serialize(request.OrderBy.Value);

@@ -16,5 +16,11 @@ public record NotificationPolicyRequest
     /// List of user roles that should receive notifications in addition to the default users for this notification type
     /// </summary>
     [JsonPropertyName("additionalRoles")]
-    public IEnumerable<string> AdditionalRoles { get; init; } = new List<string>();
+    public IEnumerable<string>? AdditionalRoles { get; init; }
+
+    /// <summary>
+    /// Set to true if the selected notification type should be sent to the counterparty
+    /// </summary>
+    [JsonPropertyName("notifyCounterparty")]
+    public bool? NotifyCounterparty { get; init; }
 }

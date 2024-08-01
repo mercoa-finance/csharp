@@ -27,6 +27,11 @@ public record EntityGetInvoicesRequest
     public DateTime? EndDate { get; init; }
 
     /// <summary>
+    /// Type of date to filter by if startDate and endDate filters are provided. Defaults to CREATED_AT.
+    /// </summary>
+    public InvoiceDateFilter? DateType { get; init; }
+
+    /// <summary>
     /// Field to order invoices by. Defaults to CREATED_AT.
     /// </summary>
     public InvoiceOrderByField? OrderBy { get; init; }

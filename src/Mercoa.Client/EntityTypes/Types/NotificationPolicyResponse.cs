@@ -19,6 +19,12 @@ public record NotificationPolicyResponse
     [JsonPropertyName("additionalRoles")]
     public IEnumerable<string> AdditionalRoles { get; init; } = new List<string>();
 
+    /// <summary>
+    /// True if the selected notification type is sent to the counterparty
+    /// </summary>
+    [JsonPropertyName("notifyCounterparty")]
+    public required bool NotifyCounterparty { get; init; }
+
     [JsonPropertyName("type")]
     public required NotificationType Type { get; init; }
 }

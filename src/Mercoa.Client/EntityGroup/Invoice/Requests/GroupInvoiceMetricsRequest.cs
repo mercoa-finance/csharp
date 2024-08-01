@@ -52,22 +52,37 @@ public record GroupInvoiceMetricsRequest
     public InvoiceStatus? Status { get; init; }
 
     /// <summary>
-    /// Start date for invoice dueDate filter.
+    /// Start date filter. Defaults to CREATED_AT unless specified the dateType is specified
+    /// </summary>
+    public DateTime? StartDate { get; init; }
+
+    /// <summary>
+    /// End date filter. Defaults to CREATED_AT unless specified the dateType is specified
+    /// </summary>
+    public DateTime? EndDate { get; init; }
+
+    /// <summary>
+    /// Type of date to filter by if startDate and endDate filters are provided. Defaults to CREATED_AT.
+    /// </summary>
+    public InvoiceDateFilter? DateType { get; init; }
+
+    /// <summary>
+    /// DEPRECATED. Use startDate, endDate, and dateType instead. Start date for invoice dueDate filter.
     /// </summary>
     public DateTime? DueDateStart { get; init; }
 
     /// <summary>
-    /// End date for invoice dueDate filter.
+    /// DEPRECATED. Use startDate, endDate, and dateType instead. End date for invoice dueDate filter.
     /// </summary>
     public DateTime? DueDateEnd { get; init; }
 
     /// <summary>
-    /// Start date for invoice created on date filter.
+    /// DEPRECATED. Use startDate, endDate, and dateType instead. Start date for invoice created on date filter.
     /// </summary>
     public DateTime? CreatedDateStart { get; init; }
 
     /// <summary>
-    /// End date for invoice created date filter.
+    /// DEPRECATED. Use startDate, endDate, and dateType instead. End date for invoice created date filter.
     /// </summary>
     public DateTime? CreatedDateEnd { get; init; }
 
