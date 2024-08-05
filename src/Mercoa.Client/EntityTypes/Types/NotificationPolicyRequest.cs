@@ -19,8 +19,14 @@ public record NotificationPolicyRequest
     public IEnumerable<string>? AdditionalRoles { get; init; }
 
     /// <summary>
-    /// Set to true if the selected notification type should be sent to the counterparty
+    /// Set to true if the selected notification type should be sent to the counterparty if this is a payable invoice.
     /// </summary>
-    [JsonPropertyName("notifyCounterparty")]
-    public bool? NotifyCounterparty { get; init; }
+    [JsonPropertyName("notifyPayeeCounterparty")]
+    public bool? NotifyPayeeCounterparty { get; init; }
+
+    /// <summary>
+    /// Set to true if the selected notification type should be sent to the counterparty if this is a receivable invoice.
+    /// </summary>
+    [JsonPropertyName("notifyPayorCounterparty")]
+    public bool? NotifyPayorCounterparty { get; init; }
 }

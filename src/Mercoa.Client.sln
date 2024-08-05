@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{FCCC4365-20DF-490B-8EF7-2C290D7AC1E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{3C0B68A7-06B8-43EE-8C42-5ADD5C0EED14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{F76EB4BA-7DDA-40FB-8454-F5A00A11A43E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{2A516238-88EA-4F75-A4CF-F5222B2FFC5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FCCC4365-20DF-490B-8EF7-2C290D7AC1E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCCC4365-20DF-490B-8EF7-2C290D7AC1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCCC4365-20DF-490B-8EF7-2C290D7AC1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCCC4365-20DF-490B-8EF7-2C290D7AC1E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F76EB4BA-7DDA-40FB-8454-F5A00A11A43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F76EB4BA-7DDA-40FB-8454-F5A00A11A43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F76EB4BA-7DDA-40FB-8454-F5A00A11A43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F76EB4BA-7DDA-40FB-8454-F5A00A11A43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0B68A7-06B8-43EE-8C42-5ADD5C0EED14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0B68A7-06B8-43EE-8C42-5ADD5C0EED14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0B68A7-06B8-43EE-8C42-5ADD5C0EED14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0B68A7-06B8-43EE-8C42-5ADD5C0EED14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A516238-88EA-4F75-A4CF-F5222B2FFC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A516238-88EA-4F75-A4CF-F5222B2FFC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A516238-88EA-4F75-A4CF-F5222B2FFC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A516238-88EA-4F75-A4CF-F5222B2FFC5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
