@@ -100,4 +100,9 @@ public record EntityGetInvoicesRequest
     /// Invoice status to filter on.
     /// </summary>
     public InvoiceStatus? Status { get; init; }
+
+    /// <summary>
+    /// Filter invoices by payment type.
+    /// </summary>
+    public IEnumerable<PaymentType>? PaymentType { get; init; }
 }

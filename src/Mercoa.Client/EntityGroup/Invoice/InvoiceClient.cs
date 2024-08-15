@@ -94,6 +94,10 @@ public class InvoiceClient
         {
             _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
+        if (request.PaymentType != null)
+        {
+            _query["paymentType"] = request.PaymentType.ToString();
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {

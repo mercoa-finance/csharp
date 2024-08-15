@@ -90,4 +90,9 @@ public record EntityGetInvoicesRequest
     /// Invoice status to filter on.
     /// </summary>
     public InvoiceStatus? Status { get; init; }
+
+    /// <summary>
+    /// Filter invoices by recurring status
+    /// </summary>
+    public IEnumerable<PaymentType>? PaymentType { get; init; }
 }

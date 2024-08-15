@@ -20,5 +20,8 @@ public enum InvoiceMetricsPerDateGroupBy
     InvoiceDate,
 
     [EnumMember(Value = "DEDUCTION_DATE")]
-    DeductionDate
+    DeductionDate,
+
+    [EnumMember(Value = "NEXT_PAYMENT_DATE")]
+    NextPaymentDate
 }

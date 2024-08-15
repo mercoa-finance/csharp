@@ -22,6 +22,15 @@ public enum InvoiceOrderByField
     [EnumMember(Value = "UPDATED_AT")]
     UpdatedAt,
 
+    [EnumMember(Value = "DEDUCTION_DATE")]
+    DeductionDate,
+
+    [EnumMember(Value = "INVOICE_DATE")]
+    InvoiceDate,
+
+    [EnumMember(Value = "SETTLEMENT_DATE")]
+    SettlementDate,
+
     [EnumMember(Value = "INVOICE_NUMBER")]
     InvoiceNumber,
 
@@ -29,5 +38,8 @@ public enum InvoiceOrderByField
     VendorName,
 
     [EnumMember(Value = "PAYER_NAME")]
-    PayerName
+    PayerName,
+
+    [EnumMember(Value = "NEXT_PAYMENT_DATE")]
+    NextPaymentDate
 }

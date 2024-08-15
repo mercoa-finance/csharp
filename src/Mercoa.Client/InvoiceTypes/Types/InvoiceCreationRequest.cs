@@ -38,7 +38,7 @@ public record InvoiceCreationRequest
     public DateTime? InvoiceDate { get; init; }
 
     /// <summary>
-    /// Date when funds are scheduled to be deducted from payer's account.
+    /// Initial date when funds are scheduled to be deducted from payer's account.
     /// </summary>
     [JsonPropertyName("deductionDate")]
     public DateTime? DeductionDate { get; init; }
@@ -141,4 +141,10 @@ public record InvoiceCreationRequest
     /// </summary>
     [JsonPropertyName("fees")]
     public InvoiceFeesRequest? Fees { get; init; }
+
+    /// <summary>
+    /// If this is a recurring invoice, this will be the payment schedule for the invoice. If not provided, this will be a one-time invoice.
+    /// </summary>
+    [JsonPropertyName("paymentSchedule")]
+    public object? PaymentSchedule { get; init; }
 }

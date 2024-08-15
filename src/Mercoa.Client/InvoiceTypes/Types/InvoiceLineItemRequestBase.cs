@@ -17,7 +17,7 @@ public record InvoiceLineItemRequestBase
     public string? Name { get; init; }
 
     [JsonPropertyName("quantity")]
-    public int? Quantity { get; init; }
+    public double? Quantity { get; init; }
 
     /// <summary>
     /// Unit price of the line item in major units. If the entered amount has more decimal places than the currency supports, trailing decimals will be truncated.

@@ -26,7 +26,7 @@ public record InvoiceLineItemResponse
     public string? Name { get; init; }
 
     [JsonPropertyName("quantity")]
-    public int? Quantity { get; init; }
+    public double? Quantity { get; init; }
 
     /// <summary>
     /// Unit price of line item in major units.

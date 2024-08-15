@@ -16,6 +16,9 @@ public enum InvoiceDateFilter
     [EnumMember(Value = "DEDUCTION_DATE")]
     DeductionDate,
 
+    [EnumMember(Value = "NEXT_PAYMENT_DATE")]
+    NextPaymentDate,
+
     [EnumMember(Value = "DUE_DATE")]
     DueDate,
 

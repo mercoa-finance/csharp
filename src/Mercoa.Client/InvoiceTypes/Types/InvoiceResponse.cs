@@ -32,10 +32,16 @@ public record InvoiceResponse
     public DateTime? InvoiceDate { get; init; }
 
     /// <summary>
-    /// Date when funds are scheduled to be deducted from payer's account. The actual deduction date may differ from this date, and will be reflected in the processedAt field.
+    /// Initial date when funds are scheduled to be deducted from payer's account. The actual deduction date may differ from this date, and will be reflected in the processedAt field.
     /// </summary>
     [JsonPropertyName("deductionDate")]
     public DateTime? DeductionDate { get; init; }
+
+    /// <summary>
+    /// If this is a recurring invoice, this will be the next date when funds are scheduled to be deducted from payer's account.
+    /// </summary>
+    [JsonPropertyName("nextDeductionDate")]
+    public DateTime? NextDeductionDate { get; init; }
 
     /// <summary>
     /// Date when the invoice payment was processed.
@@ -138,6 +144,12 @@ public record InvoiceResponse
     public string? ForeignId { get; init; }
 
     /// <summary>
+    /// The ID of the entity who created this invoice.
+    /// </summary>
+    [JsonPropertyName("creatorEntityId")]
+    public string? CreatorEntityId { get; init; }
+
+    /// <summary>
     /// Entity user who created this invoice.
     /// </summary>
     [JsonPropertyName("creatorUser")]
@@ -160,4 +172,10 @@ public record InvoiceResponse
     /// </summary>
     [JsonPropertyName("fees")]
     public InvoiceFeesResponse? Fees { get; init; }
+
+    /// <summary>
+    /// If this is a recurring invoice, this will be the payment schedule for the invoice. If not provided, this will be a one-time invoice.
+    /// </summary>
+    [JsonPropertyName("paymentSchedule")]
+    public object? PaymentSchedule { get; init; }
 }
