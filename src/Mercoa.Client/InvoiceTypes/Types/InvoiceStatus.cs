@@ -10,6 +10,9 @@ namespace Mercoa.Client;
 [JsonConverter(typeof(StringEnumSerializer<InvoiceStatus>))]
 public enum InvoiceStatus
 {
+    [EnumMember(Value = "UNASSIGNED")]
+    Unassigned,
+
     [EnumMember(Value = "DRAFT")]
     Draft,
 

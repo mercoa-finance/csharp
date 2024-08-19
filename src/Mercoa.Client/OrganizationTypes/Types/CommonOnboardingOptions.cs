@@ -5,14 +5,8 @@ using Mercoa.Client;
 
 namespace Mercoa.Client;
 
-public record IndividualOnboardingOptions
+public record CommonOnboardingOptions
 {
-    [JsonPropertyName("dateOfBirth")]
-    public required OnboardingOption DateOfBirth { get; init; }
-
-    [JsonPropertyName("ssn")]
-    public required OnboardingOption Ssn { get; init; }
-
     [JsonPropertyName("termsOfService")]
     public required OnboardingOption TermsOfService { get; init; }
 

@@ -7,15 +7,6 @@ namespace Mercoa.Client;
 
 public record BusinessOnboardingOptions
 {
-    [JsonPropertyName("termsOfService")]
-    public required OnboardingOption TermsOfService { get; init; }
-
-    [JsonPropertyName("email")]
-    public required OnboardingOption Email { get; init; }
-
-    [JsonPropertyName("name")]
-    public required OnboardingOption Name { get; init; }
-
     [JsonPropertyName("type")]
     public required OnboardingOption Type { get; init; }
 
@@ -27,12 +18,6 @@ public record BusinessOnboardingOptions
 
     [JsonPropertyName("mcc")]
     public required OnboardingOption Mcc { get; init; }
-
-    [JsonPropertyName("address")]
-    public required OnboardingOption Address { get; init; }
-
-    [JsonPropertyName("phone")]
-    public required OnboardingOption Phone { get; init; }
 
     [JsonPropertyName("formationDate")]
     public required OnboardingOption FormationDate { get; init; }
@@ -48,4 +33,34 @@ public record BusinessOnboardingOptions
 
     [JsonPropertyName("logo")]
     public required OnboardingOption Logo { get; init; }
+
+    [JsonPropertyName("averageTransactionSize")]
+    public required OnboardingOption AverageTransactionSize { get; init; }
+
+    [JsonPropertyName("averageMonthlyTransactionVolume")]
+    public required OnboardingOption AverageMonthlyTransactionVolume { get; init; }
+
+    [JsonPropertyName("maxTransactionSize")]
+    public required OnboardingOption MaxTransactionSize { get; init; }
+
+    [JsonPropertyName("termsOfService")]
+    public required OnboardingOption TermsOfService { get; init; }
+
+    [JsonPropertyName("email")]
+    public required OnboardingOption Email { get; init; }
+
+    [JsonPropertyName("name")]
+    public required OnboardingOption Name { get; init; }
+
+    [JsonPropertyName("address")]
+    public required OnboardingOption Address { get; init; }
+
+    [JsonPropertyName("phone")]
+    public required OnboardingOption Phone { get; init; }
+
+    [JsonPropertyName("tenNinetyNine")]
+    public required OnboardingOption TenNinetyNine { get; init; }
+
+    [JsonPropertyName("w9")]
+    public required OnboardingOption W9 { get; init; }
 }

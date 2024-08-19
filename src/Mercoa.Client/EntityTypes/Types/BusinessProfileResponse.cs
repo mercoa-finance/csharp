@@ -42,4 +42,13 @@ public record BusinessProfileResponse
 
     [JsonPropertyName("industryCodes")]
     public IndustryCodes? IndustryCodes { get; init; }
+
+    [JsonPropertyName("averageMonthlyTransactionVolume")]
+    public double? AverageMonthlyTransactionVolume { get; init; }
+
+    [JsonPropertyName("averageTransactionSize")]
+    public double? AverageTransactionSize { get; init; }
+
+    [JsonPropertyName("maxTransactionSize")]
+    public double? MaxTransactionSize { get; init; }
 }

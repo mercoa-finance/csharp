@@ -63,4 +63,22 @@ public record BusinessProfileRequest
     /// </summary>
     [JsonPropertyName("industryCodes")]
     public IndustryCodes? IndustryCodes { get; init; }
+
+    /// <summary>
+    /// Average monthly transaction volume for the business. Required to collect funds.
+    /// </summary>
+    [JsonPropertyName("averageMonthlyTransactionVolume")]
+    public double? AverageMonthlyTransactionVolume { get; init; }
+
+    /// <summary>
+    /// Average transaction size for the business. Required to collect funds.
+    /// </summary>
+    [JsonPropertyName("averageTransactionSize")]
+    public double? AverageTransactionSize { get; init; }
+
+    /// <summary>
+    /// Maximum transaction size for the business. Required to collect funds.
+    /// </summary>
+    [JsonPropertyName("maxTransactionSize")]
+    public double? MaxTransactionSize { get; init; }
 }
