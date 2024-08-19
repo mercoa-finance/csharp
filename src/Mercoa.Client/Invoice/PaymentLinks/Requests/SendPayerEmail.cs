@@ -5,5 +5,5 @@ public record SendPayerEmail
     /// <summary>
     /// Whether to attach the invoice to the email
     /// </summary>
-    public bool? AttachInvoice { get; init; }
+    public bool? AttachInvoice { get; set; }
 }

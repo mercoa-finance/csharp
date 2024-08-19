@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,20 +7,20 @@ namespace Mercoa.Client;
 public record NotificationResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     /// <summary>
     /// The invoice ID that this notification is related to. This field is only present for notifications related to invoices.
     /// </summary>
     [JsonPropertyName("invoiceId")]
-    public string? InvoiceId { get; init; }
+    public string? InvoiceId { get; set; }
 
     [JsonPropertyName("type")]
-    public required NotificationType Type { get; init; }
+    public required NotificationType Type { get; set; }
 
     [JsonPropertyName("status")]
-    public required NotificationStatus Status { get; init; }
+    public required NotificationStatus Status { get; set; }
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 }

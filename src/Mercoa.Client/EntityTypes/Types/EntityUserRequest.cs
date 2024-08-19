@@ -10,17 +10,17 @@ public record EntityUserRequest
     /// The ID used to identify this user in your system.
     /// </summary>
     [JsonPropertyName("foreignId")]
-    public string? ForeignId { get; init; }
+    public string? ForeignId { get; set; }
 
     [JsonPropertyName("email")]
-    public string? Email { get; init; }
+    public string? Email { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// List of roles. A role can be any string. For example: "payer", "approver", "viewer"
     /// </summary>
     [JsonPropertyName("roles")]
-    public IEnumerable<string>? Roles { get; init; }
+    public IEnumerable<string>? Roles { get; set; }
 }

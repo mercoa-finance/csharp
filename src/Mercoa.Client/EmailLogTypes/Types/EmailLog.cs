@@ -7,26 +7,26 @@ namespace Mercoa.Client;
 public record EmailLog
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("subject")]
-    public required string Subject { get; init; }
+    public required string Subject { get; set; }
 
     [JsonPropertyName("from")]
-    public required string From { get; init; }
+    public required string From { get; set; }
 
     [JsonPropertyName("to")]
-    public required string To { get; init; }
+    public required string To { get; set; }
 
     [JsonPropertyName("htmlBody")]
-    public required string HtmlBody { get; init; }
+    public required string HtmlBody { get; set; }
 
     [JsonPropertyName("textBody")]
-    public required string TextBody { get; init; }
+    public required string TextBody { get; set; }
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("invoiceId")]
-    public string? InvoiceId { get; init; }
+    public string? InvoiceId { get; set; }
 }

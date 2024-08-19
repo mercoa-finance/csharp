@@ -1,17 +1,18 @@
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
+using Mercoa.Client;
 using Mercoa.Client.Core;
-using Mercoa.Client.Invoice;
 
 #nullable enable
 
 namespace Mercoa.Client.Invoice;
 
-public class PaymentLinksClient
+public partial class PaymentLinksClient
 {
     private RawClient _client;
 
-    public PaymentLinksClient(RawClient client)
+    internal PaymentLinksClient(RawClient client)
     {
         _client = client;
     }
@@ -19,74 +20,130 @@ public class PaymentLinksClient
     /// <summary>
     /// Get temporary link for payer to send payment
     /// </summary>
-    public async Task<string> GetPayerLinkAsync(string invoiceId)
+    public async Task<string> GetPayerLinkAsync(string invoiceId, RequestOptions? options = null)
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
-                Path = $"/invoice/{invoiceId}/payerLink"
+                Path = $"/invoice/{invoiceId}/payerLink",
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<string>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Trigger email to payer inviting them to make payment
     /// </summary>
-    public async Task SendPayerEmailAsync(string invoiceId, SendPayerEmail request)
+    public async Task SendPayerEmailAsync(
+        string invoiceId,
+        SendPayerEmail request,
+        RequestOptions? options = null
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.AttachInvoice != null)
         {
             _query["attachInvoice"] = request.AttachInvoice.ToString();
         }
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/invoice/{invoiceId}/sendPayerEmail",
-                Query = _query
+                Query = _query,
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
     /// <summary>
     /// Get temporary link for vendor to accept payment
     /// </summary>
-    public async Task<string> GetVendorLinkAsync(string invoiceId)
+    public async Task<string> GetVendorLinkAsync(string invoiceId, RequestOptions? options = null)
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
-                Path = $"/invoice/{invoiceId}/vendorLink"
+                Path = $"/invoice/{invoiceId}/vendorLink",
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<string>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Trigger email to vendor inviting them into the vendor portal
     /// </summary>
-    public async Task SendVendorEmailAsync(string invoiceId)
+    public async Task SendVendorEmailAsync(string invoiceId, RequestOptions? options = null)
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
-                Path = $"/invoice/{invoiceId}/sendVendorEmail"
+                Path = $"/invoice/{invoiceId}/sendVendorEmail",
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 }

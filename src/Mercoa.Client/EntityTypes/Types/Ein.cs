@@ -10,5 +10,5 @@ public record Ein
     /// Must be in the format XX-XXXXXXX.
     /// </summary>
     [JsonPropertyName("number")]
-    public required string Number { get; init; }
+    public required string Number { get; set; }
 }

@@ -2,17 +2,16 @@ using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Core;
-using Mercoa.Client.Organization;
 
 #nullable enable
 
 namespace Mercoa.Client.Organization;
 
-public class OrganizationClient
+public partial class OrganizationClient
 {
     private RawClient _client;
 
-    public OrganizationClient(RawClient client)
+    internal OrganizationClient(RawClient client)
     {
         _client = client;
         NotificationConfiguration = new NotificationConfigurationClient(_client);
@@ -23,7 +22,10 @@ public class OrganizationClient
     /// <summary>
     /// Get current organization information
     /// </summary>
-    public async Task<OrganizationResponse> GetAsync(GetOrganizationRequest request)
+    public async Task<OrganizationResponse> GetAsync(
+        GetOrganizationRequest request,
+        RequestOptions? options = null
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.PaymentMethods != null)
@@ -58,53 +60,87 @@ public class OrganizationClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = "organization",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<OrganizationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<OrganizationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Update current organization
     /// </summary>
-    public async Task<OrganizationResponse> UpdateAsync(OrganizationRequest request)
+    public async Task<OrganizationResponse> UpdateAsync(
+        OrganizationRequest request,
+        RequestOptions? options = null
+    )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = "organization",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<OrganizationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<OrganizationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Get log of all emails sent to this organization. Content format subject to change.
     /// </summary>
-    public async Task<EmailLogResponse> EmailLogAsync(GetEmailLogRequest request)
+    public async Task<EmailLogResponse> EmailLogAsync(
+        GetEmailLogRequest request,
+        RequestOptions? options = null
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate.Value.ToString("o0");
+            _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate.Value.ToString("o0");
+            _query["endDate"] = request.EndDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.Limit != null)
         {
@@ -117,16 +153,30 @@ public class OrganizationClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = "organization/emailLog",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EmailLogResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<EmailLogResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

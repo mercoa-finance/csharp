@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,12 +7,12 @@ namespace Mercoa.Client;
 public record PaymentMethodWithEntityFindResponse
 {
     [JsonPropertyName("count")]
-    public required int Count { get; init; }
+    public required int Count { get; set; }
 
     [JsonPropertyName("hasMore")]
-    public required bool HasMore { get; init; }
+    public required bool HasMore { get; set; }
 
     [JsonPropertyName("data")]
-    public IEnumerable<PaymentMethodWithEntityResponse> Data { get; init; } =
+    public IEnumerable<PaymentMethodWithEntityResponse> Data { get; set; } =
         new List<PaymentMethodWithEntityResponse>();
 }

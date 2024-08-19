@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,20 +10,20 @@ public record TokenGenerationOptions
     /// Expressed in seconds or a string describing a time span. The default is 1h.
     /// </summary>
     [JsonPropertyName("expiresIn")]
-    public string? ExpiresIn { get; init; }
+    public string? ExpiresIn { get; set; }
 
     [JsonPropertyName("invoice")]
-    public TokenGenerationInvoiceOptions? Invoice { get; init; }
+    public TokenGenerationInvoiceOptions? Invoice { get; set; }
 
     [JsonPropertyName("pages")]
-    public TokenGenerationPagesOptions? Pages { get; init; }
+    public TokenGenerationPagesOptions? Pages { get; set; }
 
     [JsonPropertyName("style")]
-    public TokenGenerationStyleOptions? Style { get; init; }
+    public TokenGenerationStyleOptions? Style { get; set; }
 
     [JsonPropertyName("vendors")]
-    public TokenGenerationVendorOptions? Vendors { get; init; }
+    public TokenGenerationVendorOptions? Vendors { get; set; }
 
     [JsonPropertyName("entity")]
-    public TokenGenerationEntityOptions? Entity { get; init; }
+    public TokenGenerationEntityOptions? Entity { get; set; }
 }

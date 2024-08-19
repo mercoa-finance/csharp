@@ -7,5 +7,5 @@ namespace Mercoa.Client;
 public record CodatProviderRequest
 {
     [JsonPropertyName("apiKey")]
-    public required string ApiKey { get; init; }
+    public required string ApiKey { get; set; }
 }

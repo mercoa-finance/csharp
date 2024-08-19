@@ -7,8 +7,8 @@ namespace Mercoa.Client;
 public record RutterProviderRequest
 {
     [JsonPropertyName("clientId")]
-    public required string ClientId { get; init; }
+    public required string ClientId { get; set; }
 
     [JsonPropertyName("clientSecret")]
-    public required string ClientSecret { get; init; }
+    public required string ClientSecret { get; set; }
 }

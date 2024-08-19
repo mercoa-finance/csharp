@@ -7,26 +7,26 @@ namespace Mercoa.Client;
 public record EntityUserResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     /// <summary>
     /// The ID used to identify this user in your system.
     /// </summary>
     [JsonPropertyName("foreignId")]
-    public string? ForeignId { get; init; }
+    public string? ForeignId { get; set; }
 
     [JsonPropertyName("email")]
-    public string? Email { get; init; }
+    public string? Email { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("roles")]
-    public IEnumerable<string> Roles { get; init; } = new List<string>();
+    public IEnumerable<string> Roles { get; set; } = new List<string>();
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
-    public required DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; set; }
 }

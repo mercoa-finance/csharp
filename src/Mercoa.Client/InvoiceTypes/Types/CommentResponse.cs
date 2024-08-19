@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,23 +7,23 @@ namespace Mercoa.Client;
 public record CommentResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("text")]
-    public required string Text { get; init; }
+    public required string Text { get; set; }
 
     [JsonPropertyName("user")]
-    public EntityUserResponse? User { get; init; }
+    public EntityUserResponse? User { get; set; }
 
     /// <summary>
     /// If an approval action has triggered the generation of this comment, returns the associated approval action and actor
     /// </summary>
     [JsonPropertyName("associatedApprovalAction")]
-    public AssociatedApprovalAction? AssociatedApprovalAction { get; init; }
+    public AssociatedApprovalAction? AssociatedApprovalAction { get; set; }
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
-    public required DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; set; }
 }

@@ -5,5 +5,5 @@ public record PlaidLinkTokenRequest
     /// <summary>
     /// ID of Bank Account to update
     /// </summary>
-    public string? PaymentMethodId { get; init; }
+    public string? PaymentMethodId { get; set; }
 }

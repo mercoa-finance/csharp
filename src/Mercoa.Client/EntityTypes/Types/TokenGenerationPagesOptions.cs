@@ -7,20 +7,20 @@ namespace Mercoa.Client;
 public record TokenGenerationPagesOptions
 {
     [JsonPropertyName("paymentMethods")]
-    public bool? PaymentMethods { get; init; }
+    public bool? PaymentMethods { get; set; }
 
     [JsonPropertyName("representatives")]
-    public bool? Representatives { get; init; }
+    public bool? Representatives { get; set; }
 
     [JsonPropertyName("notifications")]
-    public bool? Notifications { get; init; }
+    public bool? Notifications { get; set; }
 
     [JsonPropertyName("counterparties")]
-    public bool? Counterparties { get; init; }
+    public bool? Counterparties { get; set; }
 
     [JsonPropertyName("approvals")]
-    public bool? Approvals { get; init; }
+    public bool? Approvals { get; set; }
 
     [JsonPropertyName("emailLog")]
-    public bool? EmailLog { get; init; }
+    public bool? EmailLog { get; set; }
 }

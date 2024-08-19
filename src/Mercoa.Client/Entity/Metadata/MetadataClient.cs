@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Mercoa.Client;
 using Mercoa.Client.Core;
 
@@ -7,11 +8,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client.Entity;
 
-public class MetadataClient
+public partial class MetadataClient
 {
     private RawClient _client;
 
-    public MetadataClient(RawClient client)
+    internal MetadataClient(RawClient client)
     {
         _client = client;
     }
@@ -19,41 +20,76 @@ public class MetadataClient
     /// <summary>
     /// Retrieve all metadata options associated with this entity
     /// </summary>
-    public async Task<IEnumerable<EntityMetadataResponse>> GetAllAsync(string entityId)
+    public async Task<IEnumerable<EntityMetadataResponse>> GetAllAsync(
+        string entityId,
+        RequestOptions? options = null
+    )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/metadata"
+                Path = $"/entity/{entityId}/metadata",
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<EntityMetadataResponse>>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<IEnumerable<EntityMetadataResponse>>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Retrieve metadata associated with a specific key
     /// </summary>
-    public async Task<IEnumerable<string>> GetAsync(string entityId, string key)
+    public async Task<IEnumerable<string>> GetAsync(
+        string entityId,
+        string key,
+        RequestOptions? options = null
+    )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/metadata/{key}"
+                Path = $"/entity/{entityId}/metadata/{key}",
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<string>>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<IEnumerable<string>>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
@@ -62,36 +98,63 @@ public class MetadataClient
     public async Task<IEnumerable<string>> UpdateAsync(
         string entityId,
         string key,
-        IEnumerable<string> request
+        IEnumerable<string> request,
+        RequestOptions? options = null
     )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/entity/{entityId}/metadata/{key}",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<string>>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<IEnumerable<string>>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Delete all metadata associated with a specific key
     /// </summary>
-    public async Task DeleteAsync(string entityId, string key)
+    public async Task DeleteAsync(string entityId, string key, RequestOptions? options = null)
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Delete,
-                Path = $"/entity/{entityId}/metadata/{key}"
+                Path = $"/entity/{entityId}/metadata/{key}",
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 }

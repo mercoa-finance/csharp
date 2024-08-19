@@ -7,8 +7,8 @@ namespace Mercoa.Client;
 public record EntityMetadataResponse
 {
     [JsonPropertyName("key")]
-    public required string Key { get; init; }
+    public required string Key { get; set; }
 
     [JsonPropertyName("value")]
-    public IEnumerable<string> Value { get; init; } = new List<string>();
+    public IEnumerable<string> Value { get; set; } = new List<string>();
 }

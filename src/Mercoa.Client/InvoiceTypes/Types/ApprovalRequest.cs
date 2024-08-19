@@ -10,8 +10,8 @@ public record ApprovalRequest
     /// Comment associated with this approval action.
     /// </summary>
     [JsonPropertyName("text")]
-    public string? Text { get; init; }
+    public string? Text { get; set; }
 
     [JsonPropertyName("userId")]
-    public required string UserId { get; init; }
+    public required string UserId { get; set; }
 }

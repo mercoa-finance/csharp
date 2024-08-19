@@ -7,11 +7,11 @@ namespace Mercoa.Client;
 public record OnboardingOption
 {
     [JsonPropertyName("show")]
-    public required bool Show { get; init; }
+    public required bool Show { get; set; }
 
     [JsonPropertyName("edit")]
-    public required bool Edit { get; init; }
+    public required bool Edit { get; set; }
 
     [JsonPropertyName("required")]
-    public required bool Required { get; init; }
+    public required bool Required { get; set; }
 }

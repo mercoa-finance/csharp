@@ -4,11 +4,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client;
 
-public class CommonsClient
+public partial class CommonsClient
 {
     private RawClient _client;
 
-    public CommonsClient(RawClient client)
+    internal CommonsClient(RawClient client)
     {
         _client = client;
     }

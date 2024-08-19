@@ -10,5 +10,5 @@ public record RutterCompanyCreationRequest
     /// The access token for the existing Rutter connection. If the connection does not exist, leave this field blank and Rutter will create a new connection.
     /// </summary>
     [JsonPropertyName("accessToken")]
-    public string? AccessToken { get; init; }
+    public string? AccessToken { get; set; }
 }

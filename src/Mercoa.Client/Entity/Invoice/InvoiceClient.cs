@@ -2,17 +2,16 @@ using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Core;
-using Mercoa.Client.Entity;
 
 #nullable enable
 
 namespace Mercoa.Client.Entity;
 
-public class InvoiceClient
+public partial class InvoiceClient
 {
     private RawClient _client;
 
-    public InvoiceClient(RawClient client)
+    internal InvoiceClient(RawClient client)
     {
         _client = client;
     }
@@ -22,10 +21,24 @@ public class InvoiceClient
     /// </summary>
     public async Task<FindInvoiceResponse> FindAsync(
         string entityId,
-        EntityGetInvoicesRequest request
+        EntityGetInvoicesRequest request,
+        RequestOptions? options = null
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["metadata"] = request.Metadata.Select(_value => _value.ToString()).ToList();
+        _query["lineItemMetadata"] = request
+            .LineItemMetadata.Select(_value => _value.ToString())
+            .ToList();
+        _query["lineItemGlAccountId"] = request.LineItemGlAccountId;
+        _query["payerId"] = request.PayerId;
+        _query["vendorId"] = request.VendorId;
+        _query["approverId"] = request.ApproverId;
+        _query["approverAction"] = request
+            .ApproverAction.Select(_value => _value.ToString())
+            .ToList();
+        _query["invoiceId"] = request.InvoiceId;
+        _query["status"] = request.Status.Select(_value => _value.ToString()).ToList();
         if (request.ExcludePayables != null)
         {
             _query["excludePayables"] = request.ExcludePayables.ToString();
@@ -36,11 +49,11 @@ public class InvoiceClient
         }
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate.Value.ToString("o0");
+            _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate.Value.ToString("o0");
+            _query["endDate"] = request.EndDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.DateType != null)
         {
@@ -62,45 +75,9 @@ public class InvoiceClient
         {
             _query["startingAfter"] = request.StartingAfter;
         }
-        if (request.Metadata != null)
-        {
-            _query["metadata"] = request.Metadata.ToString();
-        }
-        if (request.LineItemMetadata != null)
-        {
-            _query["lineItemMetadata"] = request.LineItemMetadata.ToString();
-        }
-        if (request.LineItemGlAccountId != null)
-        {
-            _query["lineItemGlAccountId"] = request.LineItemGlAccountId;
-        }
         if (request.Search != null)
         {
             _query["search"] = request.Search;
-        }
-        if (request.PayerId != null)
-        {
-            _query["payerId"] = request.PayerId;
-        }
-        if (request.VendorId != null)
-        {
-            _query["vendorId"] = request.VendorId;
-        }
-        if (request.ApproverId != null)
-        {
-            _query["approverId"] = request.ApproverId;
-        }
-        if (request.ApproverAction != null)
-        {
-            _query["approverAction"] = JsonSerializer.Serialize(request.ApproverAction.Value);
-        }
-        if (request.InvoiceId != null)
-        {
-            _query["invoiceId"] = request.InvoiceId;
-        }
-        if (request.Status != null)
-        {
-            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         if (request.PaymentType != null)
         {
@@ -109,17 +86,31 @@ public class InvoiceClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/entity/{entityId}/invoices",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindInvoiceResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<FindInvoiceResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
@@ -127,10 +118,17 @@ public class InvoiceClient
     /// </summary>
     public async Task<IEnumerable<InvoiceMetricsResponse>> MetricsAsync(
         string entityId,
-        InvoiceMetricsRequest request
+        InvoiceMetricsRequest request,
+        RequestOptions? options = null
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["payerId"] = request.PayerId;
+        _query["vendorId"] = request.VendorId;
+        _query["approverId"] = request.ApproverId;
+        _query["invoiceId"] = request.InvoiceId;
+        _query["status"] = request.Status.Select(_value => _value.ToString()).ToList();
+        _query["currency"] = request.Currency.Select(_value => _value.ToString()).ToList();
         if (request.Search != null)
         {
             _query["search"] = request.Search;
@@ -147,33 +145,13 @@ public class InvoiceClient
         {
             _query["returnByDate"] = JsonSerializer.Serialize(request.ReturnByDate.Value);
         }
-        if (request.PayerId != null)
-        {
-            _query["payerId"] = request.PayerId;
-        }
-        if (request.VendorId != null)
-        {
-            _query["vendorId"] = request.VendorId;
-        }
-        if (request.ApproverId != null)
-        {
-            _query["approverId"] = request.ApproverId;
-        }
-        if (request.InvoiceId != null)
-        {
-            _query["invoiceId"] = request.InvoiceId;
-        }
-        if (request.Status != null)
-        {
-            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
-        }
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate.Value.ToString("o0");
+            _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate.Value.ToString("o0");
+            _query["endDate"] = request.EndDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.DateType != null)
         {
@@ -181,37 +159,51 @@ public class InvoiceClient
         }
         if (request.DueDateStart != null)
         {
-            _query["dueDateStart"] = request.DueDateStart.Value.ToString("o0");
+            _query["dueDateStart"] = request.DueDateStart.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.DueDateEnd != null)
         {
-            _query["dueDateEnd"] = request.DueDateEnd.Value.ToString("o0");
+            _query["dueDateEnd"] = request.DueDateEnd.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.CreatedDateStart != null)
         {
-            _query["createdDateStart"] = request.CreatedDateStart.Value.ToString("o0");
+            _query["createdDateStart"] = request.CreatedDateStart.Value.ToString(
+                Constants.DateTimeFormat
+            );
         }
         if (request.CreatedDateEnd != null)
         {
-            _query["createdDateEnd"] = request.CreatedDateEnd.Value.ToString("o0");
-        }
-        if (request.Currency != null)
-        {
-            _query["currency"] = JsonSerializer.Serialize(request.Currency.Value);
+            _query["createdDateEnd"] = request.CreatedDateEnd.Value.ToString(
+                Constants.DateTimeFormat
+            );
         }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/entity/{entityId}/invoice-metrics",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<IEnumerable<InvoiceMetricsResponse>>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<IEnumerable<InvoiceMetricsResponse>>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

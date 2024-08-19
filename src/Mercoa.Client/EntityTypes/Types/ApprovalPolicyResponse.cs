@@ -7,20 +7,20 @@ namespace Mercoa.Client;
 public record ApprovalPolicyResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("trigger")]
-    public IEnumerable<object> Trigger { get; init; } = new List<object>();
+    public IEnumerable<object> Trigger { get; set; } = new List<object>();
 
     [JsonPropertyName("rule")]
-    public required object Rule { get; init; }
+    public required object Rule { get; set; }
 
     [JsonPropertyName("upstreamPolicyId")]
-    public required string UpstreamPolicyId { get; init; }
+    public required string UpstreamPolicyId { get; set; }
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
-    public required DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; set; }
 }

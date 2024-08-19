@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,8 +7,8 @@ namespace Mercoa.Client;
 public record InvoiceNotificationConfigurationResponse
 {
     [JsonPropertyName("type")]
-    public required NotificationType Type { get; init; }
+    public required NotificationType Type { get; set; }
 
     [JsonPropertyName("url")]
-    public required string Url { get; init; }
+    public required string Url { get; set; }
 }

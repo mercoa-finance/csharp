@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,8 +7,8 @@ namespace Mercoa.Client;
 public record BankLookupResponse
 {
     [JsonPropertyName("bankName")]
-    public required string BankName { get; init; }
+    public required string BankName { get; set; }
 
     [JsonPropertyName("bankAddress")]
-    public required BankAddress BankAddress { get; init; }
+    public required BankAddress BankAddress { get; set; }
 }

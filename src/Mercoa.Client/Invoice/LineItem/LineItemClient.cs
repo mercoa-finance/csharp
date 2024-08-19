@@ -7,11 +7,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client.Invoice.LineItem;
 
-public class LineItemClient
+public partial class LineItemClient
 {
     private RawClient _client;
 
-    public LineItemClient(RawClient client)
+    internal LineItemClient(RawClient client)
     {
         _client = client;
     }
@@ -22,22 +22,37 @@ public class LineItemClient
     public async Task<InvoiceResponse> UpdateAsync(
         string invoiceId,
         string lineItemId,
-        InvoiceLineItemIndividualUpdateRequest request
+        InvoiceLineItemIndividualUpdateRequest request,
+        RequestOptions? options = null
     )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Put,
                 Path = $"/invoice/{invoiceId}/line-item/{lineItemId}",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<InvoiceResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<InvoiceResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

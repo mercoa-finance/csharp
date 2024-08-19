@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,11 +10,11 @@ public record ProfileResponse
     /// Will be set if the entity is a business
     /// </summary>
     [JsonPropertyName("business")]
-    public BusinessProfileResponse? Business { get; init; }
+    public BusinessProfileResponse? Business { get; set; }
 
     /// <summary>
     /// Will be set if the entity is a individual
     /// </summary>
     [JsonPropertyName("individual")]
-    public IndividualProfileResponse? Individual { get; init; }
+    public IndividualProfileResponse? Individual { get; set; }
 }

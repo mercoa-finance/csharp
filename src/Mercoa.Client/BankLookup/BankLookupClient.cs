@@ -1,17 +1,16 @@
 using System.Net.Http;
 using System.Text.Json;
-using Mercoa.Client;
 using Mercoa.Client.Core;
 
 #nullable enable
 
 namespace Mercoa.Client;
 
-public class BankLookupClient
+public partial class BankLookupClient
 {
     private RawClient _client;
 
-    public BankLookupClient(RawClient client)
+    internal BankLookupClient(RawClient client)
     {
         _client = client;
     }
@@ -19,25 +18,40 @@ public class BankLookupClient
     /// <summary>
     /// Find bank account details
     /// </summary>
-    public async Task<BankLookupResponse> FindAsync(BankLookupRequest request)
+    public async Task<BankLookupResponse> FindAsync(
+        BankLookupRequest request,
+        RequestOptions? options = null
+    )
     {
-        var _query = new Dictionary<string, object>()
-        {
-            { "routingNumber", request.RoutingNumber },
-        };
+        var _query = new Dictionary<string, object>() { };
+        _query["routingNumber"] = request.RoutingNumber;
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = "bankLookup",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<BankLookupResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<BankLookupResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

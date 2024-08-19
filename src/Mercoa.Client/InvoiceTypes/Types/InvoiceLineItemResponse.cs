@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,50 +7,50 @@ namespace Mercoa.Client;
 public record InvoiceLineItemResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     /// <summary>
     /// Total amount of line item in major units.
     /// </summary>
     [JsonPropertyName("amount")]
-    public double? Amount { get; init; }
+    public double? Amount { get; set; }
 
     [JsonPropertyName("currency")]
-    public required CurrencyCode Currency { get; init; }
+    public required CurrencyCode Currency { get; set; }
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("quantity")]
-    public double? Quantity { get; init; }
+    public double? Quantity { get; set; }
 
     /// <summary>
     /// Unit price of line item in major units.
     /// </summary>
     [JsonPropertyName("unitPrice")]
-    public double? UnitPrice { get; init; }
+    public double? UnitPrice { get; set; }
 
     [JsonPropertyName("serviceStartDate")]
-    public DateTime? ServiceStartDate { get; init; }
+    public DateTime? ServiceStartDate { get; set; }
 
     [JsonPropertyName("serviceEndDate")]
-    public DateTime? ServiceEndDate { get; init; }
+    public DateTime? ServiceEndDate { get; set; }
 
     [JsonPropertyName("metadata")]
-    public Dictionary<string, string>? Metadata { get; init; }
+    public Dictionary<string, string>? Metadata { get; set; }
 
     /// <summary>
     /// ID of general ledger account associated with this line item.
     /// </summary>
     [JsonPropertyName("glAccountId")]
-    public string? GlAccountId { get; init; }
+    public string? GlAccountId { get; set; }
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
-    public required DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; set; }
 }

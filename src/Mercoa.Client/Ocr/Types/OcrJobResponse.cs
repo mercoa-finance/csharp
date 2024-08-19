@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,11 +7,11 @@ namespace Mercoa.Client;
 public record OcrJobResponse
 {
     [JsonPropertyName("jobId")]
-    public required string JobId { get; init; }
+    public required string JobId { get; set; }
 
     [JsonPropertyName("status")]
-    public required OcrJobStatus Status { get; init; }
+    public required OcrJobStatus Status { get; set; }
 
     [JsonPropertyName("data")]
-    public OcrResponse? Data { get; init; }
+    public OcrResponse? Data { get; set; }
 }

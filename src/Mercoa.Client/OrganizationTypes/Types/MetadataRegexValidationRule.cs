@@ -10,11 +10,11 @@ public record MetadataRegexValidationRule
     /// A regular expression that the value must match.
     /// </summary>
     [JsonPropertyName("regex")]
-    public required string Regex { get; init; }
+    public required string Regex { get; set; }
 
     /// <summary>
     /// The error message to display if the value does not match the regular expression.
     /// </summary>
     [JsonPropertyName("errorMessage")]
-    public required string ErrorMessage { get; init; }
+    public required string ErrorMessage { get; set; }
 }

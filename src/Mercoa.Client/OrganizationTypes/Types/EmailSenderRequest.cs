@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,14 +7,14 @@ namespace Mercoa.Client;
 public record EmailSenderRequest
 {
     [JsonPropertyName("provider")]
-    public required EmailSenderProvider Provider { get; init; }
+    public required EmailSenderProvider Provider { get; set; }
 
     [JsonPropertyName("fromEmail")]
-    public required string FromEmail { get; init; }
+    public required string FromEmail { get; set; }
 
     [JsonPropertyName("fromName")]
-    public required string FromName { get; init; }
+    public required string FromName { get; set; }
 
     [JsonPropertyName("apiKey")]
-    public string? ApiKey { get; init; }
+    public string? ApiKey { get; set; }
 }

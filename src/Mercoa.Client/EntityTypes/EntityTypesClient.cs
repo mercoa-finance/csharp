@@ -4,11 +4,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client;
 
-public class EntityTypesClient
+public partial class EntityTypesClient
 {
     private RawClient _client;
 
-    public EntityTypesClient(RawClient client)
+    internal EntityTypesClient(RawClient client)
     {
         _client = client;
     }

@@ -10,5 +10,5 @@ public record IndividualGovernmentId
     /// Full Social Security Number. Must be in the format 123-45-6789.
     /// </summary>
     [JsonPropertyName("ssn")]
-    public required string Ssn { get; init; }
+    public required string Ssn { get; set; }
 }

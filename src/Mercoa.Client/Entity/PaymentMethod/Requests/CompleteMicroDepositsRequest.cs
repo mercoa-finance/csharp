@@ -10,5 +10,5 @@ public record CompleteMicroDepositsRequest
     /// The amounts of the micro deposits in cents
     /// </summary>
     [JsonPropertyName("amounts")]
-    public IEnumerable<int> Amounts { get; init; } = new List<int>();
+    public IEnumerable<int> Amounts { get; set; } = new List<int>();
 }

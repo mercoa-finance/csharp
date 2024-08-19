@@ -4,11 +4,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client;
 
-public class WebhooksClient
+public partial class WebhooksClient
 {
     private RawClient _client;
 
-    public WebhooksClient(RawClient client)
+    internal WebhooksClient(RawClient client)
     {
         _client = client;
     }

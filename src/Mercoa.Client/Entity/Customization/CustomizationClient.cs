@@ -7,11 +7,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client.Entity;
 
-public class CustomizationClient
+public partial class CustomizationClient
 {
     private RawClient _client;
 
-    public CustomizationClient(RawClient client)
+    internal CustomizationClient(RawClient client)
     {
         _client = client;
     }
@@ -19,21 +19,38 @@ public class CustomizationClient
     /// <summary>
     /// Get entity customization.
     /// </summary>
-    public async Task<EntityCustomizationResponse> GetAsync(string entityId)
+    public async Task<EntityCustomizationResponse> GetAsync(
+        string entityId,
+        RequestOptions? options = null
+    )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/customization"
+                Path = $"/entity/{entityId}/customization",
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<EntityCustomizationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
@@ -41,22 +58,37 @@ public class CustomizationClient
     /// </summary>
     public async Task<EntityCustomizationResponse> UpdateAsync(
         string entityId,
-        EntityCustomizationRequest request
+        EntityCustomizationRequest request,
+        RequestOptions? options = null
     )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/entity/{entityId}/customization",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityCustomizationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<EntityCustomizationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

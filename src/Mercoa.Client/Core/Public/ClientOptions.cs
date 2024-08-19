@@ -1,16 +1,16 @@
+using System;
 using System.Net.Http;
-using Mercoa.Client.Core;
 
 #nullable enable
 
-namespace Mercoa.Client.Core;
+namespace Mercoa.Client;
 
 public partial class ClientOptions
 {
     /// <summary>
     /// The Base URL for the API.
     /// </summary>
-    public string BaseUrl { get; init; } = Environments.PRODUCTION;
+    public string BaseUrl { get; init; } = MercoaEnvironment.Production;
 
     /// <summary>
     /// The http client used to make requests.
@@ -23,7 +23,7 @@ public partial class ClientOptions
     public int MaxRetries { get; init; } = 2;
 
     /// <summary>
-    /// The timeout for the request in seconds.
+    /// The timeout for the request.
     /// </summary>
-    public int TimeoutInSeconds { get; init; } = 30;
+    public TimeSpan Timeout { get; init; } = TimeSpan.FromSeconds(30);
 }

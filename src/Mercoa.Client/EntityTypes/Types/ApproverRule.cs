@@ -7,8 +7,8 @@ namespace Mercoa.Client;
 public record ApproverRule
 {
     [JsonPropertyName("numApprovers")]
-    public required int NumApprovers { get; init; }
+    public required int NumApprovers { get; set; }
 
     [JsonPropertyName("identifierList")]
-    public required object IdentifierList { get; init; }
+    public required object IdentifierList { get; set; }
 }

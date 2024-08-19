@@ -9,5 +9,5 @@ public record GetAllPaymentMethodsRequest
     /// <summary>
     /// Type of payment method to filter
     /// </summary>
-    public PaymentMethodType? Type { get; init; }
+    public IEnumerable<PaymentMethodType> Type { get; set; } = new List<PaymentMethodType>();
 }

@@ -1,4 +1,4 @@
-using Mercoa.Client;
+using System;
 using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 using Mercoa.Client.EntityGroup;
@@ -21,8 +21,9 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.5.3" },
+                { "X-Fern-SDK-Version", "0.5.4" },
             },
+            new Dictionary<string, Func<string>>() { },
             clientOptions ?? new ClientOptions()
         );
         EntityGroup = new EntityGroupClient(_client);

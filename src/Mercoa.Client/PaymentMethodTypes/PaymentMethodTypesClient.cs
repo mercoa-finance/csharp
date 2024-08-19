@@ -4,11 +4,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client;
 
-public class PaymentMethodTypesClient
+public partial class PaymentMethodTypesClient
 {
     private RawClient _client;
 
-    public PaymentMethodTypesClient(RawClient client)
+    internal PaymentMethodTypesClient(RawClient client)
     {
         _client = client;
     }

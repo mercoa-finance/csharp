@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,14 +10,14 @@ public record DocumentResponse
     /// ID of the document. If not provided, this is a dynamic document that is generated on the fly.
     /// </summary>
     [JsonPropertyName("id")]
-    public string? Id { get; init; }
+    public string? Id { get; set; }
 
     [JsonPropertyName("mimeType")]
-    public required string MimeType { get; init; }
+    public required string MimeType { get; set; }
 
     [JsonPropertyName("type")]
-    public required DocumentType Type { get; init; }
+    public required DocumentType Type { get; set; }
 
     [JsonPropertyName("uri")]
-    public required string Uri { get; init; }
+    public required string Uri { get; set; }
 }

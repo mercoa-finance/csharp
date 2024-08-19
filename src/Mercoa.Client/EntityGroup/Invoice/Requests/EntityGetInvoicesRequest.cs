@@ -9,90 +9,91 @@ public record EntityGetInvoicesRequest
     /// <summary>
     /// Return only invoices that are receivable by the entity.
     /// </summary>
-    public bool? ExcludePayables { get; init; }
+    public bool? ExcludePayables { get; set; }
 
     /// <summary>
     /// Return only invoices that are payable by the entity.
     /// </summary>
-    public bool? ExcludeReceivables { get; init; }
+    public bool? ExcludeReceivables { get; set; }
 
     /// <summary>
     /// Start date for invoice created on date filter.
     /// </summary>
-    public DateTime? StartDate { get; init; }
+    public DateTime? StartDate { get; set; }
 
     /// <summary>
     /// End date for invoice created date filter.
     /// </summary>
-    public DateTime? EndDate { get; init; }
+    public DateTime? EndDate { get; set; }
 
     /// <summary>
     /// Type of date to filter by if startDate and endDate filters are provided. Defaults to CREATED_AT.
     /// </summary>
-    public InvoiceDateFilter? DateType { get; init; }
+    public InvoiceDateFilter? DateType { get; set; }
 
     /// <summary>
     /// Field to order invoices by. Defaults to CREATED_AT.
     /// </summary>
-    public InvoiceOrderByField? OrderBy { get; init; }
+    public InvoiceOrderByField? OrderBy { get; set; }
 
     /// <summary>
     /// Direction to order invoices by. Defaults to asc.
     /// </summary>
-    public OrderDirection? OrderDirection { get; init; }
+    public OrderDirection? OrderDirection { get; set; }
 
     /// <summary>
     /// Number of invoices to return. Limit can range between 1 and 100, and the default is 10.
     /// </summary>
-    public int? Limit { get; init; }
+    public int? Limit { get; set; }
 
     /// <summary>
     /// The ID of the invoice to start after. If not provided, the first page of invoices will be returned.
     /// </summary>
-    public string? StartingAfter { get; init; }
+    public string? StartingAfter { get; set; }
 
     /// <summary>
     /// Filter invoices by metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
-    public InvoiceMetadataFilter? Metadata { get; init; }
+    public IEnumerable<InvoiceMetadataFilter> Metadata { get; set; } =
+        new List<InvoiceMetadataFilter>();
 
     /// <summary>
     /// Find invoices by vendor name, invoice number, or amount. Partial matches are supported.
     /// </summary>
-    public string? Search { get; init; }
+    public string? Search { get; set; }
 
     /// <summary>
     /// Filter invoices by payer ID.
     /// </summary>
-    public string? PayerId { get; init; }
+    public IEnumerable<string> PayerId { get; set; } = new List<string>();
 
     /// <summary>
     /// Filter invoices by vendor ID.
     /// </summary>
-    public string? VendorId { get; init; }
+    public IEnumerable<string> VendorId { get; set; } = new List<string>();
 
     /// <summary>
     /// Filter invoices by assigned approver user ID.
     /// </summary>
-    public string? ApproverId { get; init; }
+    public IEnumerable<string> ApproverId { get; set; } = new List<string>();
 
     /// <summary>
     /// Filter invoices by approver action. Needs to be used with approverId. For example, if you want to find all invoices that have been approved by a specific user, you would use approverId and approverAction=APPROVE.
     /// </summary>
-    public ApproverAction? ApproverAction { get; init; }
+    public IEnumerable<ApproverAction> ApproverAction { get; set; } = new List<ApproverAction>();
 
     /// <summary>
     /// Filter invoices by invoice ID.
     /// </summary>
-    public string? InvoiceId { get; init; }
+    public IEnumerable<string> InvoiceId { get; set; } = new List<string>();
 
     /// <summary>
     /// Invoice status to filter on.
     /// </summary>
-    public InvoiceStatus? Status { get; init; }
+    public IEnumerable<InvoiceStatus> Status { get; set; } = new List<InvoiceStatus>();
 
     /// <summary>
     /// Filter invoices by recurring status
     /// </summary>
-    public IEnumerable<PaymentType>? PaymentType { get; init; }
+    public IEnumerable<PaymentType>? PaymentType { get; set; }
 }

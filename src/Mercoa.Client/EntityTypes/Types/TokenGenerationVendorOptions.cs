@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,8 +10,8 @@ public record TokenGenerationVendorOptions
     /// If true, the user will not be able to create new vendors.
     /// </summary>
     [JsonPropertyName("disableCreation")]
-    public bool? DisableCreation { get; init; }
+    public bool? DisableCreation { get; set; }
 
     [JsonPropertyName("network")]
-    public required VendorNetwork Network { get; init; }
+    public required VendorNetwork Network { get; set; }
 }

@@ -7,5 +7,5 @@ namespace Mercoa.Client;
 public record VendorTrigger
 {
     [JsonPropertyName("vendorIds")]
-    public IEnumerable<string> VendorIds { get; init; } = new List<string>();
+    public IEnumerable<string> VendorIds { get; set; } = new List<string>();
 }

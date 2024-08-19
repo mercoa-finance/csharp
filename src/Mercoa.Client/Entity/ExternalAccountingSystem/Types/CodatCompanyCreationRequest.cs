@@ -10,5 +10,5 @@ public record CodatCompanyCreationRequest
     /// If the company already exists in Codat, provide the company ID to link the company to the entity. If the company does not exist, leave this field blank and Codat will create a new company.
     /// </summary>
     [JsonPropertyName("companyId")]
-    public string? CompanyId { get; init; }
+    public string? CompanyId { get; set; }
 }

@@ -7,8 +7,8 @@ namespace Mercoa.Client;
 public record CommentRequest
 {
     [JsonPropertyName("text")]
-    public required string Text { get; init; }
+    public required string Text { get; set; }
 
     [JsonPropertyName("userId")]
-    public string? UserId { get; init; }
+    public string? UserId { get; set; }
 }

@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,41 +7,41 @@ namespace Mercoa.Client;
 public record OrganizationResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("sandbox")]
-    public required bool Sandbox { get; init; }
+    public required bool Sandbox { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     [JsonPropertyName("logoUrl")]
-    public string? LogoUrl { get; init; }
+    public string? LogoUrl { get; set; }
 
     [JsonPropertyName("websiteUrl")]
-    public string? WebsiteUrl { get; init; }
+    public string? WebsiteUrl { get; set; }
 
     [JsonPropertyName("supportEmail")]
-    public string? SupportEmail { get; init; }
+    public string? SupportEmail { get; set; }
 
     [JsonPropertyName("paymentMethods")]
-    public PaymentMethodsResponse? PaymentMethods { get; init; }
+    public PaymentMethodsResponse? PaymentMethods { get; set; }
 
     [JsonPropertyName("emailProvider")]
-    public EmailProviderResponse? EmailProvider { get; init; }
+    public EmailProviderResponse? EmailProvider { get; set; }
 
     [JsonPropertyName("externalAccountingSystemProvider")]
-    public object? ExternalAccountingSystemProvider { get; init; }
+    public object? ExternalAccountingSystemProvider { get; set; }
 
     [JsonPropertyName("colorScheme")]
-    public ColorSchemeResponse? ColorScheme { get; init; }
+    public ColorSchemeResponse? ColorScheme { get; set; }
 
     [JsonPropertyName("payeeOnboardingOptions")]
-    public OnboardingOptionsResponse? PayeeOnboardingOptions { get; init; }
+    public OnboardingOptionsResponse? PayeeOnboardingOptions { get; set; }
 
     [JsonPropertyName("payorOnboardingOptions")]
-    public OnboardingOptionsResponse? PayorOnboardingOptions { get; init; }
+    public OnboardingOptionsResponse? PayorOnboardingOptions { get; set; }
 
     [JsonPropertyName("metadataSchema")]
-    public IEnumerable<MetadataSchema>? MetadataSchema { get; init; }
+    public IEnumerable<MetadataSchema>? MetadataSchema { get; set; }
 }

@@ -4,11 +4,11 @@ using Mercoa.Client.Core;
 
 namespace Mercoa.Client;
 
-public class EmailLogTypesClient
+public partial class EmailLogTypesClient
 {
     private RawClient _client;
 
-    public EmailLogTypesClient(RawClient client)
+    internal EmailLogTypesClient(RawClient client)
     {
         _client = client;
     }

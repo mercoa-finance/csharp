@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,24 +10,24 @@ public record EntityGroupUserResponse
     /// The ID used to identify this user in your system.
     /// </summary>
     [JsonPropertyName("foreignId")]
-    public required string ForeignId { get; init; }
+    public required string ForeignId { get; set; }
 
     [JsonPropertyName("email")]
-    public string? Email { get; init; }
+    public string? Email { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// List of roles per entity.
     /// </summary>
     [JsonPropertyName("entities")]
-    public IEnumerable<EntityGroupUserEntityResponse> Entities { get; init; } =
+    public IEnumerable<EntityGroupUserEntityResponse> Entities { get; set; } =
         new List<EntityGroupUserEntityResponse>();
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
-    public required DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; set; }
 }

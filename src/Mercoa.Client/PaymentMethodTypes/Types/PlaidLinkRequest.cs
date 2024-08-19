@@ -10,17 +10,17 @@ public record PlaidLinkRequest
     /// Plaid account ID
     /// </summary>
     [JsonPropertyName("accountId")]
-    public required string AccountId { get; init; }
+    public required string AccountId { get; set; }
 
     /// <summary>
     /// Public token received from Plaid Link. Use this if linking the account using the Plaid Link frontend component.
     /// </summary>
     [JsonPropertyName("publicToken")]
-    public string? PublicToken { get; init; }
+    public string? PublicToken { get; set; }
 
     /// <summary>
     /// Plaid access token for the account. If you already have an access token for the account (for example, you have linked the account to your app already), use this instead of publicToken.
     /// </summary>
     [JsonPropertyName("accessToken")]
-    public string? AccessToken { get; init; }
+    public string? AccessToken { get; set; }
 }

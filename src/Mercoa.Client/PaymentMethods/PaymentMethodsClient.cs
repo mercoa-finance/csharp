@@ -1,26 +1,28 @@
 using System.Net.Http;
 using System.Text.Json;
-using Mercoa.Client;
 using Mercoa.Client.Core;
 
 #nullable enable
 
 namespace Mercoa.Client;
 
-public class PaymentMethodsClient
+public partial class PaymentMethodsClient
 {
     private RawClient _client;
 
-    public PaymentMethodsClient(RawClient client)
+    internal PaymentMethodsClient(RawClient client)
     {
         _client = client;
     }
 
     public async Task<PaymentMethodWithEntityFindResponse> FindAsync(
-        FindPaymentMethodsRequest request
+        FindPaymentMethodsRequest request,
+        RequestOptions? options = null
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["type"] = request.Type.Select(_value => _value.ToString()).ToList();
+        _query["entityId"] = request.EntityId;
         if (request.Limit != null)
         {
             _query["limit"] = request.Limit.ToString();
@@ -29,27 +31,33 @@ public class PaymentMethodsClient
         {
             _query["startingAfter"] = request.StartingAfter;
         }
-        if (request.Type != null)
-        {
-            _query["type"] = JsonSerializer.Serialize(request.Type.Value);
-        }
-        if (request.EntityId != null)
-        {
-            _query["entityId"] = request.EntityId;
-        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = "paymentMethods",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<PaymentMethodWithEntityFindResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<PaymentMethodWithEntityFindResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

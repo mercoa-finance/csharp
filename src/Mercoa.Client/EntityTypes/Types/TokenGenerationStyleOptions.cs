@@ -7,5 +7,5 @@ namespace Mercoa.Client;
 public record TokenGenerationStyleOptions
 {
     [JsonPropertyName("primaryColor")]
-    public required string PrimaryColor { get; init; }
+    public required string PrimaryColor { get; set; }
 }

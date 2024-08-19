@@ -10,11 +10,11 @@ public record InvoiceFeesRequest
     /// Fee charged to the payer (C2).
     /// </summary>
     [JsonPropertyName("sourcePlatformMarkupFee")]
-    public required double SourcePlatformMarkupFee { get; init; }
+    public required double SourcePlatformMarkupFee { get; set; }
 
     /// <summary>
     /// Fee charged to the payee (C3).
     /// </summary>
     [JsonPropertyName("destinationPlatformMarkupFee")]
-    public required double DestinationPlatformMarkupFee { get; init; }
+    public required double DestinationPlatformMarkupFee { get; set; }
 }

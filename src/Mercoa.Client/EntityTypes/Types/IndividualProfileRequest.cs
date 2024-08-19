@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,20 +7,20 @@ namespace Mercoa.Client;
 public record IndividualProfileRequest
 {
     [JsonPropertyName("email")]
-    public string? Email { get; init; }
+    public string? Email { get; set; }
 
     [JsonPropertyName("name")]
-    public required FullName Name { get; init; }
+    public required FullName Name { get; set; }
 
     [JsonPropertyName("phone")]
-    public PhoneNumber? Phone { get; init; }
+    public PhoneNumber? Phone { get; set; }
 
     [JsonPropertyName("address")]
-    public Address? Address { get; init; }
+    public Address? Address { get; set; }
 
     [JsonPropertyName("birthDate")]
-    public BirthDate? BirthDate { get; init; }
+    public BirthDate? BirthDate { get; set; }
 
     [JsonPropertyName("governmentID")]
-    public IndividualGovernmentId? GovernmentId { get; init; }
+    public IndividualGovernmentId? GovernmentId { get; set; }
 }

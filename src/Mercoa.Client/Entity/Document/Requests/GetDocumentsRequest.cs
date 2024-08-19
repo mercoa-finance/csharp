@@ -9,5 +9,5 @@ public record GetDocumentsRequest
     /// <summary>
     /// Filter by document type
     /// </summary>
-    public DocumentType? Type { get; init; }
+    public IEnumerable<DocumentType> Type { get; set; } = new List<DocumentType>();
 }

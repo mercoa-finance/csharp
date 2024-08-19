@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,14 +10,14 @@ public record FindInvoiceResponse
     /// Total number of notifications for the given start and end date filters. This value is not limited by the limit parameter. It is provided so that you can determine how many pages of results are available.
     /// </summary>
     [JsonPropertyName("count")]
-    public required int Count { get; init; }
+    public required int Count { get; set; }
 
     /// <summary>
     /// True if there are more notifications available for the given start and end date filters.
     /// </summary>
     [JsonPropertyName("hasMore")]
-    public required bool HasMore { get; init; }
+    public required bool HasMore { get; set; }
 
     [JsonPropertyName("data")]
-    public IEnumerable<InvoiceResponse> Data { get; init; } = new List<InvoiceResponse>();
+    public IEnumerable<InvoiceResponse> Data { get; set; } = new List<InvoiceResponse>();
 }

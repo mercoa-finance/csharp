@@ -1,8 +1,8 @@
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Mercoa.Client;
 using Mercoa.Client.Core;
-using Mercoa.Client.Entity;
 using Mercoa.Client.Entity.EmailLog;
 using Mercoa.Client.Entity.User;
 
@@ -10,11 +10,11 @@ using Mercoa.Client.Entity.User;
 
 namespace Mercoa.Client.Entity;
 
-public class EntityClient
+public partial class EntityClient
 {
     private RawClient _client;
 
-    public EntityClient(RawClient client)
+    internal EntityClient(RawClient client)
     {
         _client = client;
         EmailLog = new EmailLogClient(_client);
@@ -58,9 +58,14 @@ public class EntityClient
     /// <summary>
     /// Search all entities with the given filters. If no filters are provided, all entities will be returned.
     /// </summary>
-    public async Task<FindEntityResponse> FindAsync(FindEntities request)
+    public async Task<FindEntityResponse> FindAsync(
+        FindEntities request,
+        RequestOptions? options = null
+    )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["foreignId"] = request.ForeignId;
+        _query["status"] = request.Status.Select(_value => _value.ToString()).ToList();
         if (request.PaymentMethods != null)
         {
             _query["paymentMethods"] = request.PaymentMethods.ToString();
@@ -68,14 +73,6 @@ public class EntityClient
         if (request.IsCustomer != null)
         {
             _query["isCustomer"] = request.IsCustomer.ToString();
-        }
-        if (request.ForeignId != null)
-        {
-            _query["foreignId"] = request.ForeignId;
-        }
-        if (request.Status != null)
-        {
-            _query["status"] = JsonSerializer.Serialize(request.Status.Value);
         }
         if (request.IsPayee != null)
         {
@@ -100,89 +97,184 @@ public class EntityClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = "entity",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindEntityResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<FindEntityResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
-    public async Task<EntityResponse> CreateAsync(EntityRequest request)
+    public async Task<EntityResponse> CreateAsync(
+        EntityRequest request,
+        RequestOptions? options = null
+    )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = "entity",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<EntityResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
-    }
 
-    public async Task<EntityResponse> GetAsync(string entityId)
-    {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.JsonApiRequest { Method = HttpMethod.Get, Path = $"entity/{entityId}" }
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
-        var responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            return JsonSerializer.Deserialize<EntityResponse>(responseBody)!;
-        }
-        throw new Exception(responseBody);
     }
 
-    public async Task<EntityResponse> UpdateAsync(string entityId, EntityUpdateRequest request)
+    public async Task<EntityResponse> GetAsync(string entityId, RequestOptions? options = null)
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
-                Method = HttpMethod.Post,
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Get,
                 Path = $"entity/{entityId}",
-                Body = request
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<EntityResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<EntityResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
+
+    public async Task<EntityResponse> UpdateAsync(
+        string entityId,
+        EntityUpdateRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Post,
+                Path = $"entity/{entityId}",
+                Body = request,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<EntityResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Will archive the entity. This action cannot be undone, and the entity will no longer be available for use. The foreignId on the entity will be cleared as well.
     /// </summary>
-    public async Task DeleteAsync(string entityId)
+    public async Task DeleteAsync(string entityId, RequestOptions? options = null)
     {
-        await _client.MakeRequestAsync(
-            new RawClient.JsonApiRequest { Method = HttpMethod.Delete, Path = $"entity/{entityId}" }
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Delete,
+                Path = $"entity/{entityId}",
+                Options = options
+            }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
     /// <summary>
     /// This endpoint is used to indicate acceptance of Mercoa's terms of service for an entity. Send a request to this endpoint only after the entity has accepted the Mercoa ToS. Entities must accept Mercoa ToS before they can be send or pay invoices using Mercoa's payment rails.
     /// </summary>
-    public async Task AcceptTermsOfServiceAsync(string entityId)
+    public async Task AcceptTermsOfServiceAsync(string entityId, RequestOptions? options = null)
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
-                Path = $"entity/{entityId}/accept-tos"
+                Path = $"entity/{entityId}/accept-tos",
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
@@ -191,14 +283,26 @@ public class EntityClient
     /// Send a request to this endpoint only after the entity has accepted the Mercoa ToS,
     /// all representatives have been added, and all required fields have been filled out.
     /// </summary>
-    public async Task InitiateKybAsync(string entityId)
+    public async Task InitiateKybAsync(string entityId, RequestOptions? options = null)
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
-                Path = $"entity/{entityId}/request-kyb"
+                Path = $"entity/{entityId}/request-kyb",
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
@@ -207,28 +311,50 @@ public class EntityClient
     ///
     /// <Warning>We recommend using [this endpoint](/api-reference/entity/user/get-token). This will enable features such as approvals and comments.</Warning>
     /// </summary>
-    public async Task<string> GetTokenAsync(string entityId, TokenGenerationOptions request)
+    public async Task<string> GetTokenAsync(
+        string entityId,
+        TokenGenerationOptions request,
+        RequestOptions? options = null
+    )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"entity/{entityId}/token",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<string>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Get a Plaid link token for an entity. This token can be used to add or update a bank account to the entity using Plaid Link.
     /// </summary>
-    public async Task<string> PlaidLinkTokenAsync(string entityId, PlaidLinkTokenRequest request)
+    public async Task<string> PlaidLinkTokenAsync(
+        string entityId,
+        PlaidLinkTokenRequest request,
+        RequestOptions? options = null
+    )
     {
         var _query = new Dictionary<string, object>() { };
         if (request.PaymentMethodId != null)
@@ -238,17 +364,31 @@ public class EntityClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"entity/{entityId}/plaidLinkToken",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<string>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
@@ -256,13 +396,12 @@ public class EntityClient
     /// </summary>
     public async Task<string> GetOnboardingLinkAsync(
         string entityId,
-        GenerateOnboardingLink request
+        GenerateOnboardingLink request,
+        RequestOptions? options = null
     )
     {
-        var _query = new Dictionary<string, object>()
-        {
-            { "type", JsonSerializer.Serialize(request.Type) },
-        };
+        var _query = new Dictionary<string, object>() { };
+        _query["type"] = JsonSerializer.Serialize(request.Type);
         if (request.ExpiresIn != null)
         {
             _query["expiresIn"] = request.ExpiresIn;
@@ -274,28 +413,44 @@ public class EntityClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"entity/{entityId}/onboarding",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<string>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<string>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Send an email with a onboarding link to the entity. The email will be sent to the email address associated with the entity.
     /// </summary>
-    public async Task SendOnboardingLinkAsync(string entityId, SendOnboardingLink request)
+    public async Task SendOnboardingLinkAsync(
+        string entityId,
+        SendOnboardingLink request,
+        RequestOptions? options = null
+    )
     {
-        var _query = new Dictionary<string, object>()
-        {
-            { "type", JsonSerializer.Serialize(request.Type) },
-        };
+        var _query = new Dictionary<string, object>() { };
+        _query["type"] = JsonSerializer.Serialize(request.Type);
         if (request.ExpiresIn != null)
         {
             _query["expiresIn"] = request.ExpiresIn;
@@ -304,13 +459,25 @@ public class EntityClient
         {
             _query["connectedEntityId"] = request.ConnectedEntityId;
         }
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"entity/{entityId}/onboarding",
-                Query = _query
+                Query = _query,
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 }

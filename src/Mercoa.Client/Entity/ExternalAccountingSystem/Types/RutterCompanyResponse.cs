@@ -7,5 +7,5 @@ namespace Mercoa.Client.Entity;
 public record RutterCompanyResponse
 {
     [JsonPropertyName("accessToken")]
-    public required string AccessToken { get; init; }
+    public required string AccessToken { get; set; }
 }

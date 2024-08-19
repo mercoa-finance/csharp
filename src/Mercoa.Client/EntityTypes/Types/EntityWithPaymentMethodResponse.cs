@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,89 +7,89 @@ namespace Mercoa.Client;
 public record EntityWithPaymentMethodResponse
 {
     [JsonPropertyName("paymentMethods")]
-    public IEnumerable<object>? PaymentMethods { get; init; }
+    public IEnumerable<object>? PaymentMethods { get; set; }
 
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("name")]
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     [JsonPropertyName("email")]
-    public required string Email { get; init; }
+    public required string Email { get; set; }
 
     /// <summary>
     /// The ID used to identify this entity in your system
     /// </summary>
     [JsonPropertyName("foreignId")]
-    public string? ForeignId { get; init; }
+    public string? ForeignId { get; set; }
 
     /// <summary>
     /// Local-part/username of the email address to which to send invoices to be added to the Invoice Inbox.
     /// </summary>
     [JsonPropertyName("emailTo")]
-    public string? EmailTo { get; init; }
+    public string? EmailTo { get; set; }
 
     /// <summary>
     /// Email inbox alias addresses. Used when forwarding emails to the emailTo address from an alias.
     /// </summary>
     [JsonPropertyName("emailToAlias")]
-    public IEnumerable<string>? EmailToAlias { get; init; }
+    public IEnumerable<string>? EmailToAlias { get; set; }
 
     /// <summary>
     /// True if this entity has a direct relationship with your organization.
     /// </summary>
     [JsonPropertyName("isCustomer")]
-    public required bool IsCustomer { get; init; }
+    public required bool IsCustomer { get; set; }
 
     [JsonPropertyName("accountType")]
-    public required AccountType AccountType { get; init; }
+    public required AccountType AccountType { get; set; }
 
     [JsonPropertyName("profile")]
-    public required ProfileResponse Profile { get; init; }
+    public required ProfileResponse Profile { get; set; }
 
     /// <summary>
     /// URL for the entity logo
     /// </summary>
     [JsonPropertyName("logo")]
-    public string? Logo { get; init; }
+    public string? Logo { get; set; }
 
     [JsonPropertyName("status")]
-    public required EntityStatus Status { get; init; }
+    public required EntityStatus Status { get; set; }
 
     /// <summary>
     /// True if this entity has accepted the terms of service.
     /// </summary>
     [JsonPropertyName("acceptedTos")]
-    public required bool AcceptedTos { get; init; }
+    public required bool AcceptedTos { get; set; }
 
     /// <summary>
     /// True if this entity can pay invoices.
     /// </summary>
     [JsonPropertyName("isPayor")]
-    public required bool IsPayor { get; init; }
+    public required bool IsPayor { get; set; }
 
     /// <summary>
     /// True if this entity can receive payments.
     /// </summary>
     [JsonPropertyName("isPayee")]
-    public required bool IsPayee { get; init; }
+    public required bool IsPayee { get; set; }
 
     /// <summary>
     /// True if this entity is available as a payor to any entity on your platform. Otherwise this entity will only be available as a payor to entities that have a direct relationship with this entity.
     /// </summary>
     [JsonPropertyName("isNetworkPayor")]
-    public required bool IsNetworkPayor { get; init; }
+    public required bool IsNetworkPayor { get; set; }
 
     /// <summary>
     /// True if this entity is available as a payee to any entity on your platform. Otherwise this entity will only be available as a payee to entities that have a direct relationship with this entity.
     /// </summary>
     [JsonPropertyName("isNetworkPayee")]
-    public required bool IsNetworkPayee { get; init; }
+    public required bool IsNetworkPayee { get; set; }
 
     [JsonPropertyName("createdAt")]
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
-    public required DateTime UpdatedAt { get; init; }
+    public required DateTime UpdatedAt { get; set; }
 }

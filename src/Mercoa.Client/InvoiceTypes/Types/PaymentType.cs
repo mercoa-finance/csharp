@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 using Mercoa.Client.Core;
 
 #nullable enable

@@ -1,18 +1,18 @@
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Mercoa.Client;
 using Mercoa.Client.Core;
-using Mercoa.Client.Entity;
 
 #nullable enable
 
 namespace Mercoa.Client.Entity;
 
-public class CounterpartyClient
+public partial class CounterpartyClient
 {
     private RawClient _client;
 
-    public CounterpartyClient(RawClient client)
+    internal CounterpartyClient(RawClient client)
     {
         _client = client;
     }
@@ -22,17 +22,16 @@ public class CounterpartyClient
     /// </summary>
     public async Task<FindCounterpartiesResponse> FindPayeesAsync(
         string entityId,
-        FindPayeeCounterpartiesRequest request
+        FindPayeeCounterpartiesRequest request,
+        RequestOptions? options = null
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["networkType"] = request.NetworkType.Select(_value => _value.ToString()).ToList();
+        _query["counterpartyId"] = request.CounterpartyId;
         if (request.Name != null)
         {
             _query["name"] = request.Name;
-        }
-        if (request.NetworkType != null)
-        {
-            _query["networkType"] = JsonSerializer.Serialize(request.NetworkType.Value);
         }
         if (request.PaymentMethods != null)
         {
@@ -41,10 +40,6 @@ public class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.CounterpartyId != null)
-        {
-            _query["counterpartyId"] = request.CounterpartyId;
         }
         if (request.Limit != null)
         {
@@ -57,17 +52,31 @@ public class CounterpartyClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/entity/{entityId}/counterparties/payees",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<FindCounterpartiesResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
@@ -75,17 +84,16 @@ public class CounterpartyClient
     /// </summary>
     public async Task<FindCounterpartiesResponse> FindPayorsAsync(
         string entityId,
-        FindPayorCounterpartiesRequest request
+        FindPayorCounterpartiesRequest request,
+        RequestOptions? options = null
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["networkType"] = request.NetworkType.Select(_value => _value.ToString()).ToList();
+        _query["counterpartyId"] = request.CounterpartyId;
         if (request.Name != null)
         {
             _query["name"] = request.Name;
-        }
-        if (request.NetworkType != null)
-        {
-            _query["networkType"] = JsonSerializer.Serialize(request.NetworkType.Value);
         }
         if (request.PaymentMethods != null)
         {
@@ -94,10 +102,6 @@ public class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.CounterpartyId != null)
-        {
-            _query["counterpartyId"] = request.CounterpartyId;
         }
         if (request.Limit != null)
         {
@@ -110,76 +114,154 @@ public class CounterpartyClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/entity/{entityId}/counterparties/payors",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindCounterpartiesResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<FindCounterpartiesResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
     /// Create association between Entity and a given list of Payees. If a Payee has previously been archived, unarchive the Payee.
     /// </summary>
-    public async Task AddPayeesAsync(string entityId, EntityAddPayeesRequest request)
+    public async Task AddPayeesAsync(
+        string entityId,
+        EntityAddPayeesRequest request,
+        RequestOptions? options = null
+    )
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/entity/{entityId}/addPayees",
-                Body = request
+                Body = request,
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
     /// <summary>
     /// Marks Payees as unsearchable by Entity via Counterparty search. Invoices associated with these Payees will still be searchable via Invoice search.
     /// </summary>
-    public async Task HidePayeesAsync(string entityId, EntityHidePayeesRequest request)
+    public async Task HidePayeesAsync(
+        string entityId,
+        EntityHidePayeesRequest request,
+        RequestOptions? options = null
+    )
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/entity/{entityId}/hidePayees",
-                Body = request
+                Body = request,
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
     /// <summary>
     /// Create association between Entity and a given list of Payors. If a Payor has previously been archived, unarchive the Payor.
     /// </summary>
-    public async Task AddPayorsAsync(string entityId, EntityAddPayorsRequest request)
+    public async Task AddPayorsAsync(
+        string entityId,
+        EntityAddPayorsRequest request,
+        RequestOptions? options = null
+    )
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/entity/{entityId}/addPayors",
-                Body = request
+                Body = request,
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 
     /// <summary>
     /// Marks Payors as unsearchable by Entity via Counterparty search. Invoices associated with these Payors will still be searchable via Invoice search.
     /// </summary>
-    public async Task HidePayorsAsync(string entityId, EntityHidePayorsRequest request)
+    public async Task HidePayorsAsync(
+        string entityId,
+        EntityHidePayorsRequest request,
+        RequestOptions? options = null
+    )
     {
-        await _client.MakeRequestAsync(
+        var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Post,
                 Path = $"/entity/{entityId}/hidePayors",
-                Body = request
+                Body = request,
+                Options = options
             }
+        );
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
         );
     }
 }

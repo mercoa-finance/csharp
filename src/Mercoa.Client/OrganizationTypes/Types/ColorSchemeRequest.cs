@@ -7,14 +7,14 @@ namespace Mercoa.Client;
 public record ColorSchemeRequest
 {
     [JsonPropertyName("primaryColor")]
-    public string? PrimaryColor { get; init; }
+    public string? PrimaryColor { get; set; }
 
     [JsonPropertyName("secondaryColor")]
-    public string? SecondaryColor { get; init; }
+    public string? SecondaryColor { get; set; }
 
     [JsonPropertyName("logoBackgroundColor")]
-    public string? LogoBackgroundColor { get; init; }
+    public string? LogoBackgroundColor { get; set; }
 
     [JsonPropertyName("roundedCorners")]
-    public int? RoundedCorners { get; init; }
+    public int? RoundedCorners { get; set; }
 }

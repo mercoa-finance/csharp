@@ -11,8 +11,8 @@ public record UploadDocumentRequest
     /// Base64 encoded image or PDF of document. PNG, JPG, WEBP, and PDF are supported. 10MB max.
     /// </summary>
     [JsonPropertyName("document")]
-    public required string Document { get; init; }
+    public required string Document { get; set; }
 
     [JsonPropertyName("type")]
-    public required DocumentType Type { get; init; }
+    public required DocumentType Type { get; set; }
 }

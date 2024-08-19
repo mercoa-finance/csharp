@@ -7,17 +7,17 @@ namespace Mercoa.Client;
 public record BankAddress
 {
     [JsonPropertyName("address")]
-    public required string Address { get; init; }
+    public required string Address { get; set; }
 
     [JsonPropertyName("city")]
-    public required string City { get; init; }
+    public required string City { get; set; }
 
     [JsonPropertyName("state")]
-    public required string State { get; init; }
+    public required string State { get; set; }
 
     [JsonPropertyName("postalCode")]
-    public required string PostalCode { get; init; }
+    public required string PostalCode { get; set; }
 
     [JsonPropertyName("postalCodeExtension")]
-    public required string PostalCodeExtension { get; init; }
+    public required string PostalCodeExtension { get; set; }
 }

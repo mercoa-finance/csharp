@@ -10,8 +10,8 @@ public record AddApproverRequest
     /// The identifier for the approval slot this user is assigned to.
     /// </summary>
     [JsonPropertyName("approvalSlotId")]
-    public string? ApprovalSlotId { get; init; }
+    public string? ApprovalSlotId { get; set; }
 
     [JsonPropertyName("userId")]
-    public required string UserId { get; init; }
+    public required string UserId { get; set; }
 }

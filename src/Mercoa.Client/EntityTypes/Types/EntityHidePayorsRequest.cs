@@ -10,5 +10,5 @@ public record EntityHidePayorsRequest
     /// List of payor entity IDs to hide
     /// </summary>
     [JsonPropertyName("payors")]
-    public IEnumerable<string> Payors { get; init; } = new List<string>();
+    public IEnumerable<string> Payors { get; set; } = new List<string>();
 }

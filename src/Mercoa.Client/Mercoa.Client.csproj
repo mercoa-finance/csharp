@@ -7,7 +7,7 @@
         <NuGetAudit>false</NuGetAudit>
         <LangVersion>12</LangVersion>
         <Nullable>enable</Nullable>
-        <Version>0.5.3</Version>
+        <Version>0.5.4</Version>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/mercoa-finance/csharp</PackageProjectUrl>
     </PropertyGroup>
@@ -34,7 +34,7 @@
     <ItemGroup>
         <PackageReference Include="OneOf" Version="3.0.263" />
         <PackageReference Include="OneOf.Extended" Version="3.0.263" />
-        <PackageReference Include="System.Text.Json" Version="8.0.3" />
+        <PackageReference Include="System.Text.Json" Version="8.0.4" />
     </ItemGroup>
 
     <ItemGroup>

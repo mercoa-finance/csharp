@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,35 +7,35 @@ namespace Mercoa.Client;
 public record OrganizationRequest
 {
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("logo")]
-    public string? Logo { get; init; }
+    public string? Logo { get; set; }
 
     [JsonPropertyName("websiteUrl")]
-    public string? WebsiteUrl { get; init; }
+    public string? WebsiteUrl { get; set; }
 
     [JsonPropertyName("supportEmail")]
-    public string? SupportEmail { get; init; }
+    public string? SupportEmail { get; set; }
 
     [JsonPropertyName("paymentMethods")]
-    public PaymentMethodsRequest? PaymentMethods { get; init; }
+    public PaymentMethodsRequest? PaymentMethods { get; set; }
 
     [JsonPropertyName("emailProvider")]
-    public EmailProviderRequest? EmailProvider { get; init; }
+    public EmailProviderRequest? EmailProvider { get; set; }
 
     [JsonPropertyName("externalAccountingSystemProvider")]
-    public object? ExternalAccountingSystemProvider { get; init; }
+    public object? ExternalAccountingSystemProvider { get; set; }
 
     [JsonPropertyName("colorScheme")]
-    public ColorSchemeRequest? ColorScheme { get; init; }
+    public ColorSchemeRequest? ColorScheme { get; set; }
 
     [JsonPropertyName("payeeOnboardingOptions")]
-    public OnboardingOptionsRequest? PayeeOnboardingOptions { get; init; }
+    public OnboardingOptionsRequest? PayeeOnboardingOptions { get; set; }
 
     [JsonPropertyName("payorOnboardingOptions")]
-    public OnboardingOptionsRequest? PayorOnboardingOptions { get; init; }
+    public OnboardingOptionsRequest? PayorOnboardingOptions { get; set; }
 
     [JsonPropertyName("metadataSchema")]
-    public IEnumerable<MetadataSchema>? MetadataSchema { get; init; }
+    public IEnumerable<MetadataSchema>? MetadataSchema { get; set; }
 }

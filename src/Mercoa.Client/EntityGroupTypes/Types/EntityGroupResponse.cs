@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -8,17 +7,17 @@ namespace Mercoa.Client;
 public record EntityGroupResponse
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 
     [JsonPropertyName("foreignId")]
-    public string? ForeignId { get; init; }
+    public string? ForeignId { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("emailToName")]
-    public string? EmailToName { get; init; }
+    public string? EmailToName { get; set; }
 
     [JsonPropertyName("entities")]
-    public IEnumerable<EntityResponse> Entities { get; init; } = new List<EntityResponse>();
+    public IEnumerable<EntityResponse> Entities { get; set; } = new List<EntityResponse>();
 }

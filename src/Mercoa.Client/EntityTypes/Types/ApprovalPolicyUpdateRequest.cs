@@ -7,11 +7,11 @@ namespace Mercoa.Client;
 public record ApprovalPolicyUpdateRequest
 {
     [JsonPropertyName("trigger")]
-    public IEnumerable<object>? Trigger { get; init; }
+    public IEnumerable<object>? Trigger { get; set; }
 
     [JsonPropertyName("rule")]
-    public object? Rule { get; init; }
+    public object? Rule { get; set; }
 
     [JsonPropertyName("upstreamPolicyId")]
-    public string? UpstreamPolicyId { get; init; }
+    public string? UpstreamPolicyId { get; set; }
 }

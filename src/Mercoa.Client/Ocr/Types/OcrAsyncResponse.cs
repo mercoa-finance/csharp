@@ -7,5 +7,5 @@ namespace Mercoa.Client;
 public record OcrAsyncResponse
 {
     [JsonPropertyName("jobId")]
-    public required string JobId { get; init; }
+    public required string JobId { get; set; }
 }

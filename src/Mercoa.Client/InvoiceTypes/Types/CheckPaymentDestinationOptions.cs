@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Mercoa.Client;
 
 #nullable enable
 
@@ -11,5 +10,5 @@ public record CheckPaymentDestinationOptions
     /// Delivery method for check disbursements. Defaults to MAIL.
     /// </summary>
     [JsonPropertyName("delivery")]
-    public CheckDeliveryMethod? Delivery { get; init; }
+    public CheckDeliveryMethod? Delivery { get; set; }
 }

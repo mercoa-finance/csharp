@@ -7,11 +7,11 @@ namespace Mercoa.Client;
 public record BirthDate
 {
     [JsonPropertyName("day")]
-    public string? Day { get; init; }
+    public string? Day { get; set; }
 
     [JsonPropertyName("month")]
-    public string? Month { get; init; }
+    public string? Month { get; set; }
 
     [JsonPropertyName("year")]
-    public string? Year { get; init; }
+    public string? Year { get; set; }
 }

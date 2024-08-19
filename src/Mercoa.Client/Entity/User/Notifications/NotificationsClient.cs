@@ -2,17 +2,16 @@ using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client;
 using Mercoa.Client.Core;
-using Mercoa.Client.Entity.User;
 
 #nullable enable
 
 namespace Mercoa.Client.Entity.User;
 
-public class NotificationsClient
+public partial class NotificationsClient
 {
     private RawClient _client;
 
-    public NotificationsClient(RawClient client)
+    internal NotificationsClient(RawClient client)
     {
         _client = client;
     }
@@ -20,17 +19,21 @@ public class NotificationsClient
     public async Task<FindNotificationResponse> FindAsync(
         string entityId,
         string userId,
-        EntityGetNotificationsRequest request
+        EntityGetNotificationsRequest request,
+        RequestOptions? options = null
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["notificationType"] = request
+            .NotificationType.Select(_value => _value.ToString())
+            .ToList();
         if (request.StartDate != null)
         {
-            _query["startDate"] = request.StartDate.Value.ToString("o0");
+            _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.EndDate != null)
         {
-            _query["endDate"] = request.EndDate.Value.ToString("o0");
+            _query["endDate"] = request.EndDate.Value.ToString(Constants.DateTimeFormat);
         }
         if (request.OrderDirection != null)
         {
@@ -44,10 +47,6 @@ public class NotificationsClient
         {
             _query["startingAfter"] = request.StartingAfter;
         }
-        if (request.NotificationType != null)
-        {
-            _query["notificationType"] = JsonSerializer.Serialize(request.NotificationType.Value);
-        }
         if (request.Status != null)
         {
             _query["status"] = JsonSerializer.Serialize(request.Status.Value);
@@ -55,38 +54,67 @@ public class NotificationsClient
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/entity/{entityId}/user/{userId}/notifications",
-                Query = _query
+                Query = _query,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<FindNotificationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<FindNotificationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     public async Task<NotificationResponse> GetAsync(
         string entityId,
         string userId,
-        string notificationId
+        string notificationId,
+        RequestOptions? options = null
     )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/user/{userId}/notification/{notificationId}"
+                Path = $"/entity/{entityId}/user/{userId}/notification/{notificationId}",
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<NotificationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 
     /// <summary>
@@ -96,22 +124,37 @@ public class NotificationsClient
         string entityId,
         string userId,
         string notificationId,
-        NotificationUpdateRequest request
+        NotificationUpdateRequest request,
+        RequestOptions? options = null
     )
     {
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
+                BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Put,
                 Path = $"/entity/{entityId}/user/{userId}/notification/{notificationId}",
-                Body = request
+                Body = request,
+                Options = options
             }
         );
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
         if (response.StatusCode is >= 200 and < 400)
         {
-            return JsonSerializer.Deserialize<NotificationResponse>(responseBody)!;
+            try
+            {
+                return JsonUtils.Deserialize<NotificationResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
         }
-        throw new Exception(responseBody);
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
     }
 }

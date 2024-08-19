@@ -10,8 +10,8 @@ public record ApprovalSlotAssignment
     /// The identifier for the approval slot this user is assigned to.
     /// </summary>
     [JsonPropertyName("approvalSlotId")]
-    public required string ApprovalSlotId { get; init; }
+    public required string ApprovalSlotId { get; set; }
 
     [JsonPropertyName("assignedUserId")]
-    public required string AssignedUserId { get; init; }
+    public required string AssignedUserId { get; set; }
 }
