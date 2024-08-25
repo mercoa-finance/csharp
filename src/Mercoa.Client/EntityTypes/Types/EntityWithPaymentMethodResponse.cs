@@ -87,6 +87,12 @@ public record EntityWithPaymentMethodResponse
     [JsonPropertyName("isNetworkPayee")]
     public required bool IsNetworkPayee { get; set; }
 
+    /// <summary>
+    /// Simple key/value metadata associated with this entity. For more complex metadata, use the Metadata API.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, string>? Metadata { get; set; }
+
     [JsonPropertyName("createdAt")]
     public required DateTime CreatedAt { get; set; }
 

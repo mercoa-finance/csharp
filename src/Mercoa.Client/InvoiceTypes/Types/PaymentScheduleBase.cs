@@ -18,6 +18,6 @@ public record PaymentScheduleBase
     /// When to end the payments, either a number of occurrences or a date. Defaults to never ending if not specified
     /// </summary>
     [JsonPropertyName("ends")]
-    [JsonConverter(typeof(OneOfSerializer<OneOf<int, DateOnly>>))]
-    public OneOf<int, DateOnly>? Ends { get; set; }
+    [JsonConverter(typeof(OneOfSerializer<OneOf<int, DateTime>>))]
+    public OneOf<int, DateTime>? Ends { get; set; }
 }

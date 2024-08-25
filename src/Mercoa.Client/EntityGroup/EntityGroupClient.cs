@@ -114,15 +114,22 @@ public partial class EntityGroupClient
     /// </summary>
     public async Task<EntityGroupResponse> GetAsync(
         string entityGroupId,
+        EntityGroupGetRequest request,
         RequestOptions? options = null
     )
     {
+        var _query = new Dictionary<string, object>() { };
+        if (request.EntityMetadata != null)
+        {
+            _query["entityMetadata"] = request.EntityMetadata.ToString();
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
                 BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"entityGroup/{entityGroupId}",
+                Query = _query,
                 Options = options
             }
         );
@@ -204,6 +211,47 @@ public partial class EntityGroupClient
             return;
         }
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
+
+    /// <summary>
+    /// Generate a JWT token for an entity group with the given options. This token can be used to authenticate to any entity in the entity group in the Mercoa API and iFrame.
+    ///
+    /// <Warning>We recommend using [this endpoint](/api-reference/entity-group/user/get-token). This will enable features such as approvals and comments.</Warning>
+    /// </summary>
+    public async Task<string> GetTokenAsync(
+        string entityGroupId,
+        TokenGenerationOptions request,
+        RequestOptions? options = null
+    )
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Post,
+                Path = $"entityGroup/{entityGroupId}/token",
+                Body = request,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<string>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
         throw new MercoaApiException(
             $"Error with status code {response.StatusCode}",
             response.StatusCode,

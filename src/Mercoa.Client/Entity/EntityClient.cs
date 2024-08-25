@@ -159,14 +159,24 @@ public partial class EntityClient
         );
     }
 
-    public async Task<EntityResponse> GetAsync(string entityId, RequestOptions? options = null)
+    public async Task<EntityResponse> GetAsync(
+        string entityId,
+        EntityGetRequest request,
+        RequestOptions? options = null
+    )
     {
+        var _query = new Dictionary<string, object>() { };
+        if (request.Metadata != null)
+        {
+            _query["metadata"] = request.Metadata.ToString();
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
                 BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"entity/{entityId}",
+                Query = _query,
                 Options = options
             }
         );

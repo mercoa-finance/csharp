@@ -28,7 +28,7 @@ public record FindPayeeCounterpartiesRequest
     public bool? InvoiceMetrics { get; set; }
 
     /// <summary>
-    /// Filter by counterparty ids
+    /// Filter by counterparty ids (Foreign ID is supported)
     /// </summary>
     public IEnumerable<string> CounterpartyId { get; set; } = new List<string>();
 
