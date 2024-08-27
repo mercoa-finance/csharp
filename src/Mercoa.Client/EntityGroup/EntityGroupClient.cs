@@ -258,4 +258,82 @@ public partial class EntityGroupClient
             responseBody
         );
     }
+
+    /// <summary>
+    /// Add entities to an entity group
+    /// </summary>
+    public async Task<EntityGroupResponse> AddEntitiesAsync(
+        string entityGroupId,
+        EntityGroupEntityUpdateRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Post,
+                Path = $"entityGroup/{entityGroupId}/addEntities",
+                Body = request,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<EntityGroupResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
+
+    /// <summary>
+    /// Remove entities from an entity group
+    /// </summary>
+    public async Task<EntityGroupResponse> RemoveEntitiesAsync(
+        string entityGroupId,
+        EntityGroupEntityUpdateRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Post,
+                Path = $"entityGroup/{entityGroupId}/removeEntities",
+                Body = request,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<EntityGroupResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
 }

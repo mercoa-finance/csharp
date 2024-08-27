@@ -60,6 +60,9 @@ public record InvoiceRequestBase
     [JsonPropertyName("serviceEndDate")]
     public DateTime? ServiceEndDate { get; set; }
 
+    /// <summary>
+    /// ID or foreign ID of the payer of this invoice.
+    /// </summary>
     [JsonPropertyName("payerId")]
     public string? PayerId { get; set; }
 
@@ -69,6 +72,9 @@ public record InvoiceRequestBase
     [JsonPropertyName("paymentSourceId")]
     public string? PaymentSourceId { get; set; }
 
+    /// <summary>
+    /// ID or foreign ID of the vendor of this invoice.
+    /// </summary>
     [JsonPropertyName("vendorId")]
     public string? VendorId { get; set; }
 

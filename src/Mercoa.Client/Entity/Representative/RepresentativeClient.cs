@@ -125,6 +125,43 @@ public partial class RepresentativeClient
         );
     }
 
+    public async Task<RepresentativeResponse> UpdateAsync(
+        string entityId,
+        string representativeId,
+        RepresentativeRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Post,
+                Path = $"/entity/{entityId}/representative/{representativeId}",
+                Body = request,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<RepresentativeResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
+
     public async Task DeleteAsync(
         string entityId,
         string representativeId,

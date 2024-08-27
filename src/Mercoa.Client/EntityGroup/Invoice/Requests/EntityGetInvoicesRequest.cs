@@ -63,12 +63,12 @@ public record EntityGetInvoicesRequest
     public string? Search { get; set; }
 
     /// <summary>
-    /// Filter invoices by payer ID.
+    /// Filter invoices by payer ID or payer foreign ID.
     /// </summary>
     public IEnumerable<string> PayerId { get; set; } = new List<string>();
 
     /// <summary>
-    /// Filter invoices by vendor ID.
+    /// Filter invoices by vendor ID or vendor foreign ID.
     /// </summary>
     public IEnumerable<string> VendorId { get; set; } = new List<string>();
 

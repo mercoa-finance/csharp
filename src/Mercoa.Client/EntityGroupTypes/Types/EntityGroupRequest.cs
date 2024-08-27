@@ -6,9 +6,6 @@ namespace Mercoa.Client;
 
 public record EntityGroupRequest
 {
-    [JsonPropertyName("entityIds")]
-    public IEnumerable<string>? EntityIds { get; set; }
-
     [JsonPropertyName("foreignId")]
     public string? ForeignId { get; set; }
 
@@ -17,4 +14,10 @@ public record EntityGroupRequest
 
     [JsonPropertyName("emailToName")]
     public string? EmailToName { get; set; }
+
+    /// <summary>
+    /// List of entity IDs or foreign IDs
+    /// </summary>
+    [JsonPropertyName("entityIds")]
+    public IEnumerable<string>? EntityIds { get; set; }
 }

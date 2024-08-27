@@ -10,7 +10,7 @@ public record InvoiceUpdateRequest
     public IEnumerable<InvoiceLineItemUpdateRequest>? LineItems { get; set; }
 
     /// <summary>
-    /// ID of entity who created this invoice. If creating a payable invoice (AP), this must be the same as the payerId. If creating a receivable invoice (AR), this must be the same as the vendorId.
+    /// ID or foreign ID of entity who created this invoice. If creating a payable invoice (AP), this must be the same as the payerId. If creating a receivable invoice (AR), this must be the same as the vendorId.
     /// </summary>
     [JsonPropertyName("creatorEntityId")]
     public string? CreatorEntityId { get; set; }
@@ -69,6 +69,9 @@ public record InvoiceUpdateRequest
     [JsonPropertyName("serviceEndDate")]
     public DateTime? ServiceEndDate { get; set; }
 
+    /// <summary>
+    /// ID or foreign ID of the payer of this invoice.
+    /// </summary>
     [JsonPropertyName("payerId")]
     public string? PayerId { get; set; }
 
@@ -78,6 +81,9 @@ public record InvoiceUpdateRequest
     [JsonPropertyName("paymentSourceId")]
     public string? PaymentSourceId { get; set; }
 
+    /// <summary>
+    /// ID or foreign ID of the vendor of this invoice.
+    /// </summary>
     [JsonPropertyName("vendorId")]
     public string? VendorId { get; set; }
 

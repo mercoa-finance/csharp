@@ -7,7 +7,7 @@ namespace Mercoa.Client;
 public record EntityAddPayeesRequest
 {
     /// <summary>
-    /// List of payee entity IDs to associate with the entity
+    /// List of payee entity IDs or foreign IDs to associate with the entity
     /// </summary>
     [JsonPropertyName("payees")]
     public IEnumerable<string> Payees { get; set; } = new List<string>();

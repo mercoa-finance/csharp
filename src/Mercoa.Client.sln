@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{3976D2E3-8742-4759-9486-C7444EFF855B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{E121585F-8949-47CD-A5A4-2A0DCA76FAAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{9059673F-AF0B-4C37-9543-9C43F5221919}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{B2374B5C-F4A2-40CF-BC51-2442E2608E0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3976D2E3-8742-4759-9486-C7444EFF855B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3976D2E3-8742-4759-9486-C7444EFF855B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3976D2E3-8742-4759-9486-C7444EFF855B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3976D2E3-8742-4759-9486-C7444EFF855B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9059673F-AF0B-4C37-9543-9C43F5221919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9059673F-AF0B-4C37-9543-9C43F5221919}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9059673F-AF0B-4C37-9543-9C43F5221919}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9059673F-AF0B-4C37-9543-9C43F5221919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E121585F-8949-47CD-A5A4-2A0DCA76FAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E121585F-8949-47CD-A5A4-2A0DCA76FAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E121585F-8949-47CD-A5A4-2A0DCA76FAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E121585F-8949-47CD-A5A4-2A0DCA76FAAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2374B5C-F4A2-40CF-BC51-2442E2608E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2374B5C-F4A2-40CF-BC51-2442E2608E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2374B5C-F4A2-40CF-BC51-2442E2608E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2374B5C-F4A2-40CF-BC51-2442E2608E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
