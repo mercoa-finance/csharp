@@ -128,7 +128,7 @@ public partial class RepresentativeClient
     public async Task<RepresentativeResponse> UpdateAsync(
         string entityId,
         string representativeId,
-        RepresentativeRequest request,
+        RepresentativeUpdateRequest request,
         RequestOptions? options = null
     )
     {

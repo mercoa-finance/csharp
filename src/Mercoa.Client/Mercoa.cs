@@ -21,7 +21,7 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.5.6" },
+                { "X-Fern-SDK-Version", "0.5.7" },
             },
             new Dictionary<string, Func<string>>() { },
             clientOptions ?? new ClientOptions()

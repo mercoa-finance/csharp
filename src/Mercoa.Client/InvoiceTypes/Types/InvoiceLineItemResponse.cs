@@ -33,6 +33,9 @@ public record InvoiceLineItemResponse
     [JsonPropertyName("unitPrice")]
     public double? UnitPrice { get; set; }
 
+    [JsonPropertyName("category")]
+    public required InvoiceLineItemCategory Category { get; set; }
+
     [JsonPropertyName("serviceStartDate")]
     public DateTime? ServiceStartDate { get; set; }
 

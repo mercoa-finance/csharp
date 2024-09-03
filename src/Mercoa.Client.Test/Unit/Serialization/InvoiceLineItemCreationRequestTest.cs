@@ -24,6 +24,7 @@ public class InvoiceLineItemCreationRequestTest
   ""name"": ""Product A"",
   ""quantity"": 1,
   ""unitPrice"": 100,
+  ""category"": ""EXPENSE"",
   ""serviceStartDate"": ""2021-01-01T00:00:00Z"",
   ""serviceEndDate"": ""2021-01-31T00:00:00Z"",
   ""metadata"": {
