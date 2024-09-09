@@ -16,6 +16,12 @@ public record EntityGroupRequest
     public string? EmailToName { get; set; }
 
     /// <summary>
+    /// Metadata key/value pairs to associate with this group. Will overwrite existing metadata.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, string>? Metadata { get; set; }
+
+    /// <summary>
     /// List of entity IDs or foreign IDs
     /// </summary>
     [JsonPropertyName("entityIds")]

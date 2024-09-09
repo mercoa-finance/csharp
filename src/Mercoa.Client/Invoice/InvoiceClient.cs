@@ -249,4 +249,52 @@ public partial class InvoiceClient
             responseBody
         );
     }
+
+    /// <summary>
+    /// Get all events for an invoice
+    /// </summary>
+    public async Task<InvoiceEventsResponse> EventsAsync(
+        string invoiceId,
+        InvoiceInvoiceGetEventsRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var _query = new Dictionary<string, object>() { };
+        if (request.StartDate != null)
+        {
+            _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
+        }
+        if (request.EndDate != null)
+        {
+            _query["endDate"] = request.EndDate.Value.ToString(Constants.DateTimeFormat);
+        }
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Get,
+                Path = $"invoice/{invoiceId}/events",
+                Query = _query,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<InvoiceEventsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
 }

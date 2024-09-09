@@ -20,4 +20,7 @@ public record EntityGroupResponse
 
     [JsonPropertyName("entities")]
     public IEnumerable<EntityResponse> Entities { get; set; } = new List<EntityResponse>();
+
+    [JsonPropertyName("metadata")]
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }

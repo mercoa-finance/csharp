@@ -33,6 +33,11 @@ public record FindPayeeCounterpartiesRequest
     public IEnumerable<string> CounterpartyId { get; set; } = new List<string>();
 
     /// <summary>
+    /// If true, will return simple key/value metadata for the counterparties.
+    /// </summary>
+    public bool? ReturnMetadata { get; set; }
+
+    /// <summary>
     /// Number of counterparties to return. Limit can range between 1 and 100, and the default is 10.
     /// </summary>
     public int? Limit { get; set; }

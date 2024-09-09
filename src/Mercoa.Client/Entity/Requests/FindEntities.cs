@@ -41,6 +41,11 @@ public record FindEntities
     public string? Name { get; set; }
 
     /// <summary>
+    /// If true, will return simple key/value metadata for the entity. For more complex metadata, use the Metadata API.
+    /// </summary>
+    public bool? ReturnMetadata { get; set; }
+
+    /// <summary>
     /// Number of entities to return. Limit can range between 1 and 100, and the default is 10.
     /// </summary>
     public int? Limit { get; set; }

@@ -9,11 +9,17 @@ public record RepresentativeRequest
     [JsonPropertyName("name")]
     public required FullName Name { get; set; }
 
+    /// <summary>
+    /// Either phone or email is required.
+    /// </summary>
     [JsonPropertyName("phone")]
-    public required PhoneNumber Phone { get; set; }
+    public PhoneNumber? Phone { get; set; }
 
+    /// <summary>
+    /// Either phone or email is required.
+    /// </summary>
     [JsonPropertyName("email")]
-    public required string Email { get; set; }
+    public string? Email { get; set; }
 
     [JsonPropertyName("address")]
     public required Address Address { get; set; }

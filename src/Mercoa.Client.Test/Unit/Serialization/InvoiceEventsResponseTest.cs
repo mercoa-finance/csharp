@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class EntityGroupFindResponseTest
+public class InvoiceEventsResponseTest
 {
     [Test]
     public void TestSerialization()
@@ -18,19 +18,17 @@ public class EntityGroupFindResponseTest
         var inputJson =
             @"
         {
-  ""count"": 3,
-  ""hasMore"": false,
   ""data"": [
     {
-      ""id"": ""entg_a3582b70-fd04-4888-9185-a640ae9048be"",
-      ""foreignId"": ""your-group-id"",
-      ""name"": ""AcmeConglomerate"",
-      ""emailToName"": ""acmegroup"",
-      ""metadata"": {
-        ""key1"": ""value1""
-      },
-      ""entities"": [
-        {
+      ""webhookIds"": [
+        ""webhook_12345""
+      ],
+      ""userId"": ""user_e24fc81c-c5ee-47e8-af42-4fe29d895506"",
+      ""data"": {
+        ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+        ""status"": ""DRAFT"",
+        ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
+        ""payer"": {
           ""id"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
           ""foreignId"": ""MY-DB-ID-12345"",
           ""name"": ""Acme Inc."",
@@ -65,36 +63,52 @@ public class EntityGroupFindResponseTest
               ""taxIDProvided"": true,
               ""ownersProvided"": true
             }
-          }
-        },
-        {
-          ""id"": ""ent_21661ac1-a2a8-4465-a6c0-64474ba8181d"",
-          ""foreignId"": ""MY-DB-ID-90909"",
-          ""name"": ""Big Box Store"",
-          ""email"": ""vendor@bigboxstore.com"",
-          ""acceptedTos"": false,
-          ""status"": ""unverified"",
-          ""isCustomer"": false,
-          ""isPayor"": false,
-          ""isPayee"": true,
-          ""isNetworkPayor"": false,
-          ""isNetworkPayee"": false,
-          ""accountType"": ""business"",
-          ""updatedAt"": ""2024-01-02T00:00:00Z"",
-          ""createdAt"": ""2024-01-01T00:00:00Z"",
-          ""profile"": {
-            ""business"": {
-              ""email"": ""vendor@bigboxstore.com"",
-              ""legalBusinessName"": ""Big Box Store"",
-              ""businessType"": ""publicCorporation"",
-              ""taxIDProvided"": false,
-              ""ownersProvided"": false
+          },
+          ""accounts"": [
+            {
+              ""accountId"": ""85866843"",
+              ""postalCode"": ""94105"",
+              ""nameOnAccount"": ""John Doe""
             }
-          }
-        }
-      ]
+          ],
+          ""paymentMethods"": [
+            {
+              ""id"": ""pm_4794d597-70dc-4fec-b6ec-c5988e759769"",
+              ""type"": ""bankAccount"",
+              ""accountName"": ""My Checking Account"",
+              ""bankName"": ""Chase"",
+              ""routingNumber"": ""12345678"",
+              ""accountNumber"": ""99988767623"",
+              ""accountType"": ""CHECKING"",
+              ""status"": ""VERIFIED"",
+              ""isDefaultSource"": true,
+              ""isDefaultDestination"": true,
+              ""supportedCurrencies"": [
+                ""USD""
+              ],
+              ""metadata"": {},
+              ""frozen"": false,
+              ""createdAt"": ""2021-01-01T00:00:00Z"",
+              ""updatedAt"": ""2021-01-01T00:00:00Z""
+            }
+          ],
+          ""counterpartyType"": [
+            ""ENTITY""
+          ]
+        },
+        ""paymentDestinationConfirmed"": true,
+        ""hasDocuments"": true,
+        ""hasSourceEmail"": true,
+        ""approvers"": [],
+        ""approvalPolicy"": [],
+        ""metadata"": {},
+        ""createdAt"": ""2021-01-01T00:00:00Z"",
+        ""updatedAt"": ""2021-01-01T00:00:00Z""
+      },
+      ""createdAt"": ""2024-01-01T00:00:00.000Z""
     }
-  ]
+  ],
+  ""count"": 1
 }
 ";
 
@@ -103,7 +117,7 @@ public class EntityGroupFindResponseTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<EntityGroupFindResponse>(
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceEventsResponse>(
             inputJson,
             serializerOptions
         );

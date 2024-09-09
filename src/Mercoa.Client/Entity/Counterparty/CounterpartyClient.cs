@@ -41,6 +41,10 @@ public partial class CounterpartyClient
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
         }
+        if (request.ReturnMetadata != null)
+        {
+            _query["returnMetadata"] = request.ReturnMetadata.ToString();
+        }
         if (request.Limit != null)
         {
             _query["limit"] = request.Limit.ToString();
@@ -102,6 +106,10 @@ public partial class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
+        }
+        if (request.ReturnMetadata != null)
+        {
+            _query["returnMetadata"] = request.ReturnMetadata.ToString();
         }
         if (request.Limit != null)
         {

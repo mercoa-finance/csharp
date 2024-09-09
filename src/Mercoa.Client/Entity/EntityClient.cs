@@ -86,6 +86,10 @@ public partial class EntityClient
         {
             _query["name"] = request.Name;
         }
+        if (request.ReturnMetadata != null)
+        {
+            _query["returnMetadata"] = request.ReturnMetadata.ToString();
+        }
         if (request.Limit != null)
         {
             _query["limit"] = request.Limit.ToString();
@@ -166,9 +170,9 @@ public partial class EntityClient
     )
     {
         var _query = new Dictionary<string, object>() { };
-        if (request.Metadata != null)
+        if (request.ReturnMetadata != null)
         {
-            _query["metadata"] = request.Metadata.ToString();
+            _query["returnMetadata"] = request.ReturnMetadata.ToString();
         }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
@@ -484,6 +488,54 @@ public partial class EntityClient
             return;
         }
         var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
+
+    /// <summary>
+    /// Get all events for an entity
+    /// </summary>
+    public async Task<EntityEventsResponse> EventsAsync(
+        string entityId,
+        EntityEntityGetEventsRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var _query = new Dictionary<string, object>() { };
+        if (request.StartDate != null)
+        {
+            _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
+        }
+        if (request.EndDate != null)
+        {
+            _query["endDate"] = request.EndDate.Value.ToString(Constants.DateTimeFormat);
+        }
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Get,
+                Path = $"entity/{entityId}/events",
+                Query = _query,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<EntityEventsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
         throw new MercoaApiException(
             $"Error with status code {response.StatusCode}",
             response.StatusCode,
