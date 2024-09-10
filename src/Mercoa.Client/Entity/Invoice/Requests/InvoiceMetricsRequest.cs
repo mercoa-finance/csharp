@@ -27,6 +27,17 @@ public record InvoiceMetricsRequest
     public InvoiceMetricsPerDateGroupBy? ReturnByDate { get; set; }
 
     /// <summary>
+    /// Return invoice metrics grouped by date. Defaults to daily.
+    /// </summary>
+    public InvoiceMetricsPerDateFrequency? ReturnByDateFrequency { get; set; }
+
+    /// <summary>
+    /// Return invoice metrics grouped by.
+    /// </summary>
+    public IEnumerable<InvoiceMetricsGroupBy> GroupBy { get; set; } =
+        new List<InvoiceMetricsGroupBy>();
+
+    /// <summary>
     /// Filter invoices by payer ID.
     /// </summary>
     public IEnumerable<string> PayerId { get; set; } = new List<string>();
@@ -65,26 +76,6 @@ public record InvoiceMetricsRequest
     /// Type of date to filter by if startDate and endDate filters are provided. Defaults to CREATED_AT.
     /// </summary>
     public InvoiceDateFilter? DateType { get; set; }
-
-    /// <summary>
-    /// DEPRECATED. Use startDate, endDate, and dateType instead. Start date for invoice dueDate filter.
-    /// </summary>
-    public DateTime? DueDateStart { get; set; }
-
-    /// <summary>
-    /// DEPRECATED. Use startDate, endDate, and dateType instead. End date for invoice dueDate filter.
-    /// </summary>
-    public DateTime? DueDateEnd { get; set; }
-
-    /// <summary>
-    /// DEPRECATED. Use startDate, endDate, and dateType instead. Start date for invoice created on date filter.
-    /// </summary>
-    public DateTime? CreatedDateStart { get; set; }
-
-    /// <summary>
-    /// DEPRECATED. Use startDate, endDate, and dateType instead. End date for invoice created date filter.
-    /// </summary>
-    public DateTime? CreatedDateEnd { get; set; }
 
     /// <summary>
     /// Currency to filter on

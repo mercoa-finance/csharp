@@ -6,6 +6,12 @@ namespace Mercoa.Client;
 
 public record InvoiceMetricsPerDateResponse
 {
+    /// <summary>
+    /// If groupBy is provided, this will be the group by value.
+    /// </summary>
+    [JsonPropertyName("group")]
+    public IEnumerable<Dictionary<string, string>>? Group { get; set; }
+
     [JsonPropertyName("date")]
     public required DateTime Date { get; set; }
 

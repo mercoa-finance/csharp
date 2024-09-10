@@ -41,7 +41,12 @@ public record FindEntities
     public string? Name { get; set; }
 
     /// <summary>
-    /// If true, will return simple key/value metadata for the entity. For more complex metadata, use the Metadata API.
+    /// Filter entities by simple key/value metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
+    /// </summary>
+    public MetadataFilter? Metadata { get; set; }
+
+    /// <summary>
+    /// If true, will return simple key/value metadata for the entities. For more complex metadata, use the Metadata API.
     /// </summary>
     public bool? ReturnMetadata { get; set; }
 

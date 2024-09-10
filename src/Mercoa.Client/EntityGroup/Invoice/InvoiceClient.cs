@@ -119,6 +119,7 @@ public partial class InvoiceClient
     )
     {
         var _query = new Dictionary<string, object>() { };
+        _query["groupBy"] = request.GroupBy.Select(_value => _value.ToString()).ToList();
         _query["payerId"] = request.PayerId;
         _query["vendorId"] = request.VendorId;
         _query["approverId"] = request.ApproverId;
@@ -141,6 +142,12 @@ public partial class InvoiceClient
         {
             _query["returnByDate"] = JsonSerializer.Serialize(request.ReturnByDate.Value);
         }
+        if (request.ReturnByDateFrequency != null)
+        {
+            _query["returnByDateFrequency"] = JsonSerializer.Serialize(
+                request.ReturnByDateFrequency.Value
+            );
+        }
         if (request.StartDate != null)
         {
             _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
@@ -152,26 +159,6 @@ public partial class InvoiceClient
         if (request.DateType != null)
         {
             _query["dateType"] = JsonSerializer.Serialize(request.DateType.Value);
-        }
-        if (request.DueDateStart != null)
-        {
-            _query["dueDateStart"] = request.DueDateStart.Value.ToString(Constants.DateTimeFormat);
-        }
-        if (request.DueDateEnd != null)
-        {
-            _query["dueDateEnd"] = request.DueDateEnd.Value.ToString(Constants.DateTimeFormat);
-        }
-        if (request.CreatedDateStart != null)
-        {
-            _query["createdDateStart"] = request.CreatedDateStart.Value.ToString(
-                Constants.DateTimeFormat
-            );
-        }
-        if (request.CreatedDateEnd != null)
-        {
-            _query["createdDateEnd"] = request.CreatedDateEnd.Value.ToString(
-                Constants.DateTimeFormat
-            );
         }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest

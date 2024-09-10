@@ -54,8 +54,7 @@ public record EntityGetInvoicesRequest
     /// <summary>
     /// Filter invoices by metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
-    public IEnumerable<InvoiceMetadataFilter> Metadata { get; set; } =
-        new List<InvoiceMetadataFilter>();
+    public IEnumerable<MetadataFilter> Metadata { get; set; } = new List<MetadataFilter>();
 
     /// <summary>
     /// Find invoices by vendor name, invoice number, or amount. Partial matches are supported.

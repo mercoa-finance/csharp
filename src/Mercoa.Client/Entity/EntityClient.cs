@@ -86,6 +86,10 @@ public partial class EntityClient
         {
             _query["name"] = request.Name;
         }
+        if (request.Metadata != null)
+        {
+            _query["metadata"] = request.Metadata.ToString();
+        }
         if (request.ReturnMetadata != null)
         {
             _query["returnMetadata"] = request.ReturnMetadata.ToString();

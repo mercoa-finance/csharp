@@ -54,14 +54,12 @@ public record EntityGetInvoicesRequest
     /// <summary>
     /// Filter invoices by metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
-    public IEnumerable<InvoiceMetadataFilter> Metadata { get; set; } =
-        new List<InvoiceMetadataFilter>();
+    public IEnumerable<MetadataFilter> Metadata { get; set; } = new List<MetadataFilter>();
 
     /// <summary>
     /// Filter invoices by line item metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
-    public IEnumerable<InvoiceMetadataFilter> LineItemMetadata { get; set; } =
-        new List<InvoiceMetadataFilter>();
+    public IEnumerable<MetadataFilter> LineItemMetadata { get; set; } = new List<MetadataFilter>();
 
     /// <summary>
     /// Filter invoices by line item GL account ID. Each filter will be applied as an OR condition. Duplicate keys will be ignored.
