@@ -29,6 +29,7 @@ public partial class CounterpartyClient
         var _query = new Dictionary<string, object>() { };
         _query["networkType"] = request.NetworkType.Select(_value => _value.ToString()).ToList();
         _query["counterpartyId"] = request.CounterpartyId;
+        _query["metadata"] = request.Metadata.Select(_value => _value.ToString()).ToList();
         if (request.Name != null)
         {
             _query["name"] = request.Name;
@@ -40,10 +41,6 @@ public partial class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.Metadata != null)
-        {
-            _query["metadata"] = request.Metadata.ToString();
         }
         if (request.ReturnMetadata != null)
         {
@@ -99,6 +96,7 @@ public partial class CounterpartyClient
         var _query = new Dictionary<string, object>() { };
         _query["networkType"] = request.NetworkType.Select(_value => _value.ToString()).ToList();
         _query["counterpartyId"] = request.CounterpartyId;
+        _query["metadata"] = request.Metadata.Select(_value => _value.ToString()).ToList();
         if (request.Name != null)
         {
             _query["name"] = request.Name;
@@ -110,10 +108,6 @@ public partial class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.Metadata != null)
-        {
-            _query["metadata"] = request.Metadata.ToString();
         }
         if (request.ReturnMetadata != null)
         {

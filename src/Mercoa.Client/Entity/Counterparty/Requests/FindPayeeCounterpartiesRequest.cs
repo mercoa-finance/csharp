@@ -35,7 +35,7 @@ public record FindPayeeCounterpartiesRequest
     /// <summary>
     /// Filter counterparties by simple key/value metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.
     /// </summary>
-    public MetadataFilter? Metadata { get; set; }
+    public IEnumerable<MetadataFilter> Metadata { get; set; } = new List<MetadataFilter>();
 
     /// <summary>
     /// If true, will return simple key/value metadata for the counterparties. For more complex metadata, use the Metadata API.
