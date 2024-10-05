@@ -4,16 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public record InvoiceCreationRequest
+public record InvoiceCreationWithEntityGroupRequest
 {
     [JsonPropertyName("lineItems")]
     public IEnumerable<InvoiceLineItemCreationRequest>? LineItems { get; set; }
 
     /// <summary>
-    /// ID of entity who created this invoice.
+    /// ID of the entity group who created this invoice.
     /// </summary>
-    [JsonPropertyName("creatorEntityId")]
-    public required string CreatorEntityId { get; set; }
+    [JsonPropertyName("creatorEntityGroupId")]
+    public required string CreatorEntityGroupId { get; set; }
 
     [JsonPropertyName("status")]
     public InvoiceStatus? Status { get; set; }

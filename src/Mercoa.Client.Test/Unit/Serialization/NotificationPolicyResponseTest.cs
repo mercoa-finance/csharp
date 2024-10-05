@@ -23,6 +23,9 @@ public class NotificationPolicyResponseTest
     ""admin"",
     ""approver""
   ],
+  ""additionalUsers"": [
+    ""user_1234""
+  ],
   ""type"": ""INVOICE_APPROVAL_NEEDED"",
   ""notifyPayeeCounterparty"": true,
   ""notifyPayorCounterparty"": true
@@ -55,6 +58,7 @@ public class NotificationPolicyResponseTest
     ""admin"",
     ""bookkeeper""
   ],
+  ""additionalUsers"": [],
   ""type"": ""INVOICE_APPROVED"",
   ""notifyPayeeCounterparty"": false,
   ""notifyPayorCounterparty"": true
@@ -84,6 +88,9 @@ public class NotificationPolicyResponseTest
         {
   ""disabled"": true,
   ""additionalRoles"": [],
+  ""additionalUsers"": [
+    ""user_1234""
+  ],
   ""type"": ""INVOICE_APPROVED"",
   ""notifyPayeeCounterparty"": true,
   ""notifyPayorCounterparty"": false

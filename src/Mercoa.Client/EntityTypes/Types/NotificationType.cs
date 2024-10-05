@@ -37,5 +37,8 @@ public enum NotificationType
     InvoiceEmailed,
 
     [EnumMember(Value = "INVOICE_FAILED")]
-    InvoiceFailed
+    InvoiceFailed,
+
+    [EnumMember(Value = "COUNTERPARTY_ONBOARDING_COMPLETED")]
+    CounterpartyOnboardingCompleted
 }

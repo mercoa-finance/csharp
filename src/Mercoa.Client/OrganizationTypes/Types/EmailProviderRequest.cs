@@ -11,4 +11,7 @@ public record EmailProviderRequest
 
     [JsonPropertyName("inboxDomain")]
     public required string InboxDomain { get; set; }
+
+    [JsonPropertyName("alternativeInboxDomains")]
+    public IEnumerable<string>? AlternativeInboxDomains { get; set; }
 }

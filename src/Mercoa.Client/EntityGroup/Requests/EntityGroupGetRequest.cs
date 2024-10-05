@@ -3,7 +3,7 @@ namespace Mercoa.Client.EntityGroup;
 public record EntityGroupGetRequest
 {
     /// <summary>
-    /// If true, will return simple key/value metadata for entities in the group. For more complex metadata, use the Metadata API.
+    /// Return simple key/value metadata for the specified keys for the entities in the group. For more complex metadata, use the Metadata API.
     /// </summary>
-    public bool? ReturnEntityMetadata { get; set; }
+    public IEnumerable<string> ReturnEntityMetadata { get; set; } = new List<string>();
 }

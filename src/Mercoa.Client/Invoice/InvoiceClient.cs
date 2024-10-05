@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Mercoa.Client;
 using Mercoa.Client.Core;
 using Mercoa.Client.Invoice.LineItem;
+using OneOf;
 
 #nullable enable
 
@@ -123,7 +124,7 @@ public partial class InvoiceClient
     }
 
     public async Task<InvoiceResponse> CreateAsync(
-        InvoiceCreationRequest request,
+        OneOf<InvoiceCreationWithEntityRequest, InvoiceCreationWithEntityGroupRequest> request,
         RequestOptions? options = null
     )
     {

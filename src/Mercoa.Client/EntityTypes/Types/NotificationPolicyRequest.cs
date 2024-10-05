@@ -19,6 +19,12 @@ public record NotificationPolicyRequest
     public IEnumerable<string>? AdditionalRoles { get; set; }
 
     /// <summary>
+    /// List of user IDs that should receive notifications in addition to the default users for this notification type
+    /// </summary>
+    [JsonPropertyName("additionalUsers")]
+    public IEnumerable<string>? AdditionalUsers { get; set; }
+
+    /// <summary>
     /// Set to true if the selected notification type should be sent to the counterparty if this is a payable invoice.
     /// </summary>
     [JsonPropertyName("notifyPayeeCounterparty")]

@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Mercoa.Client.Core;
+using OneOf;
 
 #nullable enable
 
@@ -31,7 +33,16 @@ public record BankAccountRequest
     /// If provided, will link a bank account using Plaid Link
     /// </summary>
     [JsonPropertyName("plaid")]
-    public PlaidLinkRequest? Plaid { get; set; }
+    [JsonConverter(
+        typeof(OneOfSerializer<
+            OneOf<PlaidProcessorTokenRequest, PlaidPublicTokenRequest, PlaidAccessTokenRequest>
+        >)
+    )]
+    public OneOf<
+        PlaidProcessorTokenRequest,
+        PlaidPublicTokenRequest,
+        PlaidAccessTokenRequest
+    >? Plaid { get; set; }
 
     /// <summary>
     /// If this bank account supports check printing, use this to enable check printing and set the check options. Checks will be printed directly from the bank account.

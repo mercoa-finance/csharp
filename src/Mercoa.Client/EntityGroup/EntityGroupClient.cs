@@ -119,10 +119,7 @@ public partial class EntityGroupClient
     )
     {
         var _query = new Dictionary<string, object>() { };
-        if (request.ReturnEntityMetadata != null)
-        {
-            _query["returnEntityMetadata"] = request.ReturnEntityMetadata.ToString();
-        }
+        _query["returnEntityMetadata"] = request.ReturnEntityMetadata;
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {

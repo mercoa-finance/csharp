@@ -46,9 +46,9 @@ public record FindEntities
     public MetadataFilter? Metadata { get; set; }
 
     /// <summary>
-    /// If true, will return simple key/value metadata for the entities. For more complex metadata, use the Metadata API.
+    /// Return simple key/value metadata for the specified keys for the entities. For more complex metadata, use the Metadata API.
     /// </summary>
-    public bool? ReturnMetadata { get; set; }
+    public IEnumerable<string> ReturnMetadata { get; set; } = new List<string>();
 
     /// <summary>
     /// Number of entities to return. Limit can range between 1 and 100, and the default is 10.

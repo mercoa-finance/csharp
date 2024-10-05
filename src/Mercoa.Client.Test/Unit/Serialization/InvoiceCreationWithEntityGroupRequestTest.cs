@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class InvoiceCreationRequestTest
+public class InvoiceCreationWithEntityGroupRequestTest
 {
     [Test]
     public void TestSerialization_1()
@@ -51,7 +51,7 @@ public class InvoiceCreationRequestTest
       ""glAccountId"": ""600394""
     }
   ],
-  ""creatorEntityId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
+  ""creatorEntityGroupId"": ""entg_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""creatorUserId"": ""user_e24fc81c-c5ee-47e8-af42-4fe29d895506""
 }
 ";
@@ -61,7 +61,7 @@ public class InvoiceCreationRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationWithEntityGroupRequest>(
             inputJson,
             serializerOptions
         );
@@ -79,7 +79,7 @@ public class InvoiceCreationRequestTest
         {
   ""status"": ""DRAFT"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
-  ""creatorEntityId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c""
+  ""creatorEntityGroupId"": ""entg_8545a84e-a45f-41bf-bdf1-33b42a55812c""
 }
 ";
 
@@ -88,7 +88,7 @@ public class InvoiceCreationRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationWithEntityGroupRequest>(
             inputJson,
             serializerOptions
         );
@@ -106,7 +106,7 @@ public class InvoiceCreationRequestTest
         {
   ""status"": ""NEW"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
-  ""creatorEntityId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
+  ""creatorEntityGroupId"": ""entg_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""vendorId"": ""ent_21661ac1-a2a8-4465-a6c0-64474ba8181d"",
   ""currency"": ""USD"",
   ""amount"": 100,
@@ -121,7 +121,7 @@ public class InvoiceCreationRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationWithEntityGroupRequest>(
             inputJson,
             serializerOptions
         );
@@ -139,7 +139,7 @@ public class InvoiceCreationRequestTest
         {
   ""status"": ""SCHEDULED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
-  ""creatorEntityId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
+  ""creatorEntityGroupId"": ""entg_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""vendorId"": ""ent_21661ac1-a2a8-4465-a6c0-64474ba8181d"",
   ""currency"": ""USD"",
   ""amount"": 100,
@@ -156,7 +156,7 @@ public class InvoiceCreationRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceCreationWithEntityGroupRequest>(
             inputJson,
             serializerOptions
         );

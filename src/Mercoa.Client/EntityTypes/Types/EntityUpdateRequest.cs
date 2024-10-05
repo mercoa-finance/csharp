@@ -71,4 +71,10 @@ public record EntityUpdateRequest
     /// </summary>
     [JsonPropertyName("metadata")]
     public Dictionary<string, string>? Metadata { get; set; }
+
+    /// <summary>
+    /// The ID of the entity that this entity is connected to. This is used to trigger notifications to the connected entity when this entity is updated.
+    /// </summary>
+    [JsonPropertyName("connectedEntityId")]
+    public string? ConnectedEntityId { get; set; }
 }

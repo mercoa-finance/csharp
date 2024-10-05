@@ -23,6 +23,7 @@ public partial class EntityClient
         Counterparty = new CounterpartyClient(_client);
         Customization = new CustomizationClient(_client);
         Document = new DocumentClient(_client);
+        EmailTemplate = new EmailTemplateClient(_client);
         ExternalAccountingSystem = new ExternalAccountingSystemClient(_client);
         Invoice = new InvoiceClient(_client);
         Metadata = new MetadataClient(_client);
@@ -42,6 +43,8 @@ public partial class EntityClient
     public CustomizationClient Customization { get; }
 
     public DocumentClient Document { get; }
+
+    public EmailTemplateClient EmailTemplate { get; }
 
     public ExternalAccountingSystemClient ExternalAccountingSystem { get; }
 
@@ -66,6 +69,7 @@ public partial class EntityClient
         var _query = new Dictionary<string, object>() { };
         _query["foreignId"] = request.ForeignId;
         _query["status"] = request.Status.Select(_value => _value.ToString()).ToList();
+        _query["returnMetadata"] = request.ReturnMetadata;
         if (request.PaymentMethods != null)
         {
             _query["paymentMethods"] = request.PaymentMethods.ToString();
@@ -89,10 +93,6 @@ public partial class EntityClient
         if (request.Metadata != null)
         {
             _query["metadata"] = request.Metadata.ToString();
-        }
-        if (request.ReturnMetadata != null)
-        {
-            _query["returnMetadata"] = request.ReturnMetadata.ToString();
         }
         if (request.Limit != null)
         {
@@ -174,10 +174,7 @@ public partial class EntityClient
     )
     {
         var _query = new Dictionary<string, object>() { };
-        if (request.ReturnMetadata != null)
-        {
-            _query["returnMetadata"] = request.ReturnMetadata.ToString();
-        }
+        _query["returnMetadata"] = request.ReturnMetadata;
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {

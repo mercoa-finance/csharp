@@ -30,6 +30,7 @@ public partial class CounterpartyClient
         _query["networkType"] = request.NetworkType.Select(_value => _value.ToString()).ToList();
         _query["counterpartyId"] = request.CounterpartyId;
         _query["metadata"] = request.Metadata.Select(_value => _value.ToString()).ToList();
+        _query["returnMetadata"] = request.ReturnMetadata;
         if (request.Name != null)
         {
             _query["name"] = request.Name;
@@ -41,10 +42,6 @@ public partial class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.ReturnMetadata != null)
-        {
-            _query["returnMetadata"] = request.ReturnMetadata.ToString();
         }
         if (request.Limit != null)
         {
@@ -97,6 +94,7 @@ public partial class CounterpartyClient
         _query["networkType"] = request.NetworkType.Select(_value => _value.ToString()).ToList();
         _query["counterpartyId"] = request.CounterpartyId;
         _query["metadata"] = request.Metadata.Select(_value => _value.ToString()).ToList();
+        _query["returnMetadata"] = request.ReturnMetadata;
         if (request.Name != null)
         {
             _query["name"] = request.Name;
@@ -108,10 +106,6 @@ public partial class CounterpartyClient
         if (request.InvoiceMetrics != null)
         {
             _query["invoiceMetrics"] = request.InvoiceMetrics.ToString();
-        }
-        if (request.ReturnMetadata != null)
-        {
-            _query["returnMetadata"] = request.ReturnMetadata.ToString();
         }
         if (request.Limit != null)
         {
