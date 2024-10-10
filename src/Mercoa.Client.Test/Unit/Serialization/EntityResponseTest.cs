@@ -50,6 +50,11 @@ public class EntityResponseTest
         ""country"": ""US""
       },
       ""taxIDProvided"": true,
+      ""taxId"": {
+        ""ein"": {
+          ""number"": ""12-3456789""
+        }
+      },
       ""ownersProvided"": true
     }
   }

@@ -75,7 +75,7 @@ public partial class EntityGroupClient
     /// Create an entity group
     /// </summary>
     public async Task<EntityGroupResponse> CreateAsync(
-        EntityGroupRequest request,
+        EntityGroupCreateRequest request,
         RequestOptions? options = null
     )
     {
@@ -155,7 +155,7 @@ public partial class EntityGroupClient
     /// </summary>
     public async Task<EntityGroupResponse> UpdateAsync(
         string entityGroupId,
-        EntityGroupRequest request,
+        EntityGroupUpdateRequest request,
         RequestOptions? options = null
     )
     {
@@ -261,7 +261,7 @@ public partial class EntityGroupClient
     /// </summary>
     public async Task<EntityGroupResponse> AddEntitiesAsync(
         string entityGroupId,
-        EntityGroupEntityUpdateRequest request,
+        EntityGroupAddEntitiesRequest request,
         RequestOptions? options = null
     )
     {
@@ -300,7 +300,7 @@ public partial class EntityGroupClient
     /// </summary>
     public async Task<EntityGroupResponse> RemoveEntitiesAsync(
         string entityGroupId,
-        EntityGroupEntityUpdateRequest request,
+        EntityGroupRemoveEntitiesRequest request,
         RequestOptions? options = null
     )
     {

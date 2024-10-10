@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class EntityGroupRequestTest
+public class EntityGroupUpdateRequestTest
 {
     [Test]
     public void TestSerialization()
@@ -20,11 +20,7 @@ public class EntityGroupRequestTest
         {
   ""foreignId"": ""your-group-id"",
   ""name"": ""AcmeConglomerate"",
-  ""emailToName"": ""acmegroup"",
-  ""entityIds"": [
-    ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
-    ""ent_21661ac1-a2a8-4465-a6c0-64474ba8181d""
-  ]
+  ""emailToName"": ""acmegroup""
 }
 ";
 
@@ -33,7 +29,7 @@ public class EntityGroupRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<EntityGroupRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<EntityGroupUpdateRequest>(
             inputJson,
             serializerOptions
         );

@@ -12,6 +12,9 @@ public record ApprovalRequest
     [JsonPropertyName("text")]
     public string? Text { get; set; }
 
+    /// <summary>
+    /// The ID or the Foreign ID of the user
+    /// </summary>
     [JsonPropertyName("userId")]
     public required string UserId { get; set; }
 }

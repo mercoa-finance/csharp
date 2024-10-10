@@ -52,7 +52,7 @@ public class EntityGroupUserEntityResponseTest
   ""roles"": [
     ""viewer""
   ],
-  ""entityId"": ""ent_574s93r-3943-fu39-g9dfr-33b42a55812c""
+  ""entityId"": ""ent_9e02a20e-7749-47de-8d8a-f8ff2859fa90""
 }
 ";
 

@@ -72,6 +72,11 @@ public class PaymentMethodWebhookTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     }
@@ -166,6 +171,11 @@ public class PaymentMethodWebhookTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     }
@@ -260,6 +270,11 @@ public class PaymentMethodWebhookTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     }

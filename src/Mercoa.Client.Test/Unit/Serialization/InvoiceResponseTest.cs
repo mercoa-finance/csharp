@@ -64,6 +64,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -371,6 +376,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -546,6 +556,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -649,6 +664,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -827,6 +847,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -1027,6 +1052,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -1227,6 +1257,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -1427,6 +1462,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -1627,6 +1667,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -1827,6 +1872,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -2027,6 +2077,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },
@@ -2227,6 +2282,11 @@ public class InvoiceResponseTest
           ""country"": ""US""
         },
         ""taxIDProvided"": true,
+        ""taxId"": {
+          ""ein"": {
+            ""number"": ""12-3456789""
+          }
+        },
         ""ownersProvided"": true
       }
     },

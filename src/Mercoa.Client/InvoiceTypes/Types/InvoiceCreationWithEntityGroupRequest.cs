@@ -130,7 +130,7 @@ public record InvoiceCreationWithEntityGroupRequest
     public string? UploadedImage { get; set; }
 
     /// <summary>
-    /// ID of entity user who created this invoice.
+    /// User ID or Foreign ID of entity user who created this invoice.
     /// </summary>
     [JsonPropertyName("creatorUserId")]
     public string? CreatorUserId { get; set; }

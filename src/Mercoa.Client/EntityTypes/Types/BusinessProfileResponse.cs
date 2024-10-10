@@ -39,6 +39,9 @@ public record BusinessProfileResponse
     [JsonPropertyName("taxIDProvided")]
     public required bool TaxIdProvided { get; set; }
 
+    [JsonPropertyName("taxId")]
+    public TaxId? TaxId { get; set; }
+
     [JsonPropertyName("industryCodes")]
     public IndustryCodes? IndustryCodes { get; set; }
 

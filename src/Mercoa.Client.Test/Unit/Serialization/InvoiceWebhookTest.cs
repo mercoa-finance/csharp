@@ -66,6 +66,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -390,6 +395,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -714,6 +724,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -1028,6 +1043,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -1146,6 +1166,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -1339,6 +1364,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -1554,6 +1584,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -1769,6 +1804,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -1984,6 +2024,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -2199,6 +2244,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -2414,6 +2464,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -2629,6 +2684,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },
@@ -2844,6 +2904,11 @@ public class InvoiceWebhookTest
             ""country"": ""US""
           },
           ""taxIDProvided"": true,
+          ""taxId"": {
+            ""ein"": {
+              ""number"": ""12-3456789""
+            }
+          },
           ""ownersProvided"": true
         }
       },

@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class EntityGroupUserResponseTest
+public class EntityGroupCreateRequestTest
 {
     [Test]
     public void TestSerialization()
@@ -18,28 +18,13 @@ public class EntityGroupUserResponseTest
         var inputJson =
             @"
         {
-  ""foreignId"": ""MY-DB-ID-12345"",
-  ""email"": ""john.doe@acme.com"",
-  ""name"": ""John Doe"",
-  ""entities"": [
-    {
-      ""id"": ""user_ec3aafc8-ea86-408a-a6c1-545497badbbb"",
-      ""roles"": [
-        ""admin"",
-        ""approver""
-      ],
-      ""entityId"": ""ent_21661ac1-a2a8-4465-a6c0-64474ba8181d""
-    },
-    {
-      ""id"": ""user_3a3aafc8-ea86-408a-a6c1-545497badbbb"",
-      ""roles"": [
-        ""viewer""
-      ],
-      ""entityId"": ""ent_9e02a20e-7749-47de-8d8a-f8ff2859fa90""
-    }
-  ],
-  ""createdAt"": ""2024-01-01T00:00:00Z"",
-  ""updatedAt"": ""2024-01-01T00:00:00Z""
+  ""foreignId"": ""your-group-id"",
+  ""name"": ""AcmeConglomerate"",
+  ""emailToName"": ""acmegroup"",
+  ""entityIds"": [
+    ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
+    ""ent_21661ac1-a2a8-4465-a6c0-64474ba8181d""
+  ]
 }
 ";
 
@@ -48,7 +33,7 @@ public class EntityGroupUserResponseTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<EntityGroupUserResponse>(
+        var deserializedObject = JsonSerializer.Deserialize<EntityGroupCreateRequest>(
             inputJson,
             serializerOptions
         );
