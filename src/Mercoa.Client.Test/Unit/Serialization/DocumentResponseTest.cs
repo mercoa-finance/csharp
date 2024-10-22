@@ -122,4 +122,31 @@ public class DocumentResponseTest
 
         JToken.Parse(inputJson).Should().BeEquivalentTo(JToken.Parse(serializedJson));
     }
+
+    [Test]
+    public void TestSerialization_5()
+    {
+        var inputJson =
+            @"
+        {
+  ""mimeType"": ""application/pdf"",
+  ""uri"": ""https://mercoa.com/pdf/not-real.pdf"",
+  ""type"": ""OTHER""
+}
+";
+
+        var serializerOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+
+        var deserializedObject = JsonSerializer.Deserialize<DocumentResponse>(
+            inputJson,
+            serializerOptions
+        );
+
+        var serializedJson = JsonSerializer.Serialize(deserializedObject, serializerOptions);
+
+        JToken.Parse(inputJson).Should().BeEquivalentTo(JToken.Parse(serializedJson));
+    }
 }

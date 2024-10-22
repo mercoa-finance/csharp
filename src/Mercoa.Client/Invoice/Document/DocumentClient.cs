@@ -22,15 +22,19 @@ public partial class DocumentClient
     /// </summary>
     public async Task<IEnumerable<DocumentResponse>> GetAllAsync(
         string invoiceId,
+        GetDocumentsRequest request,
         RequestOptions? options = null
     )
     {
+        var _query = new Dictionary<string, object>() { };
+        _query["type"] = request.Type.Select(_value => _value.ToString()).ToList();
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
                 BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/invoice/{invoiceId}/documents",
+                Query = _query,
                 Options = options
             }
         );

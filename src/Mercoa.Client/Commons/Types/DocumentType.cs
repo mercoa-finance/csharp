@@ -19,5 +19,8 @@ public enum DocumentType
     W9,
 
     [EnumMember(Value = "CHECK")]
-    Check
+    Check,
+
+    [EnumMember(Value = "OTHER")]
+    Other
 }

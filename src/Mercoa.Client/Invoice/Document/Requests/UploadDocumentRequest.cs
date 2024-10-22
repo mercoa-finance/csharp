@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Mercoa.Client;
 
 #nullable enable
 
@@ -11,4 +12,10 @@ public record UploadDocumentRequest
     /// </summary>
     [JsonPropertyName("document")]
     public required string Document { get; set; }
+
+    /// <summary>
+    /// Specify Document Type, defaults to INVOICE
+    /// </summary>
+    [JsonPropertyName("type")]
+    public DocumentType? Type { get; set; }
 }
