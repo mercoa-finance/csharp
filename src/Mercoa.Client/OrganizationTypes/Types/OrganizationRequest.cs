@@ -38,4 +38,7 @@ public record OrganizationRequest
 
     [JsonPropertyName("metadataSchema")]
     public IEnumerable<MetadataSchema>? MetadataSchema { get; set; }
+
+    [JsonPropertyName("notificationEmailTemplate")]
+    public NotificationEmailTemplateRequest? NotificationEmailTemplate { get; set; }
 }

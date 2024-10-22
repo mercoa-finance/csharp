@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class CalculatePaymentTimingRequestTest
+public class InvoiceTimingTest
 {
     [Test]
     public void TestSerialization()
@@ -18,9 +18,7 @@ public class CalculatePaymentTimingRequestTest
         var inputJson =
             @"
         {
-  ""estimatedDeductionDate"": ""2024-01-02T00:00:00Z"",
-  ""paymentSourceId"": ""pm_4794d597-70dc-4fec-b6ec-c5988e759769"",
-  ""paymentDestinationId"": ""pm_4794d597-70dc-4fec-b6ec-c5988e759769""
+  ""invoiceId"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9""
 }
 ";
 
@@ -29,7 +27,7 @@ public class CalculatePaymentTimingRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<CalculatePaymentTimingRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceTiming>(
             inputJson,
             serializerOptions
         );

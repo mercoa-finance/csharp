@@ -2,7 +2,7 @@ using Mercoa.Client;
 
 #nullable enable
 
-namespace Mercoa.Client.Entity;
+namespace Mercoa.Client.Entity.PaymentMethod;
 
 public record GetAllPaymentMethodsRequest
 {

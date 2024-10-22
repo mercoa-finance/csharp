@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Mercoa.Client;
 using Mercoa.Client.Core;
 using Mercoa.Client.Entity.EmailLog;
+using Mercoa.Client.Entity.PaymentMethod;
 using Mercoa.Client.Entity.User;
 
 #nullable enable
@@ -18,6 +19,7 @@ public partial class EntityClient
     {
         _client = client;
         EmailLog = new EmailLogClient(_client);
+        PaymentMethod = new PaymentMethodClient(_client);
         User = new UserClient(_client);
         ApprovalPolicy = new ApprovalPolicyClient(_client);
         Counterparty = new CounterpartyClient(_client);
@@ -28,11 +30,12 @@ public partial class EntityClient
         Invoice = new InvoiceClient(_client);
         Metadata = new MetadataClient(_client);
         NotificationPolicy = new NotificationPolicyClient(_client);
-        PaymentMethod = new PaymentMethodClient(_client);
         Representative = new RepresentativeClient(_client);
     }
 
     public EmailLogClient EmailLog { get; }
+
+    public PaymentMethodClient PaymentMethod { get; }
 
     public UserClient User { get; }
 
@@ -53,8 +56,6 @@ public partial class EntityClient
     public MetadataClient Metadata { get; }
 
     public NotificationPolicyClient NotificationPolicy { get; }
-
-    public PaymentMethodClient PaymentMethod { get; }
 
     public RepresentativeClient Representative { get; }
 

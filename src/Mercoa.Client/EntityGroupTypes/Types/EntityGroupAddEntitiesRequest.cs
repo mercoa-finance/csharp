@@ -17,11 +17,11 @@ public record EntityGroupAddEntitiesRequest
     /// <summary>
     /// Entity ID / foreign ID of an entity currently in the group to copy users and roles from OR a boolean defining if users should be copied to the new entities.
     ///
-    /// If false, users and roles will not be copied.
-    /// If not provided or true, users and roles will be copied from the first entity the group.
+    /// If not provided or false, users and roles will not be copied.
+    /// If true, users and roles will be copied from the first entity the group.
     /// If a valid ID is provided, users and roles will be copied from the corresponding provided entity in the group.
     ///
-    /// Note: If users and roles are copied, any preexisting users will be removed from each of the entities set to be added to the group.
+    /// Note: If users copied, any preexisting users will be left alone, and users with the same foreign ID will not be copied.
     /// </summary>
     [JsonPropertyName("copyUsersFrom")]
     [JsonConverter(typeof(OneOfSerializer<OneOf<bool, string>>))]

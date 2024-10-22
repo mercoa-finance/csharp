@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public record CalculatePaymentTimingRequest
+public record EstimatedTiming
 {
     /// <summary>
     /// Date the payment is scheduled to be deducted from the payer's account. Use this field if the payment has not yet been deducted.

@@ -44,4 +44,7 @@ public record OrganizationResponse
 
     [JsonPropertyName("metadataSchema")]
     public IEnumerable<MetadataSchema>? MetadataSchema { get; set; }
+
+    [JsonPropertyName("notificationEmailTemplate")]
+    public NotificationEmailTemplateResponse? NotificationEmailTemplate { get; set; }
 }

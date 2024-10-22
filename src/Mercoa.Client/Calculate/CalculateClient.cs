@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using Mercoa.Client.Core;
+using OneOf;
 
 #nullable enable
 
@@ -57,7 +58,7 @@ public partial class CalculateClient
     /// Calculate the estimated payment timing given the deduction date, payment source, and disbursement method. Can be used to calculate timing for a payment.
     /// </summary>
     public async Task<CalculatePaymentTimingResponse> PaymentTimingAsync(
-        CalculatePaymentTimingRequest request,
+        OneOf<EstimatedTiming, InvoiceTiming> request,
         RequestOptions? options = null
     )
     {

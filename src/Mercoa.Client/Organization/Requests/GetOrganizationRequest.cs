@@ -36,4 +36,9 @@ public record GetOrganizationRequest
     /// include metadata schema in response
     /// </summary>
     public bool? MetadataSchema { get; set; }
+
+    /// <summary>
+    /// include notification-email-template in response
+    /// </summary>
+    public bool? NotificationEmailTemplate { get; set; }
 }

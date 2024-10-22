@@ -57,6 +57,10 @@ public partial class OrganizationClient
         {
             _query["metadataSchema"] = request.MetadataSchema.ToString();
         }
+        if (request.NotificationEmailTemplate != null)
+        {
+            _query["notificationEmailTemplate"] = request.NotificationEmailTemplate.ToString();
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {

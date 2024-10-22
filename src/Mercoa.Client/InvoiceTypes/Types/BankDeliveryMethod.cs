@@ -13,5 +13,8 @@ public enum BankDeliveryMethod
     AchStandard,
 
     [EnumMember(Value = "ACH_SAME_DAY")]
-    AchSameDay
+    AchSameDay,
+
+    [EnumMember(Value = "ACH_ACCELERATED")]
+    AchAccelerated
 }
