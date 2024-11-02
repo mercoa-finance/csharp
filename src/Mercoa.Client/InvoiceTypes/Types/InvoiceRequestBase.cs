@@ -139,6 +139,12 @@ public record InvoiceRequestBase
     public InvoiceFeesRequest? Fees { get; set; }
 
     /// <summary>
+    /// If true, this invoice will be paid as a batch payment. Batches are automatically determined by Mercoa based on the payment source, destination, and scheduled payment date.
+    /// </summary>
+    [JsonPropertyName("batchPayment")]
+    public bool? BatchPayment { get; set; }
+
+    /// <summary>
     /// If this is a recurring invoice, this will be the payment schedule for the invoice. If not provided, this will be a one-time invoice.
     /// </summary>
     [JsonPropertyName("paymentSchedule")]

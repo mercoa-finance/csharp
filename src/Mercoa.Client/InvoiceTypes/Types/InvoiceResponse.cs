@@ -106,6 +106,12 @@ public record InvoiceResponse
     public required bool PaymentDestinationConfirmed { get; set; }
 
     /// <summary>
+    /// If true, this invoice will be paid as a batch payment. Batches are automatically determined by Mercoa based on the payment source, destination, and scheduled payment date.
+    /// </summary>
+    [JsonPropertyName("batchPayment")]
+    public bool? BatchPayment { get; set; }
+
+    /// <summary>
     /// True if the invoice has documents attached.
     /// </summary>
     [JsonPropertyName("hasDocuments")]

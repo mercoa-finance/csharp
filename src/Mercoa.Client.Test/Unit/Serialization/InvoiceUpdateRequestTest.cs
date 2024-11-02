@@ -129,4 +129,29 @@ public class InvoiceUpdateRequestTest
 
         JToken.Parse(inputJson).Should().BeEquivalentTo(JToken.Parse(serializedJson));
     }
+
+    [Test]
+    public void TestSerialization_4()
+    {
+        var inputJson =
+            @"
+        {
+  ""batchPayment"": true
+}
+";
+
+        var serializerOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceUpdateRequest>(
+            inputJson,
+            serializerOptions
+        );
+
+        var serializedJson = JsonSerializer.Serialize(deserializedObject, serializerOptions);
+
+        JToken.Parse(inputJson).Should().BeEquivalentTo(JToken.Parse(serializedJson));
+    }
 }

@@ -47,4 +47,7 @@ public record OrganizationResponse
 
     [JsonPropertyName("notificationEmailTemplate")]
     public NotificationEmailTemplateResponse? NotificationEmailTemplate { get; set; }
+
+    [JsonPropertyName("organizationEntityId")]
+    public string? OrganizationEntityId { get; set; }
 }

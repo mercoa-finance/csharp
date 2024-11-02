@@ -20,14 +20,24 @@ public partial class PaymentLinksClient
     /// <summary>
     /// Get temporary link for payer to send payment
     /// </summary>
-    public async Task<string> GetPayerLinkAsync(string invoiceId, RequestOptions? options = null)
+    public async Task<string> GetPayerLinkAsync(
+        string invoiceId,
+        PayerLinkRequest request,
+        RequestOptions? options = null
+    )
     {
+        var _query = new Dictionary<string, object>() { };
+        if (request.ExpiresIn != null)
+        {
+            _query["expiresIn"] = request.ExpiresIn;
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
                 BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/invoice/{invoiceId}/payerLink",
+                Query = _query,
                 Options = options
             }
         );
@@ -90,14 +100,24 @@ public partial class PaymentLinksClient
     /// <summary>
     /// Get temporary link for vendor to accept payment
     /// </summary>
-    public async Task<string> GetVendorLinkAsync(string invoiceId, RequestOptions? options = null)
+    public async Task<string> GetVendorLinkAsync(
+        string invoiceId,
+        VendorLinkRequest request,
+        RequestOptions? options = null
+    )
     {
+        var _query = new Dictionary<string, object>() { };
+        if (request.ExpiresIn != null)
+        {
+            _query["expiresIn"] = request.ExpiresIn;
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {
                 BaseUrl = _client.Options.BaseUrl,
                 Method = HttpMethod.Get,
                 Path = $"/invoice/{invoiceId}/vendorLink",
+                Query = _query,
                 Options = options
             }
         );
