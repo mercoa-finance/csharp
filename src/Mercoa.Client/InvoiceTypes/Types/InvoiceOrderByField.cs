@@ -37,8 +37,5 @@ public enum InvoiceOrderByField
     VendorName,
 
     [EnumMember(Value = "PAYER_NAME")]
-    PayerName,
-
-    [EnumMember(Value = "NEXT_PAYMENT_DATE")]
-    NextPaymentDate
+    PayerName
 }

@@ -13,7 +13,7 @@ public record InvoiceTemplateCreationRequest
     /// ID of the entity who created this invoice template.
     /// </summary>
     [JsonPropertyName("creatorEntityId")]
-    public required string CreatorEntityId { get; set; }
+    public string? CreatorEntityId { get; set; }
 
     [JsonPropertyName("status")]
     public InvoiceStatus? Status { get; set; }

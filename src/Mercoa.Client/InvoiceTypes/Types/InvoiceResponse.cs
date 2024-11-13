@@ -67,12 +67,6 @@ public record InvoiceResponse
     public DateTime? DeductionDate { get; set; }
 
     /// <summary>
-    /// If this is a recurring invoice, this will be the next date when funds are scheduled to be deducted from payer's account.
-    /// </summary>
-    [JsonPropertyName("nextDeductionDate")]
-    public DateTime? NextDeductionDate { get; set; }
-
-    /// <summary>
     /// Due date of invoice.
     /// </summary>
     [JsonPropertyName("dueDate")]
