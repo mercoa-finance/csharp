@@ -62,4 +62,7 @@ public record BusinessOnboardingOptions
 
     [JsonPropertyName("w9")]
     public required OnboardingOption W9 { get; set; }
+
+    [JsonPropertyName("bankStatement")]
+    public required OnboardingOption BankStatement { get; set; }
 }

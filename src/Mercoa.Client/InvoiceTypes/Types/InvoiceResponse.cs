@@ -9,6 +9,36 @@ public record InvoiceResponse
     [JsonPropertyName("id")]
     public required string Id { get; set; }
 
+    /// <summary>
+    /// Date when the invoice payment was processed.
+    /// </summary>
+    [JsonPropertyName("processedAt")]
+    public DateTime? ProcessedAt { get; set; }
+
+    /// <summary>
+    /// Date of funds settlement.
+    /// </summary>
+    [JsonPropertyName("settlementDate")]
+    public DateTime? SettlementDate { get; set; }
+
+    /// <summary>
+    /// The ID used to identify this invoice in your system. This ID must be unique within each creatorEntity in your system, e.g. two invoices with the same creatorEntity may not have the same foreign ID.
+    /// </summary>
+    [JsonPropertyName("foreignId")]
+    public string? ForeignId { get; set; }
+
+    /// <summary>
+    /// If the invoice failed to be paid, this field will be populated with the type of failure.
+    /// </summary>
+    [JsonPropertyName("failureType")]
+    public InvoiceFailureType? FailureType { get; set; }
+
+    /// <summary>
+    /// If the invoice failed to be paid, this field will be populated with the reason of failure.
+    /// </summary>
+    [JsonPropertyName("failureReason")]
+    public InvoiceFailureReason? FailureReason { get; set; }
+
     [JsonPropertyName("status")]
     public required InvoiceStatus Status { get; set; }
 
@@ -41,18 +71,6 @@ public record InvoiceResponse
     /// </summary>
     [JsonPropertyName("nextDeductionDate")]
     public DateTime? NextDeductionDate { get; set; }
-
-    /// <summary>
-    /// Date when the invoice payment was processed.
-    /// </summary>
-    [JsonPropertyName("processedAt")]
-    public DateTime? ProcessedAt { get; set; }
-
-    /// <summary>
-    /// Date of funds settlement.
-    /// </summary>
-    [JsonPropertyName("settlementDate")]
-    public DateTime? SettlementDate { get; set; }
 
     /// <summary>
     /// Due date of invoice.
@@ -123,9 +141,6 @@ public record InvoiceResponse
     [JsonPropertyName("hasSourceEmail")]
     public required bool HasSourceEmail { get; set; }
 
-    [JsonPropertyName("comments")]
-    public IEnumerable<CommentResponse>? Comments { get; set; }
-
     [JsonPropertyName("lineItems")]
     public IEnumerable<InvoiceLineItemResponse>? LineItems { get; set; }
 
@@ -143,12 +158,6 @@ public record InvoiceResponse
     public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 
     /// <summary>
-    /// The ID used to identify this invoice in your system. This ID must be unique within each creatorEntity in your system, e.g. two invoices with the same creatorEntity may not have the same foreign ID.
-    /// </summary>
-    [JsonPropertyName("foreignId")]
-    public string? ForeignId { get; set; }
-
-    /// <summary>
     /// The ID of the entity who created this invoice.
     /// </summary>
     [JsonPropertyName("creatorEntityId")]
@@ -160,17 +169,14 @@ public record InvoiceResponse
     [JsonPropertyName("creatorUser")]
     public EntityUserResponse? CreatorUser { get; set; }
 
-    /// <summary>
-    /// If the invoice failed to be paid, this field will be populated with the type of failure.
-    /// </summary>
-    [JsonPropertyName("failureType")]
-    public InvoiceFailureType? FailureType { get; set; }
-
     [JsonPropertyName("createdAt")]
     public required DateTime CreatedAt { get; set; }
 
     [JsonPropertyName("updatedAt")]
     public required DateTime UpdatedAt { get; set; }
+
+    [JsonPropertyName("comments")]
+    public IEnumerable<CommentResponse>? Comments { get; set; }
 
     /// <summary>
     /// Fees associated with this invoice.

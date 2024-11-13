@@ -57,6 +57,7 @@ public partial class InvoiceClient
             .ToList();
         _query["invoiceId"] = request.InvoiceId;
         _query["status"] = request.Status.Select(_value => _value.ToString()).ToList();
+        _query["invoiceTemplateId"] = request.InvoiceTemplateId;
         if (request.StartDate != null)
         {
             _query["startDate"] = request.StartDate.Value.ToString(Constants.DateTimeFormat);
@@ -226,7 +227,7 @@ public partial class InvoiceClient
     }
 
     /// <summary>
-    /// Only invoices in the DRAFT and NEW status can be deleted.
+    /// Only invoices in the UNASSIGNED and DRAFT statuses can be deleted.
     /// </summary>
     public async Task DeleteAsync(string invoiceId, RequestOptions? options = null)
     {

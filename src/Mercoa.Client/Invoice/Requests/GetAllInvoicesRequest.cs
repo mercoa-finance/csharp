@@ -100,4 +100,9 @@ public record GetAllInvoicesRequest
     /// Filter invoices by recurring status
     /// </summary>
     public IEnumerable<PaymentType>? PaymentType { get; set; }
+
+    /// <summary>
+    /// Filter invoice by invoice template ID
+    /// </summary>
+    public IEnumerable<string> InvoiceTemplateId { get; set; } = new List<string>();
 }

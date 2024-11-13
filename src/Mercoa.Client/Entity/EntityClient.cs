@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Mercoa.Client;
 using Mercoa.Client.Core;
+using Mercoa.Client.Entity.Counterparty;
 using Mercoa.Client.Entity.EmailLog;
 using Mercoa.Client.Entity.PaymentMethod;
 using Mercoa.Client.Entity.User;
@@ -18,11 +19,11 @@ public partial class EntityClient
     internal EntityClient(RawClient client)
     {
         _client = client;
+        Counterparty = new CounterpartyClient(_client);
         EmailLog = new EmailLogClient(_client);
         PaymentMethod = new PaymentMethodClient(_client);
         User = new UserClient(_client);
         ApprovalPolicy = new ApprovalPolicyClient(_client);
-        Counterparty = new CounterpartyClient(_client);
         Customization = new CustomizationClient(_client);
         Document = new DocumentClient(_client);
         EmailTemplate = new EmailTemplateClient(_client);
@@ -33,6 +34,8 @@ public partial class EntityClient
         Representative = new RepresentativeClient(_client);
     }
 
+    public CounterpartyClient Counterparty { get; }
+
     public EmailLogClient EmailLog { get; }
 
     public PaymentMethodClient PaymentMethod { get; }
@@ -40,8 +43,6 @@ public partial class EntityClient
     public UserClient User { get; }
 
     public ApprovalPolicyClient ApprovalPolicy { get; }
-
-    public CounterpartyClient Counterparty { get; }
 
     public CustomizationClient Customization { get; }
 

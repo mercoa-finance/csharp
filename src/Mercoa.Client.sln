@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{349DBD59-61CD-419F-A57A-74D18AAB630A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{D06A32BA-BA68-4983-BB94-C36F7548A032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{34C14519-6708-44F6-B434-821F5C56326A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{0C41F846-CEEB-40C4-9B85-A73641B05D72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{349DBD59-61CD-419F-A57A-74D18AAB630A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{349DBD59-61CD-419F-A57A-74D18AAB630A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{349DBD59-61CD-419F-A57A-74D18AAB630A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{349DBD59-61CD-419F-A57A-74D18AAB630A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34C14519-6708-44F6-B434-821F5C56326A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34C14519-6708-44F6-B434-821F5C56326A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34C14519-6708-44F6-B434-821F5C56326A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34C14519-6708-44F6-B434-821F5C56326A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D06A32BA-BA68-4983-BB94-C36F7548A032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D06A32BA-BA68-4983-BB94-C36F7548A032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D06A32BA-BA68-4983-BB94-C36F7548A032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D06A32BA-BA68-4983-BB94-C36F7548A032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C41F846-CEEB-40C4-9B85-A73641B05D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C41F846-CEEB-40C4-9B85-A73641B05D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C41F846-CEEB-40C4-9B85-A73641B05D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C41F846-CEEB-40C4-9B85-A73641B05D72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -41,4 +41,7 @@ public record OrganizationRequest
 
     [JsonPropertyName("notificationEmailTemplate")]
     public NotificationEmailTemplateRequest? NotificationEmailTemplate { get; set; }
+
+    [JsonPropertyName("customDomains")]
+    public IEnumerable<string>? CustomDomains { get; set; }
 }

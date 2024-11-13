@@ -61,6 +61,10 @@ public partial class OrganizationClient
         {
             _query["notificationEmailTemplate"] = request.NotificationEmailTemplate.ToString();
         }
+        if (request.CustomDomains != null)
+        {
+            _query["customDomains"] = request.CustomDomains.ToString();
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {

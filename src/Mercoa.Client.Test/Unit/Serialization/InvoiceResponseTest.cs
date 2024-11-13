@@ -18,7 +18,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""PAID"",
   ""amount"": 100,
   ""currency"": ""USD"",
@@ -332,7 +332,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""DRAFT"",
   ""amount"": 100,
   ""currency"": ""USD"",
@@ -520,7 +520,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""DRAFT"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -628,7 +628,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""NEW"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -811,7 +811,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""APPROVED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -1016,7 +1016,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""REFUSED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -1221,7 +1221,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""SCHEDULED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -1426,7 +1426,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""PENDING"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -1631,7 +1631,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""PAID"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -1836,7 +1836,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""FAILED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -2041,7 +2041,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""ARCHIVED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -2246,7 +2246,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""CANCELED"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {
@@ -2451,7 +2451,7 @@ public class InvoiceResponseTest
         var inputJson =
             @"
         {
-  ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+  ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
   ""status"": ""DRAFT"",
   ""payerId"": ""ent_8545a84e-a45f-41bf-bdf1-33b42a55812c"",
   ""payer"": {

@@ -20,7 +20,7 @@ public class InvoiceEmailWebhookTest
         {
   ""eventType"": ""invoice.email"",
   ""invoice"": {
-    ""id"": ""inv_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
+    ""id"": ""in_26e7b5d3-a739-4b23-9ad9-6aaa085f47a9"",
     ""status"": ""PAID"",
     ""amount"": 100,
     ""currency"": ""USD"",
@@ -336,7 +336,7 @@ public class InvoiceEmailWebhookTest
             @"
         {
   ""eventType"": ""invoice.email"",
-  ""existingInvoiceId"": ""inv_21661ac1-a2a8-4465-a6c0-64474ba8181d""
+  ""existingInvoiceId"": ""in_21661ac1-a2a8-4465-a6c0-64474ba8181d""
 }
 ";
 

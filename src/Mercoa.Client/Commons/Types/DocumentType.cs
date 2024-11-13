@@ -21,6 +21,9 @@ public enum DocumentType
     [EnumMember(Value = "CHECK")]
     Check,
 
+    [EnumMember(Value = "BANK_STATEMENT")]
+    BankStatement,
+
     [EnumMember(Value = "OTHER")]
     Other
 }

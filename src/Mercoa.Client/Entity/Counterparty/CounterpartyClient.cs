@@ -6,7 +6,7 @@ using Mercoa.Client.Core;
 
 #nullable enable
 
-namespace Mercoa.Client.Entity;
+namespace Mercoa.Client.Entity.Counterparty;
 
 public partial class CounterpartyClient
 {
@@ -15,7 +15,10 @@ public partial class CounterpartyClient
     internal CounterpartyClient(RawClient client)
     {
         _client = client;
+        VendorCredit = new VendorCreditClient(_client);
     }
+
+    public VendorCreditClient VendorCredit { get; }
 
     /// <summary>
     /// Find payee counterparties. This endpoint lets you find vendors linked to the entity.

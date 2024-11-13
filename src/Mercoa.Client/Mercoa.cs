@@ -3,6 +3,7 @@ using Mercoa.Client.Core;
 using Mercoa.Client.Entity;
 using Mercoa.Client.EntityGroup;
 using Mercoa.Client.Invoice;
+using Mercoa.Client.InvoiceTemplate;
 using Mercoa.Client.Organization;
 
 #nullable enable
@@ -21,13 +22,14 @@ public partial class Mercoa
                 { "Authorization", $"Bearer {token}" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Mercoa.Client" },
-                { "X-Fern-SDK-Version", "0.5.11" },
+                { "X-Fern-SDK-Version", "0.5.12" },
             },
             new Dictionary<string, Func<string>>() { },
             clientOptions ?? new ClientOptions()
         );
         EntityGroup = new EntityGroupClient(_client);
         Entity = new EntityClient(_client);
+        InvoiceTemplate = new InvoiceTemplateClient(_client);
         Invoice = new InvoiceClient(_client);
         Organization = new OrganizationClient(_client);
         BankLookup = new BankLookupClient(_client);
@@ -42,12 +44,15 @@ public partial class Mercoa
         OrganizationTypes = new OrganizationTypesClient(_client);
         PaymentMethodTypes = new PaymentMethodTypesClient(_client);
         PaymentMethods = new PaymentMethodsClient(_client);
+        VendorCreditTypes = new VendorCreditTypesClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
 
     public EntityGroupClient EntityGroup { get; init; }
 
     public EntityClient Entity { get; init; }
+
+    public InvoiceTemplateClient InvoiceTemplate { get; init; }
 
     public InvoiceClient Invoice { get; init; }
 
@@ -76,6 +81,8 @@ public partial class Mercoa
     public PaymentMethodTypesClient PaymentMethodTypes { get; init; }
 
     public PaymentMethodsClient PaymentMethods { get; init; }
+
+    public VendorCreditTypesClient VendorCreditTypes { get; init; }
 
     public WebhooksClient Webhooks { get; init; }
 }

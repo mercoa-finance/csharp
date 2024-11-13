@@ -41,4 +41,9 @@ public record GetOrganizationRequest
     /// include notification-email-template in response
     /// </summary>
     public bool? NotificationEmailTemplate { get; set; }
+
+    /// <summary>
+    /// include custom domains in response
+    /// </summary>
+    public bool? CustomDomains { get; set; }
 }
