@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{2A448780-0F8C-40F7-9083-59C904E7E4DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client", "Mercoa.Client\Mercoa.Client.csproj", "{79C0ED34-F1C0-4933-A350-3B4C756BBB94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{C9897944-4630-477F-AF7C-9A4D912CB329}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercoa.Client.Test", "Mercoa.Client.Test\Mercoa.Client.Test.csproj", "{D682E8CB-0000-4958-992C-E874456B03EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2A448780-0F8C-40F7-9083-59C904E7E4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A448780-0F8C-40F7-9083-59C904E7E4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A448780-0F8C-40F7-9083-59C904E7E4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A448780-0F8C-40F7-9083-59C904E7E4DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9897944-4630-477F-AF7C-9A4D912CB329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9897944-4630-477F-AF7C-9A4D912CB329}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9897944-4630-477F-AF7C-9A4D912CB329}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9897944-4630-477F-AF7C-9A4D912CB329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C0ED34-F1C0-4933-A350-3B4C756BBB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C0ED34-F1C0-4933-A350-3B4C756BBB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C0ED34-F1C0-4933-A350-3B4C756BBB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C0ED34-F1C0-4933-A350-3B4C756BBB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D682E8CB-0000-4958-992C-E874456B03EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D682E8CB-0000-4958-992C-E874456B03EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D682E8CB-0000-4958-992C-E874456B03EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D682E8CB-0000-4958-992C-E874456B03EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

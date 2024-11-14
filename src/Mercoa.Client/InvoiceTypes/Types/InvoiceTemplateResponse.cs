@@ -37,6 +37,12 @@ public record InvoiceTemplateResponse
     public DateTime? DeductionDate { get; set; }
 
     /// <summary>
+    /// For invoice templates, this is the date when the next recurring payment will be scheduled.
+    /// </summary>
+    [JsonPropertyName("nextDeductionDate")]
+    public DateTime? NextDeductionDate { get; set; }
+
+    /// <summary>
     /// Due date of invoice.
     /// </summary>
     [JsonPropertyName("dueDate")]
