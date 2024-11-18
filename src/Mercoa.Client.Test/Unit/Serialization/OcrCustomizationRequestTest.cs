@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class InvoiceFailureReasonTest
+public class OcrCustomizationRequestTest
 {
     [Test]
     public void TestSerialization()
@@ -18,8 +18,11 @@ public class InvoiceFailureReasonTest
         var inputJson =
             @"
         {
-  ""code"": ""R01"",
-  ""description"": ""The source bank account does not have sufficient funds""
+  ""lineItems"": true,
+  ""invoiceMetadata"": true,
+  ""lineItemMetadata"": true,
+  ""lineItemGlAccountId"": true,
+  ""predictMetadata"": true
 }
 ";
 
@@ -28,7 +31,7 @@ public class InvoiceFailureReasonTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<InvoiceFailureReason>(
+        var deserializedObject = JsonSerializer.Deserialize<OcrCustomizationRequest>(
             inputJson,
             serializerOptions
         );

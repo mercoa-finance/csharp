@@ -154,4 +154,51 @@ public partial class VendorCreditClient
             responseBody
         );
     }
+
+    /// <summary>
+    /// Estimate the usage of vendor credits on an invoice of a given amount
+    /// </summary>
+    public async Task<CalculateVendorCreditUsageResponse> EstimateUsageAsync(
+        string entityId,
+        string counterpartyId,
+        CalculateVendorCreditUsageRequest request,
+        RequestOptions? options = null
+    )
+    {
+        var _query = new Dictionary<string, object>() { };
+        _query["amount"] = request.Amount.ToString();
+        if (request.Currency != null)
+        {
+            _query["currency"] = JsonSerializer.Serialize(request.Currency.Value);
+        }
+        var response = await _client.MakeRequestAsync(
+            new RawClient.JsonApiRequest
+            {
+                BaseUrl = _client.Options.BaseUrl,
+                Method = HttpMethod.Get,
+                Path =
+                    $"/entity/{entityId}/counterparty/{counterpartyId}/vendor-credits/estimate-usage",
+                Query = _query,
+                Options = options
+            }
+        );
+        var responseBody = await response.Raw.Content.ReadAsStringAsync();
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            try
+            {
+                return JsonUtils.Deserialize<CalculateVendorCreditUsageResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new MercoaException("Failed to deserialize response", e);
+            }
+        }
+
+        throw new MercoaApiException(
+            $"Error with status code {response.StatusCode}",
+            response.StatusCode,
+            responseBody
+        );
+    }
 }

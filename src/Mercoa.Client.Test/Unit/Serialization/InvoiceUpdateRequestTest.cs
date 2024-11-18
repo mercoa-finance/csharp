@@ -154,4 +154,31 @@ public class InvoiceUpdateRequestTest
 
         JToken.Parse(inputJson).Should().BeEquivalentTo(JToken.Parse(serializedJson));
     }
+
+    [Test]
+    public void TestSerialization_5()
+    {
+        var inputJson =
+            @"
+        {
+  ""vendorCreditIds"": [
+    ""vcr_c3f4c87d-794d-4543-9562-575cdddfc0d7""
+  ]
+}
+";
+
+        var serializerOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+
+        var deserializedObject = JsonSerializer.Deserialize<InvoiceUpdateRequest>(
+            inputJson,
+            serializerOptions
+        );
+
+        var serializedJson = JsonSerializer.Serialize(deserializedObject, serializerOptions);
+
+        JToken.Parse(inputJson).Should().BeEquivalentTo(JToken.Parse(serializedJson));
+    }
 }

@@ -158,4 +158,10 @@ public record InvoiceUpdateRequest
     /// </summary>
     [JsonPropertyName("paymentSchedule")]
     public object? PaymentSchedule { get; set; }
+
+    /// <summary>
+    /// The IDs of the vendor credits to be applied to this invoice. Passing this field will un-apply any previously applied vendor credits.
+    /// </summary>
+    [JsonPropertyName("vendorCreditIds")]
+    public IEnumerable<string>? VendorCreditIds { get; set; }
 }

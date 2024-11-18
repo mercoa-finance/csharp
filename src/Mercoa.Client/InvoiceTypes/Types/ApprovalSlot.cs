@@ -18,6 +18,9 @@ public record ApprovalSlot
     [JsonPropertyName("approvalSlotId")]
     public required string ApprovalSlotId { get; set; }
 
+    /// <summary>
+    /// The ID of the user who is assigned to the approval slot. If undefined, the approval slot is assigned to all eligible approvers.
+    /// </summary>
     [JsonPropertyName("assignedUserId")]
     public string? AssignedUserId { get; set; }
 

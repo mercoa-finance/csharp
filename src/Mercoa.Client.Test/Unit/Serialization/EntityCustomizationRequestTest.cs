@@ -54,7 +54,17 @@ public class EntityCustomizationRequestTest
       ""type"": ""check"",
       ""disabled"": true
     }
-  ]
+  ],
+  ""ocr"": {
+    ""lineItems"": true,
+    ""invoiceMetadata"": true,
+    ""lineItemMetadata"": true,
+    ""lineItemGlAccountId"": true,
+    ""predictMetadata"": true
+  },
+  ""notifications"": {
+    ""assumeRole"": ""admin""
+  }
 }
 ";
 

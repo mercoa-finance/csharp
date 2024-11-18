@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public record InvoiceFailureReason
+public record TransactionFailureReason
 {
     /// <summary>
     /// The failure reason code.

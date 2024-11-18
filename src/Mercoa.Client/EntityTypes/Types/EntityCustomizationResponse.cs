@@ -21,4 +21,10 @@ public record EntityCustomizationResponse
     [JsonPropertyName("paymentDestination")]
     public IEnumerable<PaymentMethodCustomizationRequest> PaymentDestination { get; set; } =
         new List<PaymentMethodCustomizationRequest>();
+
+    [JsonPropertyName("ocr")]
+    public required OcrCustomizationRequest Ocr { get; set; }
+
+    [JsonPropertyName("notifications")]
+    public required NotificationCustomizationRequest Notifications { get; set; }
 }

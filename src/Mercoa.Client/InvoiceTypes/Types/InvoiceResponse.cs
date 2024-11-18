@@ -34,10 +34,16 @@ public record InvoiceResponse
     public InvoiceFailureType? FailureType { get; set; }
 
     /// <summary>
-    /// If the invoice failed to be paid, this field will be populated with the reason of failure.
+    /// Transactions associated with this invoice.
     /// </summary>
-    [JsonPropertyName("failureReason")]
-    public InvoiceFailureReason? FailureReason { get; set; }
+    [JsonPropertyName("transactions")]
+    public IEnumerable<object>? Transactions { get; set; }
+
+    /// <summary>
+    /// The IDs of the vendor credits that are currently applied to this invoice.
+    /// </summary>
+    [JsonPropertyName("vendorCreditIds")]
+    public IEnumerable<string>? VendorCreditIds { get; set; }
 
     [JsonPropertyName("status")]
     public required InvoiceStatus Status { get; set; }
