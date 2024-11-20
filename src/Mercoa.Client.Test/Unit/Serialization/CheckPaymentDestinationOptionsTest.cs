@@ -18,7 +18,8 @@ public class CheckPaymentDestinationOptionsTest
         var inputJson =
             @"
         {
-  ""delivery"": ""MAIL""
+  ""delivery"": ""MAIL"",
+  ""printDescription"": true
 }
 ";
 

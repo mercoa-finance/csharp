@@ -199,7 +199,8 @@ public class InvoiceEmailWebhookTest
     ""paymentDestinationId"": ""pm_5fde2f4a-facc-48ef-8f0d-6b7d087c7b18"",
     ""paymentDestinationOptions"": {
       ""type"": ""check"",
-      ""delivery"": ""MAIL""
+      ""delivery"": ""MAIL"",
+      ""printDescription"": true
     },
     ""paymentDestinationConfirmed"": true,
     ""hasDocuments"": true,

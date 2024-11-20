@@ -11,4 +11,10 @@ public record CheckPaymentDestinationOptions
     /// </summary>
     [JsonPropertyName("delivery")]
     public CheckDeliveryMethod? Delivery { get; set; }
+
+    /// <summary>
+    /// If true, prints the invoice description (noteToSelf) on the check note. Defaults to false.
+    /// </summary>
+    [JsonPropertyName("printDescription")]
+    public bool? PrintDescription { get; set; }
 }
