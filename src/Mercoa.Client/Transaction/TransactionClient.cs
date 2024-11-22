@@ -32,6 +32,7 @@ public partial class TransactionClient
         _query["lineItemGlAccountId"] = request.LineItemGlAccountId;
         _query["payerId"] = request.PayerId;
         _query["vendorId"] = request.VendorId;
+        _query["creatorUserId"] = request.CreatorUserId;
         _query["invoiceId"] = request.InvoiceId;
         _query["transactionId"] = request.TransactionId;
         _query["status"] = request.Status.Select(_value => _value.ToString()).ToList();

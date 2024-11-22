@@ -7,7 +7,7 @@ namespace Mercoa.Client.InvoiceTemplate;
 public record GetAllInvoiceTemplatesRequest
 {
     /// <summary>
-    /// Filter invoice templates by the ID or foreign ID of the entity that created the invoice template.
+    /// Filter invoice templates by the ID or foreign ID of the entity that is the payer or the vendor of the invoice template.
     /// </summary>
     public IEnumerable<string> EntityId { get; set; } = new List<string>();
 
@@ -75,6 +75,11 @@ public record GetAllInvoiceTemplatesRequest
     /// Filter invoice templates by vendor ID or vendor foreign ID.
     /// </summary>
     public IEnumerable<string> VendorId { get; set; } = new List<string>();
+
+    /// <summary>
+    /// Filter invoices by the ID or foreign ID of the user that created the invoice.
+    /// </summary>
+    public IEnumerable<string> CreatorUserId { get; set; } = new List<string>();
 
     /// <summary>
     /// Filter invoice templates by assigned approver user ID.

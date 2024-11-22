@@ -33,6 +33,7 @@ public partial class InvoiceClient
         _query["lineItemGlAccountId"] = request.LineItemGlAccountId;
         _query["payerId"] = request.PayerId;
         _query["vendorId"] = request.VendorId;
+        _query["creatorUserId"] = request.CreatorUserId;
         _query["approverId"] = request.ApproverId;
         _query["approverAction"] = request
             .ApproverAction.Select(_value => _value.ToString())

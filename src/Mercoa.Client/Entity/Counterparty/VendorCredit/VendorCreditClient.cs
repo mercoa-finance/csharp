@@ -171,6 +171,14 @@ public partial class VendorCreditClient
         {
             _query["currency"] = JsonSerializer.Serialize(request.Currency.Value);
         }
+        if (request.ExcludedInvoiceIds != null)
+        {
+            _query["excludedInvoiceIds"] = request.ExcludedInvoiceIds.ToString();
+        }
+        if (request.IncludedVendorCreditIds != null)
+        {
+            _query["includedVendorCreditIds"] = request.IncludedVendorCreditIds.ToString();
+        }
         var response = await _client.MakeRequestAsync(
             new RawClient.JsonApiRequest
             {

@@ -24,43 +24,6 @@ public partial class UserClient
     public NotificationsClient Notifications { get; }
 
     /// <summary>
-    /// Get all entity users (DEPRECATED, use Search Entity Users)
-    /// </summary>
-    public async Task<IEnumerable<EntityUserResponse>> GetAllAsync(
-        string entityId,
-        RequestOptions? options = null
-    )
-    {
-        var response = await _client.MakeRequestAsync(
-            new RawClient.JsonApiRequest
-            {
-                BaseUrl = _client.Options.BaseUrl,
-                Method = HttpMethod.Get,
-                Path = $"/entity/{entityId}/users",
-                Options = options
-            }
-        );
-        var responseBody = await response.Raw.Content.ReadAsStringAsync();
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            try
-            {
-                return JsonUtils.Deserialize<IEnumerable<EntityUserResponse>>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new MercoaException("Failed to deserialize response", e);
-            }
-        }
-
-        throw new MercoaApiException(
-            $"Error with status code {response.StatusCode}",
-            response.StatusCode,
-            responseBody
-        );
-    }
-
-    /// <summary>
     /// Search entity users
     /// </summary>
     public async Task<FindEntityUserResponse> FindAsync(
@@ -92,7 +55,7 @@ public partial class UserClient
             new RawClient.JsonApiRequest
             {
                 BaseUrl = _client.Options.BaseUrl,
-                Method = HttpMethod.Put,
+                Method = HttpMethod.Get,
                 Path = $"/entity/{entityId}/users",
                 Query = _query,
                 Options = options

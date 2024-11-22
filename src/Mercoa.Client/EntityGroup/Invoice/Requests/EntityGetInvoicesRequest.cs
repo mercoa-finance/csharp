@@ -72,6 +72,11 @@ public record EntityGetInvoicesRequest
     public IEnumerable<string> VendorId { get; set; } = new List<string>();
 
     /// <summary>
+    /// Filter invoices by the ID or foreign ID of the user that created the invoice.
+    /// </summary>
+    public IEnumerable<string> CreatorUserId { get; set; } = new List<string>();
+
+    /// <summary>
     /// Filter invoices by assigned approver user ID.
     /// </summary>
     public IEnumerable<string> ApproverId { get; set; } = new List<string>();

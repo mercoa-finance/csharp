@@ -7,7 +7,7 @@ namespace Mercoa.Client.Invoice;
 public record GetAllInvoicesRequest
 {
     /// <summary>
-    /// Filter invoices by the ID or foreign ID of the entity that created the invoice.
+    /// Filter invoices by the ID or foreign ID of the entity that is the payer or the vendor of the invoice.
     /// </summary>
     public IEnumerable<string> EntityId { get; set; } = new List<string>();
 
@@ -75,6 +75,11 @@ public record GetAllInvoicesRequest
     /// Filter invoices by vendor ID or vendor foreign ID.
     /// </summary>
     public IEnumerable<string> VendorId { get; set; } = new List<string>();
+
+    /// <summary>
+    /// Filter invoices by the ID or foreign ID of the user that created the invoice.
+    /// </summary>
+    public IEnumerable<string> CreatorUserId { get; set; } = new List<string>();
 
     /// <summary>
     /// Filter invoices by assigned approver user ID.

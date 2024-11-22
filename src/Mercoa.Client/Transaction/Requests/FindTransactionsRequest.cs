@@ -3,7 +3,7 @@ namespace Mercoa.Client;
 public record FindTransactionsRequest
 {
     /// <summary>
-    /// Filter invoices by the ID or foreign ID of the entity that created the transaction.
+    /// Filter transactions by the ID or foreign ID of the entity that is the payer or the vendor of the invoice that created the transaction.
     /// </summary>
     public IEnumerable<string> EntityId { get; set; } = new List<string>();
 
@@ -18,12 +18,12 @@ public record FindTransactionsRequest
     public DateTime? EndDate { get; set; }
 
     /// <summary>
-    /// Number of invoices to return. Limit can range between 1 and 100, and the default is 10.
+    /// Number of transactions to return. Limit can range between 1 and 100, and the default is 10.
     /// </summary>
     public int? Limit { get; set; }
 
     /// <summary>
-    /// The ID of the invoice to start after. If not provided, the first page of invoices will be returned.
+    /// The ID of the transactions to start after. If not provided, the first page of transactions will be returned.
     /// </summary>
     public string? StartingAfter { get; set; }
 
@@ -56,6 +56,11 @@ public record FindTransactionsRequest
     /// Filter transactions by vendor ID or vendor foreign ID.
     /// </summary>
     public IEnumerable<string> VendorId { get; set; } = new List<string>();
+
+    /// <summary>
+    /// Filter transactions by the ID or foreign ID of the user that created the invoice that created the transaction.
+    /// </summary>
+    public IEnumerable<string> CreatorUserId { get; set; } = new List<string>();
 
     /// <summary>
     /// Filter transactions by invoice ID.
