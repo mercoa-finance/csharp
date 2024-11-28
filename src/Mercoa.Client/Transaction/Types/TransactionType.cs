@@ -16,5 +16,8 @@ public enum TransactionType
     BankAccountToMailedCheck,
 
     [EnumMember(Value = "custom")]
-    Custom
+    Custom,
+
+    [EnumMember(Value = "offPlatform")]
+    OffPlatform
 }

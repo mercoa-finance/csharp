@@ -17,4 +17,10 @@ public record ColorSchemeResponse
 
     [JsonPropertyName("roundedCorners")]
     public int? RoundedCorners { get; set; }
+
+    [JsonPropertyName("fontFamily")]
+    public string? FontFamily { get; set; }
+
+    [JsonPropertyName("fontSize")]
+    public string? FontSize { get; set; }
 }
