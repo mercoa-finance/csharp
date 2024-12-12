@@ -7,9 +7,14 @@ namespace Mercoa.Client.Entity.Counterparty;
 public record FindPayeeCounterpartiesRequest
 {
     /// <summary>
-    /// Filter by counterparty name
+    /// Use search instead. Deprecated. Filter counterparties by name. Partial matches are supported.
     /// </summary>
     public string? Name { get; set; }
+
+    /// <summary>
+    /// Filter counterparties by name or email. Partial matches are supported.
+    /// </summary>
+    public string? Search { get; set; }
 
     /// <summary>
     /// Filter by network type. By default, only ENTITY counterparties are returned.

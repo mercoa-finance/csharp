@@ -38,6 +38,10 @@ public partial class CounterpartyClient
         {
             _query["name"] = request.Name;
         }
+        if (request.Search != null)
+        {
+            _query["search"] = request.Search;
+        }
         if (request.PaymentMethods != null)
         {
             _query["paymentMethods"] = request.PaymentMethods.ToString();
@@ -101,6 +105,10 @@ public partial class CounterpartyClient
         if (request.Name != null)
         {
             _query["name"] = request.Name;
+        }
+        if (request.Search != null)
+        {
+            _query["search"] = request.Search;
         }
         if (request.PaymentMethods != null)
         {

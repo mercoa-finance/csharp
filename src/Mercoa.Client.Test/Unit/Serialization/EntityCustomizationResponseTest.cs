@@ -60,7 +60,8 @@ public class EntityCustomizationResponseTest
     ""invoiceMetadata"": true,
     ""lineItemMetadata"": true,
     ""lineItemGlAccountId"": true,
-    ""predictMetadata"": true
+    ""predictMetadata"": true,
+    ""taxAndShippingAsLineItems"": true
   },
   ""notifications"": {
     ""assumeRole"": ""admin""

@@ -10,7 +10,7 @@ public record InvoiceEvent
     public IEnumerable<string> WebhookIds { get; set; } = new List<string>();
 
     [JsonPropertyName("data")]
-    public required InvoiceResponse Data { get; set; }
+    public required InvoiceUpdateRequest Data { get; set; }
 
     /// <summary>
     /// The ID of the user who triggered this event
@@ -20,4 +20,10 @@ public record InvoiceEvent
 
     [JsonPropertyName("createdAt")]
     public required DateTime CreatedAt { get; set; }
+
+    [JsonPropertyName("ipAddress")]
+    public string? IpAddress { get; set; }
+
+    [JsonPropertyName("status")]
+    public InvoiceStatus? Status { get; set; }
 }

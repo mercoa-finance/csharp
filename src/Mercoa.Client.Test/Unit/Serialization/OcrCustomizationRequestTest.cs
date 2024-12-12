@@ -22,7 +22,8 @@ public class OcrCustomizationRequestTest
   ""invoiceMetadata"": true,
   ""lineItemMetadata"": true,
   ""lineItemGlAccountId"": true,
-  ""predictMetadata"": true
+  ""predictMetadata"": true,
+  ""taxAndShippingAsLineItems"": true
 }
 ";
 

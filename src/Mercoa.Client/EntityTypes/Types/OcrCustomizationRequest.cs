@@ -35,4 +35,10 @@ public record OcrCustomizationRequest
     /// </summary>
     [JsonPropertyName("predictMetadata")]
     public bool? PredictMetadata { get; set; }
+
+    /// <summary>
+    /// Pull tax and shipping information as line items. Defaults to true. If false, tax and shipping will extracted as invoice level fields.
+    /// </summary>
+    [JsonPropertyName("taxAndShippingAsLineItems")]
+    public bool? TaxAndShippingAsLineItems { get; set; }
 }

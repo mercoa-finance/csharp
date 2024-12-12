@@ -26,8 +26,7 @@ public class InvoiceTemplateCreationRequestTest
   ""deductionDate"": ""2021-01-10T00:00:00Z"",
   ""paymentSchedule"": {
     ""type"": ""monthly"",
-    ""dayOffset"": 10,
-    ""offsetType"": ""start"",
+    ""repeatOnDay"": 10,
     ""ends"": ""2021-01-01T00:00:00Z""
   },
   ""invoiceNumber"": ""INV-123"",

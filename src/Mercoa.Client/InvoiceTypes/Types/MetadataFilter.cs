@@ -12,7 +12,7 @@ public record MetadataFilter
     public required string Key { get; set; }
 
     /// <summary>
-    /// If multiple values are provided, the filter will match if any of the values match (OR filter)
+    /// If multiple values are provided, the filter will match if any of the values match (OR filter). To filter for the absence of a key, use the value 'NULL'.
     /// </summary>
     [JsonPropertyName("value")]
     [JsonConverter(typeof(OneOfSerializer<OneOf<string, IEnumerable<string>>>))]

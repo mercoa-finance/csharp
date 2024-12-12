@@ -210,6 +210,15 @@ public class FindTransactionsResponseTest
             ""printDescription"": true
           },
           ""paymentDestinationConfirmed"": true,
+          ""transactions"": [
+            {
+              ""id"": ""trx_bb08e72f-19f8-45f3-bcf9-46fdc46cb2f4"",
+              ""type"": ""bankAccountToBankAccount"",
+              ""status"": ""COMPLETED"",
+              ""createdAt"": ""2024-01-01T00:00:00Z"",
+              ""updatedAt"": ""2024-01-01T00:00:00Z""
+            }
+          ],
           ""hasDocuments"": true,
           ""hasSourceEmail"": true,
           ""comments"": [
@@ -513,6 +522,15 @@ public class FindTransactionsResponseTest
             ""printDescription"": true
           },
           ""paymentDestinationConfirmed"": true,
+          ""transactions"": [
+            {
+              ""id"": ""trx_bb08e72f-19f8-45f3-bcf9-46fdc46cb2f4"",
+              ""type"": ""bankAccountToBankAccount"",
+              ""status"": ""COMPLETED"",
+              ""createdAt"": ""2024-01-01T00:00:00Z"",
+              ""updatedAt"": ""2024-01-01T00:00:00Z""
+            }
+          ],
           ""hasDocuments"": true,
           ""hasSourceEmail"": true,
           ""comments"": [
@@ -815,6 +833,19 @@ public class FindTransactionsResponseTest
           ""approvers"": [],
           ""approvalPolicy"": [],
           ""metadata"": {},
+          ""transactions"": [
+            {
+              ""id"": ""trx_bb08e72f-19f8-45f3-bcf9-46fdc46cb2f4"",
+              ""type"": ""bankAccountToBankAccount"",
+              ""status"": ""FAILED"",
+              ""failureReason"": {
+                ""code"": ""R01"",
+                ""description"": ""The source bank account does not have sufficient funds""
+              },
+              ""createdAt"": ""2024-01-01T00:00:00Z"",
+              ""updatedAt"": ""2024-01-01T00:00:00Z""
+            }
+          ],
           ""createdAt"": ""2021-01-01T00:00:00Z"",
           ""updatedAt"": ""2021-01-01T00:00:00Z""
         }

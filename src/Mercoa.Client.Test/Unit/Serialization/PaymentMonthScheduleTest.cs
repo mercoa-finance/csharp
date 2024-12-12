@@ -18,8 +18,7 @@ public class PaymentMonthScheduleTest
         var inputJson =
             @"
         {
-  ""dayOffset"": 10,
-  ""offsetType"": ""start"",
+  ""repeatOnDay"": 10,
   ""ends"": ""2021-01-01T00:00:00Z""
 }
 ";

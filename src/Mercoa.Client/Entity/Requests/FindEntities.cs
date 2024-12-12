@@ -36,9 +36,14 @@ public record FindEntities
     public bool? IsPayor { get; set; }
 
     /// <summary>
-    /// Filter entities by name. Partial matches are supported.
+    /// Use search instead. Deprecated. Filter entities by name. Partial matches are supported.
     /// </summary>
     public string? Name { get; set; }
+
+    /// <summary>
+    /// Find entities by name, email, or emailTo. Partial matches are supported.
+    /// </summary>
+    public string? Search { get; set; }
 
     /// <summary>
     /// Filter entities by simple key/value metadata. Each filter will be applied as an AND condition. Duplicate keys will be ignored.

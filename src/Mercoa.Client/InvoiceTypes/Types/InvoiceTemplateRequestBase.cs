@@ -125,4 +125,16 @@ public record InvoiceTemplateRequestBase
     /// </summary>
     [JsonPropertyName("paymentSchedule")]
     public object? PaymentSchedule { get; set; }
+
+    /// <summary>
+    /// Tax amount for this invoice.
+    /// </summary>
+    [JsonPropertyName("taxAmount")]
+    public double? TaxAmount { get; set; }
+
+    /// <summary>
+    /// Shipping amount for this invoice.
+    /// </summary>
+    [JsonPropertyName("shippingAmount")]
+    public double? ShippingAmount { get; set; }
 }

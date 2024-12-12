@@ -111,6 +111,18 @@ public record InvoiceResponseBase
     [JsonPropertyName("lineItems")]
     public IEnumerable<InvoiceLineItemResponse>? LineItems { get; set; }
 
+    /// <summary>
+    /// Tax amount for this invoice.
+    /// </summary>
+    [JsonPropertyName("taxAmount")]
+    public double? TaxAmount { get; set; }
+
+    /// <summary>
+    /// Shipping amount for this invoice.
+    /// </summary>
+    [JsonPropertyName("shippingAmount")]
+    public double? ShippingAmount { get; set; }
+
     [JsonPropertyName("approvers")]
     public IEnumerable<ApprovalSlot> Approvers { get; set; } = new List<ApprovalSlot>();
 
