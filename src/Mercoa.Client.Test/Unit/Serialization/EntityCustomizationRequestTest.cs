@@ -65,6 +65,9 @@ public class EntityCustomizationRequestTest
   },
   ""notifications"": {
     ""assumeRole"": ""admin""
+  },
+  ""workflow"": {
+    ""autoAdvanceInvoiceStatus"": true
   }
 }
 ";

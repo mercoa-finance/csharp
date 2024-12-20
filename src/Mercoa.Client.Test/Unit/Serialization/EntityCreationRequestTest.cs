@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Mercoa.Client.Test;
 
 [TestFixture]
-public class EntityRequestTest
+public class EntityCreationRequestTest
 {
     [Test]
     public void TestSerialization_1()
@@ -56,7 +56,7 @@ public class EntityRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<EntityRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<EntityCreationRequest>(
             inputJson,
             serializerOptions
         );
@@ -93,7 +93,7 @@ public class EntityRequestTest
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        var deserializedObject = JsonSerializer.Deserialize<EntityRequest>(
+        var deserializedObject = JsonSerializer.Deserialize<EntityCreationRequest>(
             inputJson,
             serializerOptions
         );

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Mercoa.Client;
 
-public record EntityRequest
+public record EntityCreationRequest
 {
     /// <summary>
     /// The ID used to identify this entity in your system. This ID must be unique across all entities in your system.

@@ -7,10 +7,10 @@ namespace Mercoa.Client;
 public record PlaidPublicTokenRequest
 {
     /// <summary>
-    /// Plaid account ID
+    /// Plaid account ID. If not provided, will try to match the provided routing number and account number.
     /// </summary>
     [JsonPropertyName("accountId")]
-    public required string AccountId { get; set; }
+    public string? AccountId { get; set; }
 
     /// <summary>
     /// Public token received from Plaid Link. Use this if linking the account using the Plaid Link frontend component.

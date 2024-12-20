@@ -23,4 +23,7 @@ public record EntityCustomizationRequest
 
     [JsonPropertyName("notifications")]
     public NotificationCustomizationRequest? Notifications { get; set; }
+
+    [JsonPropertyName("workflow")]
+    public WorkflowCustomizationRequest? Workflow { get; set; }
 }

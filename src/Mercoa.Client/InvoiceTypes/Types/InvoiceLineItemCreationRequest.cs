@@ -34,10 +34,10 @@ public record InvoiceLineItemCreationRequest
     public double? UnitPrice { get; set; }
 
     /// <summary>
-    /// Category of the line item. Defaults to EXPENSE.
+    /// Category of the line item.
     /// </summary>
     [JsonPropertyName("category")]
-    public InvoiceLineItemCategory? Category { get; set; }
+    public string? Category { get; set; }
 
     [JsonPropertyName("serviceStartDate")]
     public DateTime? ServiceStartDate { get; set; }

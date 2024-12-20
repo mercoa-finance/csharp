@@ -7,6 +7,7 @@ using Mercoa.Client.Entity.Counterparty;
 using Mercoa.Client.Entity.EmailLog;
 using Mercoa.Client.Entity.PaymentMethod;
 using Mercoa.Client.Entity.User;
+using OneOf;
 
 #nullable enable
 
@@ -139,7 +140,7 @@ public partial class EntityClient
     }
 
     public async Task<EntityResponse> CreateAsync(
-        EntityRequest request,
+        OneOf<EntityCreationRequest, EntityCloneRequest> request,
         RequestOptions? options = null
     )
     {
